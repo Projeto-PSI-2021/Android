@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TOPHotels</string>
+    <string name="etEmail">Insira o endereço de email</string>
+    <string name="btEntrar">Entrar</string>
+    <string name="tvEsqueceuSenha">Esqueceu a sua senha ?</string>
+    <string name="tvRegisto">Registe-se aqui!</string>
+</resources>
