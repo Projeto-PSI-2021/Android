@@ -1,4 +1,21 @@
 package com.example.tophotels;
 
-public class RegistarContaActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+
+public class RegistarContaActivity extends AppCompatActivity {
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.registar_conta_activity);
+
+
+    }
 }
+
+

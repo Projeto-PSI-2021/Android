@@ -4,4 +4,9 @@
     <string name="btEntrar">Entrar</string>
     <string name="tvEsqueceuSenha">Esqueceu a sua senha ?</string>
     <string name="tvRegisto">Registe-se aqui!</string>
+    <string name="etPrimeiroNome">Insira o seu primeiro nome</string>
+    <string name="etUltimoNome">Insira o seu último nome</string>
+    <string name="etNomeUtilizador">Insira o nome de utilizador</string>
+    <string name="Password">Insira a sua password</string>
+    <string name="CabecalhoRegistarConta">Registar conta</string>
 </resources>
