@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),"Esqueceu senha clicado",Toast.LENGTH_LONG).show();
     }
 
-    public void mostrarRegisto(View view) {
+    public void mostrarActivityRegistarConta(View view) {
         Toast.makeText(getApplicationContext(),"Registo clicado",Toast.LENGTH_LONG).show();
     }
 }
