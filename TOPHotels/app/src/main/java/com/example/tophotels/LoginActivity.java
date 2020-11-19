@@ -20,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void mostrarActivityRegistarConta(View view) {
-        Intent intentRegistarConta = new Intent(LoginActivity.this, RegistarContaActivity.class);
+        Intent intentRegistarConta = new Intent(LoginActivity.this, TelaPosLogin.class);
         startActivity(intentRegistarConta);
     }
 }

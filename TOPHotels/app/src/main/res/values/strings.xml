@@ -9,4 +9,8 @@
     <string name="etNomeUtilizador">Insira o nome de utilizador</string>
     <string name="Password">Insira a sua password</string>
     <string name="CabecalhoRegistarConta">Registar conta</string>
+    <string name="Reservas">Reservas</string>
+    <string name="Conta">Conta</string>
+    <string name="ndOpen">open</string>
+    <string name="ndClose">close</string>
 </resources>
