@@ -86,6 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:onClick="mostrarActivityPaginaInicial"
             android:text="@string/btEntrar"
             app:backgroundTint="@android:color/holo_red_light" />
 

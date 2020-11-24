@@ -1,4 +1,4 @@
-package com.example.tophotels;
+package com.example.tophotels.adaptadores;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.tophotels.modelos.Hotel;
+import com.example.tophotels.R;
 
 import java.util.ArrayList;
 
@@ -47,7 +50,7 @@ public class ListaHotelAdapter extends BaseAdapter {
         }
 
         if(convertView == null){
-            convertView = inflater.inflate(R.layout.app_bar_main, null);
+            convertView = inflater.inflate(R.layout.item_lista_hoteis, null);
 
         }
         ViewHolderLivro vHolder = (ViewHolderLivro) convertView.getTag();
@@ -62,7 +65,7 @@ public class ListaHotelAdapter extends BaseAdapter {
         return convertView;
     }
 
-    class ViewHolderLivro{
+    private class ViewHolderLivro{
         private TextView tvNomeHotel, tvLocalidade, tvPreco;
         private ImageView inCapa;
 
@@ -70,7 +73,7 @@ public class ListaHotelAdapter extends BaseAdapter {
             tvNomeHotel = view.findViewById(R.id.tvNomeHotel);
             tvLocalidade = view.findViewById(R.id.tvLocalidade);
             tvPreco = view.findViewById(R.id.tvPreco);
-            inCapa = view.findViewById(R.id.ivCapa);
+            inCapa = view.findViewById(R.id.tvImagem);
 
         }
 

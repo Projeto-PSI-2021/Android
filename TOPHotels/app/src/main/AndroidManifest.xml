@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
 
-        <activity android:name=".TelaPosLogin"></activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".vistas.TelaPosLogin"></activity>
+        <activity android:name=".vistas.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegistarContaActivity"
+            android:name=".vistas.RegistarContaActivity"
             android:label="@string/CabecalhoRegistarConta"></activity>
     </application>
 

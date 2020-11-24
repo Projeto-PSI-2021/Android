@@ -1,4 +1,4 @@
-package com.example.tophotels;
+package com.example.tophotels.modelos;
 
 
 public class Hotel {
@@ -6,6 +6,16 @@ public class Hotel {
     private int capa;
     private String nomeHotel;
     private String localidade;
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    private double preco;
 
     public Hotel (int id, int capa, String nomeHotel, String Localidade, double preco){
         this.id = id;
@@ -46,21 +56,6 @@ public class Hotel {
     public void setLocalidade(String localidade) {
         this.localidade = localidade;
     }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
-    }
-
-    private double preco;
-
-    //Construtor
-
-
-
 
 
 }

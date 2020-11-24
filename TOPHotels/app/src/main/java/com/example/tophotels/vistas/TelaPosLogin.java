@@ -1,4 +1,4 @@
-package com.example.tophotels;
+package com.example.tophotels.vistas;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.tophotels.R;
+import com.example.tophotels.vistas.ListaHoteisFragment;
+import com.example.tophotels.vistas.PesquisarHotelFragment;
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -43,19 +46,35 @@ public class TelaPosLogin extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Fragment frag = null;
+       Fragment frag = null;
+        switch (item.getItemId()){
+            case R.id.nav_reservas:
+                frag = new ListaHoteisFragment();
+                setTitle(item.getTitle());
+                break;
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+
         if(frag != null){
             getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment, frag).commit();
         }
-        drawerLayout.closeDrawer(GravityCompat.START);
 
         return true;
     }
 
     private void carregarInicio() {
         Fragment frag = null;
+        frag = new PesquisarHotelFragment();
         if (frag != null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment, frag).commit();
+        }else{
+
         }
     }
+
+
+
+
+
 }

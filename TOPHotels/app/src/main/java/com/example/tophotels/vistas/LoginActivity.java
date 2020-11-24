@@ -1,4 +1,4 @@
-package com.example.tophotels;
+package com.example.tophotels.vistas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.tophotels.R;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -19,8 +21,13 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),"Esqueceu senha clicado",Toast.LENGTH_LONG).show();
     }
 
+    public void mostrarActivityPaginaInicial(View view) {
+        Intent i = new Intent(LoginActivity.this, TelaPosLogin.class);
+        startActivity(i);
+    }
+
     public void mostrarActivityRegistarConta(View view) {
-        Intent intentRegistarConta = new Intent(LoginActivity.this, TelaPosLogin.class);
-        startActivity(intentRegistarConta);
+        Intent i = new Intent(LoginActivity.this, RegistarContaActivity.class);
+        startActivity(i);
     }
 }

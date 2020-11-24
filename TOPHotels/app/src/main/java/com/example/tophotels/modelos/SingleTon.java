@@ -1,5 +1,7 @@
-package com.example.tophotels;
+package com.example.tophotels.modelos;
 
+
+import com.example.tophotels.R;
 
 import java.util.ArrayList;
 
