@@ -8,17 +8,19 @@
         android:label=""
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TOPHotels">
-        <activity android:name=".LoginActivity">
+        android:theme="@style/AppTheme.NoActionBar">
+
+        <activity android:name=".vistas.TelaPosLogin"></activity>
+        <activity android:name=".vistas.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegistarContaActivity"
-            android:label="@string/CabecalhoRegistarConta">
-        </activity>
+        <activity
+            android:name=".vistas.RegistarContaActivity"
+            android:label="@string/CabecalhoRegistarConta"></activity>
     </application>
 
 </manifest>
