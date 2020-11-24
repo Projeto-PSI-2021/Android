@@ -10,8 +10,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="190dp"
+        android:layout_height="190dp"
+        android:layout_marginTop="35dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
         app:srcCompat="@mipmap/ic_launcher" />

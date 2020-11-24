@@ -7,9 +7,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.tophotels.R;
 import com.example.tophotels.vistas.ListaHoteisFragment;
@@ -48,9 +51,14 @@ public class TelaPosLogin extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
        Fragment frag = null;
         switch (item.getItemId()){
-            case R.id.nav_reservas:
+            /*case R.id.nav_reservas:
                 frag = new ListaHoteisFragment();
                 setTitle(item.getTitle());
+                break;*/
+
+            case R.id.nav_conta:
+                frag = new DefinicoesContaFragment();
+                setTitle("Definições de conta");
                 break;
         }
 
@@ -68,10 +76,10 @@ public class TelaPosLogin extends AppCompatActivity implements NavigationView.On
         frag = new PesquisarHotelFragment();
         if (frag != null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment, frag).commit();
-        }else{
-
         }
     }
+
+
 
 
 

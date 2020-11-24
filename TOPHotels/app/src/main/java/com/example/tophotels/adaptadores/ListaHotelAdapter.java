@@ -80,7 +80,7 @@ public class ListaHotelAdapter extends BaseAdapter {
         public void update(Hotel hotel){
             this.tvNomeHotel.setText(hotel.getNomeHotel());
             this.tvLocalidade.setText(hotel.getLocalidade());
-            this.tvPreco.setText(""+hotel.getPreco());
+            this.tvPreco.setText(""+hotel.getPreco()+ " €");
             this.inCapa.setImageResource(hotel.getCapa());
         }
     }

@@ -33,8 +33,13 @@ public class SingleTon {
     }
 
     private void gerarFakeData() {
-        this.listaLivros.add(new Hotel (2, R.drawable.hotel, "Programar ",
+        this.listaLivros.add(new Hotel (2, R.drawable.hotel, "Hotel Mexil ",
                 "Torres Vedras", 70));
+        this.listaLivros.add(new Hotel (3, R.drawable.hotel2, "Hotel da Praia ",
+                "Algarve", 90));
+        this.listaLivros.add(new Hotel (4, R.drawable.hotel3, "Hotel da Maria",
+                "Leiria", 65));
+
     }
 
     public ArrayList<Hotel> getListaLivros() {

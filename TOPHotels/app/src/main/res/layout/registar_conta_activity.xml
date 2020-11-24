@@ -8,9 +8,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="15dp">
 
         <TextView
             android:id="@+id/textView11"
@@ -62,6 +62,15 @@
             android:inputType="textPassword"
             android:textSize="14sp" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:padding="15dp">
+
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
@@ -69,6 +78,5 @@
             android:layout_marginTop="200dp"
             android:text="Registar"
             app:backgroundTint="@android:color/holo_red_light" />
-
     </LinearLayout>
 </LinearLayout>

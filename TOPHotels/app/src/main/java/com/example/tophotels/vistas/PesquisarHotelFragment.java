@@ -9,15 +9,13 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.tophotels.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PesquisarHotelFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class PesquisarHotelFragment extends Fragment {
+
     public PesquisarHotelFragment() {
         // Required empty public constructor
     }
@@ -33,17 +31,22 @@ public class PesquisarHotelFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pesquisar_hotel, container, false);
 
+
+        Button btPesquisar = (Button)view.findViewById(R.id.btPesquisar);
+        btPesquisar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment frag = null;
+                frag = new ListaHoteisFragment();
+                if (frag != null) {
+                    getFragmentManager().beginTransaction().replace(R.id.contentFragment, frag).commit();
+                }
+            }
+        });
+
+
         return view;
 
-    }
-
-    private void pesquisarHotel(View view){
-        Fragment frag = new ListaHoteisFragment();
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.contentFragment, frag);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
     }
 
 }
