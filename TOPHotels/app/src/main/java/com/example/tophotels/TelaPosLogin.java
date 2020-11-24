@@ -37,6 +37,8 @@ public class TelaPosLogin extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toogle);
         nav_view.setNavigationItemSelectedListener(this);
         carregarInicio();
+
+
     }
 
     @Override
