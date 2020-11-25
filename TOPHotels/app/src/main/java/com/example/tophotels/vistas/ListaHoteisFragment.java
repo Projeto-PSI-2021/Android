@@ -1,5 +1,6 @@
 package com.example.tophotels.vistas;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.tophotels.R;
@@ -20,7 +22,7 @@ import com.example.tophotels.adaptadores.ListaHotelAdapter;
  */
 public class ListaHoteisFragment extends Fragment {
     private ListaHotelAdapter adapter;
-    private ListView lvLivros;
+    private ListView lvHoteis;
 
 
     public ListaHoteisFragment() {
@@ -38,23 +40,24 @@ public class ListaHoteisFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_lista_hoteis, container, false);
 
-        lvLivros = view.findViewById(R.id.lvHoteis);
+        lvHoteis = view.findViewById(R.id.lvHoteis);
 
         SingleTon gestor = SingleTon.getInstance();
 
         adapter = new ListaHotelAdapter(getActivity(), gestor.getListaLivros());
-        lvLivros.setAdapter(adapter);
+
+        lvHoteis.setAdapter(adapter);
 
         //Vai escutar até clicar na imagem
-       /* lvLivros.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvHoteis.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent detalhe = new Intent(getActivity().getApplicationContext(), DetalhesLivros.class);
+                Intent detalhe = new Intent(getActivity().getApplicationContext(), HotelSelecionadoActivity.class);
                 //detalhe.putExtra(DetalhesLivros.INDICE, position);
-                detalhe.putExtra(DetalhesLivros.ID, id);
+                //detalhe.putExtra(HotelSelecionadoActivity.ID, id);
                 startActivity(detalhe);
             }
-        });*/
+        });
         return view;
     }
 }

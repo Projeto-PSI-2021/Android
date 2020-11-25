@@ -9,11 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-
+        <activity android:name=".vistas.HotelSelecionadoActivity"
+            android:parentActivityName=".vistas.TelaPosLogin"></activity>
         <activity android:name=".vistas.TelaPosLogin"></activity>
         <activity android:name=".vistas.LoginActivity">
-        <activity android:name=".HotelSelecionadoActivity"
-            android:label="Hotel Selecionado">></activity>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
