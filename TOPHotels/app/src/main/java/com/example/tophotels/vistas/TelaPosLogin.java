@@ -30,6 +30,7 @@ public class TelaPosLogin extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_pos_login);
+        setTitle("Pesquise o hotel");
 
         Toolbar tb = findViewById(R.id.toolbar);
         setSupportActionBar(tb);

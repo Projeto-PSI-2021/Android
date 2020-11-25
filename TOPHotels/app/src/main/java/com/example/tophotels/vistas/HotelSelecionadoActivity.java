@@ -1,20 +1,14 @@
 package com.example.tophotels.vistas;
 
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
+import android.view.Menu;
+import android.view.MenuInflater;
 import com.example.tophotels.R;
-
-import java.util.ArrayList;
 
 
 public class HotelSelecionadoActivity extends AppCompatActivity{
@@ -24,8 +18,18 @@ public class HotelSelecionadoActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hotel_selecionado);
+
         setTitle("Hotel Selecionado");
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
 
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_navbar, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }
