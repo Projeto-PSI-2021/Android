@@ -20,7 +20,7 @@
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/etNomeUtilizador"
+            android:id="@+id/etUsernameRegistar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -37,13 +37,11 @@
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/etEmailRegistarConta"
+            android:id="@+id/etEmailRegistar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/etEmail"
-            android:inputType="textPersonName"
-            android:textSize="14sp" />
+            android:inputType="textEmailAddress" />
 
         <TextView
             android:id="@+id/textView16"
@@ -54,7 +52,7 @@
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/editTextTextPassword2"
+            android:id="@+id/etPasswordRegistar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -76,6 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="200dp"
+            android:onClick="onClickRegistar"
             android:text="Registar"
             app:backgroundTint="@android:color/holo_red_light" />
     </LinearLayout>

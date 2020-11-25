@@ -2,17 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tophotels">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@drawable/hotel"
         android:label="TOPHotels"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".vistas.HotelSelecionadoActivity"
-            android:parentActivityName=".vistas.TelaPosLogin"></activity>
-        <activity android:name=".vistas.TelaPosLogin"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".vistas.HotelSelecionadoActivity"
+            android:parentActivityName=".vistas.TelaPosLogin" />
+        <activity
+            android:name=".vistas.TelaPosLogin"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".vistas.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -23,7 +29,7 @@
         </activity>
         <activity
             android:name=".vistas.RegistarContaActivity"
-            android:label="@string/CabecalhoRegistarConta"></activity>
+            android:label="@string/CabecalhoRegistarConta" />
     </application>
 
 </manifest>

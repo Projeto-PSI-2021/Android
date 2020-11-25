@@ -12,7 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.tophotels.R;
-import com.example.tophotels.modelos.SingleTon;
+import com.example.tophotels.modelos.HotelSingleTon;
 import com.example.tophotels.adaptadores.ListaHotelAdapter;
 
 /**
@@ -42,7 +42,7 @@ public class ListaHoteisFragment extends Fragment {
 
         lvHoteis = view.findViewById(R.id.lvHoteis);
 
-        SingleTon gestor = SingleTon.getInstance();
+        HotelSingleTon gestor = HotelSingleTon.getInstance();
 
         adapter = new ListaHotelAdapter(getActivity(), gestor.getListaLivros());
 

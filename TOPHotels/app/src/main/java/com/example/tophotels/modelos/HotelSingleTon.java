@@ -6,18 +6,18 @@ import com.example.tophotels.R;
 import java.util.ArrayList;
 
 
-public class SingleTon {
+public class HotelSingleTon {
     private ArrayList<Hotel> listaLivros;
-    private static SingleTon instance = null; //Instancia de objeto "static"
+    private static HotelSingleTon instance = null; //Instancia de objeto "static"
 
-    public static synchronized SingleTon getInstance(){
+    public static synchronized HotelSingleTon getInstance(){
         if(instance==null){
-            instance = new SingleTon();
+            instance = new HotelSingleTon();
         }
         return instance;
     }
 
-    private SingleTon(){
+    private HotelSingleTon(){
         this.listaLivros = new ArrayList<>();
         gerarFakeData();
     }
