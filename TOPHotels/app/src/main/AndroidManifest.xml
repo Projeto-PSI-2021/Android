@@ -4,14 +4,16 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label=""
+        android:icon="@drawable/hotel"
+        android:label="TOPHotels"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
 
         <activity android:name=".vistas.TelaPosLogin"></activity>
         <activity android:name=".vistas.LoginActivity">
+        <activity android:name=".HotelSelecionadoActivity"
+            android:label="Hotel Selecionado">></activity>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
