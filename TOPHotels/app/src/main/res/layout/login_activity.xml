@@ -56,12 +56,12 @@
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/etEmail"
+            android:id="@+id/etUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/etEmail"
-            android:inputType="textEmailAddress"
+            android:hint="@string/etNomeUtilizador"
+            android:inputType="textPersonName"
             android:textSize="14sp" />
 
         <TextView
@@ -86,9 +86,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:onClick="mostrarActivityPaginaInicial"
+            android:onClick="onCLickLogin"
             android:text="@string/btEntrar"
             app:backgroundTint="@android:color/holo_red_light" />
+
+        <Button
+            android:id="@+id/btTeste"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:onClick="mostrarActivityPaginaInicial"
+            android:text="Página Principal"
+            app:backgroundTint="@android:color/holo_red_light" />
+
 
         <LinearLayout
             android:layout_width="match_parent"

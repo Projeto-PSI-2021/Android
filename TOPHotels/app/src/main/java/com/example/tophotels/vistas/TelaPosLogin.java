@@ -24,6 +24,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class TelaPosLogin extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    public static final String USERNAME = "username";
     private NavigationView nav_view;
     private DrawerLayout drawerLayout;
     @Override
