@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +26,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class TelaPosLogin extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    Fragment frag = null;
     public static final String USERNAME = "username";
     private NavigationView nav_view;
     private DrawerLayout drawerLayout;
@@ -62,6 +65,17 @@ public class TelaPosLogin extends AppCompatActivity implements NavigationView.On
                 frag = new DefinicoesContaFragment();
                 setTitle("Definições de conta");
                 break;
+
+            case R.id.nav_logout:
+                SharedPreferences SM = getSharedPreferences("userrecord", 0);
+                SharedPreferences.Editor edit = SM.edit();
+                edit.putBoolean("userlogin", false);
+                edit.apply();
+
+                Intent intent = new Intent(TelaPosLogin.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+                break;
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -73,18 +87,20 @@ public class TelaPosLogin extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+
+
     private void carregarInicio() {
-        Fragment frag = null;
         frag = new PesquisarHotelFragment();
         if (frag != null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment, frag).commit();
         }
     }
 
-
-
-
-
-
-
+    @Override
+    public void onBackPressed() {
+        frag = new PesquisarHotelFragment();
+        if (frag != null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment, frag).commit();
+        }
+    }
 }
