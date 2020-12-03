@@ -8,6 +8,7 @@
     <application
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
+        android:name=".AppController"
         android:icon="@drawable/hotel"
         android:label="TOPHotels"
         android:roundIcon="@mipmap/ic_launcher_round"
