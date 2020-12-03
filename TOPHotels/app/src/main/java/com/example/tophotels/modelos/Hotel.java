@@ -3,26 +3,31 @@ package com.example.tophotels.modelos;
 
 public class Hotel {
     private int id;
-    private int capa;
-    private String nomeHotel;
+    private String nome;
+    private String proprietario;
+    private String descricao;
+    private int contacto;
+    private String website;
+    private int cp4;
+    private int cp3;
     private String localidade;
+    private String morada;
+    private int estado;
+    private int img;
 
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
-    }
-
-    private double preco;
-
-    public Hotel (int id, int capa, String nomeHotel, String Localidade, double preco){
+    public Hotel(int id, String nome, String proprietario, String descricao, int contacto, String website, int cp4, int cp3, String localidade, String morada, int estado) {
         this.id = id;
-        this.capa = capa;
-        this.nomeHotel = nomeHotel;
-        this.localidade = Localidade;
-        this.preco = preco;
+        this.nome = nome;
+        this.proprietario = proprietario;
+        this.descricao = descricao;
+        this.contacto = contacto;
+        this.website = website;
+        this.cp4 = cp4;
+        this.cp3 = cp3;
+        this.localidade = localidade;
+        this.morada = morada;
+        this.estado = estado;
+        //this.img = img;
     }
 
     public int getId() {
@@ -33,20 +38,60 @@ public class Hotel {
         this.id = id;
     }
 
-    public int getCapa() {
-        return capa;
+    public String getNome() {
+        return nome;
     }
 
-    public void setCapa(int capa) {
-        this.capa = capa;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getNomeHotel() {
-        return nomeHotel;
+    public String getProprietario() {
+        return proprietario;
     }
 
-    public void setNomeHotel(String nomeHotel) {
-        this.nomeHotel = nomeHotel;
+    public void setProprietario(String proprietario) {
+        this.proprietario = proprietario;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public int getContacto() {
+        return contacto;
+    }
+
+    public void setContacto(int contacto) {
+        this.contacto = contacto;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public int getCp4() {
+        return cp4;
+    }
+
+    public void setCp4(int cp4) {
+        this.cp4 = cp4;
+    }
+
+    public int getCp3() {
+        return cp3;
+    }
+
+    public void setCp3(int cp3) {
+        this.cp3 = cp3;
     }
 
     public String getLocalidade() {
@@ -57,5 +102,27 @@ public class Hotel {
         this.localidade = localidade;
     }
 
+    public String getMorada() {
+        return morada;
+    }
 
+    public void setMorada(String morada) {
+        this.morada = morada;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    public int getImg() {
+        return img;
+    }
+
+    public void setImg(int img) {
+        this.img = img;
+    }
 }

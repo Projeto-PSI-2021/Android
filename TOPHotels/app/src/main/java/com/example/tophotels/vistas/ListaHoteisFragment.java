@@ -10,16 +10,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.example.tophotels.AppController;
 import com.example.tophotels.R;
-import com.example.tophotels.modelos.HotelSingleTon;
+import com.example.tophotels.modelos.SingletonHotel;
 import com.example.tophotels.adaptadores.ListaHotelAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ListaHoteisFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class ListaHoteisFragment extends Fragment {
     private ListaHotelAdapter adapter;
     private ListView lvHoteis;
@@ -42,9 +46,9 @@ public class ListaHoteisFragment extends Fragment {
 
         lvHoteis = view.findViewById(R.id.lvHoteis);
 
-        HotelSingleTon gestor = HotelSingleTon.getInstance();
+        SingletonHotel gestor = SingletonHotel.getInstance();
 
-        adapter = new ListaHotelAdapter(getActivity(), gestor.getListaLivros());
+        adapter = new ListaHotelAdapter(getActivity(), gestor.getListaHoteis());
 
         lvHoteis.setAdapter(adapter);
 

@@ -24,7 +24,6 @@ public class ListaHotelAdapter extends BaseAdapter {
     public ListaHotelAdapter(Context contexto, ArrayList<Hotel> lista){
         this.contexto = contexto;
         this.listaHoteis = lista;
-
     }
 
 
@@ -46,7 +45,7 @@ public class ListaHotelAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if(inflater == null){
-            this.inflater = (LayoutInflater)contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            this.inflater = (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
         if(convertView == null){
@@ -78,10 +77,9 @@ public class ListaHotelAdapter extends BaseAdapter {
         }
 
         public void update(Hotel hotel){
-            this.tvNomeHotel.setText(hotel.getNomeHotel());
+            this.tvNomeHotel.setText(hotel.getNome());
             this.tvLocalidade.setText(hotel.getLocalidade());
-            this.tvPreco.setText(""+hotel.getPreco()+ " €");
-            this.inCapa.setImageResource(hotel.getCapa());
+            //this.inCapa.setImageResource(hotel.getCapa());
         }
     }
 }
