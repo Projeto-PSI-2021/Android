@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -22,8 +23,8 @@ import com.google.android.material.navigation.NavigationView;
 public class MenuMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final int FRAGMENTO_PESQUISAHOTEL = 1;
-
     public static final int fragmentoAtual = FRAGMENTO_PESQUISAHOTEL;
+    Fragment fragment = null;
 
     public static final String USERNAME = "USERNAME";
     public static final String PREF_USER = "PREF_USER";
@@ -74,7 +75,6 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Fragment frag = null;
         switch (item.getItemId()) {
             /*case R.id.nav_reservas:
                 frag = new ListaHoteisFragment();
@@ -82,17 +82,36 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                 break;*/
 
             case R.id.nav_conta:
-                frag = new DefinicoesContaFragment();
+                fragment = new DefinicoesContaFragment();
                 setTitle("Definições de conta");
+                break;
+
+            case R.id.nav_logout:
+                SharedPreferences SM = getSharedPreferences("userrecord", 0);
+                SharedPreferences.Editor edit = SM.edit();
+                edit.putBoolean("userlogin", false);
+                edit.apply();
+
+                Intent intent = new Intent(MenuMainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
                 break;
         }
 
-        if (frag != null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment, frag).commit();
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment, fragment).commit();
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        fragment = new PesquisarHotelFragment();
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment, fragment).commit();
+        }
     }
 }

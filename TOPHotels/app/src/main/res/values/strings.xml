@@ -20,4 +20,5 @@
     <string name="tvPassword">Palavra Passe</string>
     <string name="todo">TODO</string>
     <string name="tvTituloLogin">TOPHOTELS</string>
+    <string name="Logout">Logout</string>
 </resources>
