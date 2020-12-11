@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8694704d-b80e-4a9e-a9b6-c16545597d87" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/TOPHotels/app/src/main/java/com/example/tophotels/vistas/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/TOPHotels/app/src/main/java/com/example/tophotels/vistas/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TOPHotels/app/src/main/res/layout/login_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TOPHotels/app/src/main/res/layout/login_activity.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TOPHotels/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TOPHotels/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TOPHotels/app/src/main/java/com/example/tophotels/adaptadores/ListaHotelAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/TOPHotels/app/src/main/java/com/example/tophotels/adaptadores/ListaHotelAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TOPHotels/app/src/main/java/com/example/tophotels/modelos/SingletonHotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/TOPHotels/app/src/main/java/com/example/tophotels/modelos/SingletonHotel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TOPHotels/app/src/main/java/com/example/tophotels/vistas/ListaHoteisFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/TOPHotels/app/src/main/java/com/example/tophotels/vistas/ListaHoteisFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TOPHotels/app/src/main/java/com/example/tophotels/vistas/PesquisarHotelFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/TOPHotels/app/src/main/java/com/example/tophotels/vistas/PesquisarHotelFragment.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +23,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/TOPHotels" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -35,5 +37,11 @@
       <updated>1606329819573</updated>
     </task>
     <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="740" y="280" key="FileChooserDialogImpl" timestamp="1607287340151">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="740" y="280" key="FileChooserDialogImpl/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1607287340151" />
   </component>
 </project>

@@ -15,5 +15,9 @@
     <string name="ndClose">close</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="etUsername" />
+    <string name="semEmail">Sem Email</string>
+    <string name="tvUsername">Nome de utilizador</string>
+    <string name="tvPassword">Palavra Passe</string>
+    <string name="todo">TODO</string>
+    <string name="tvTituloLogin">TOPHOTELS</string>
 </resources>

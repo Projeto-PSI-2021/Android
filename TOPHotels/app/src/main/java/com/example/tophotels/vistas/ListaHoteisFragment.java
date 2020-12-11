@@ -4,27 +4,23 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.example.tophotels.AppController;
 import com.example.tophotels.R;
+import com.example.tophotels.listeners.HotelListener;
+import com.example.tophotels.modelos.Hotel;
 import com.example.tophotels.modelos.SingletonHotel;
 import com.example.tophotels.adaptadores.ListaHotelAdapter;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.ArrayList;
 
-public class ListaHoteisFragment extends Fragment {
+public class ListaHoteisFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, HotelListener {
     private ListaHotelAdapter adapter;
     private ListView lvHoteis;
 
@@ -46,7 +42,7 @@ public class ListaHoteisFragment extends Fragment {
 
         lvHoteis = view.findViewById(R.id.lvHoteis);
 
-        SingletonHotel gestor = SingletonHotel.getInstance();
+        SingletonHotel gestor = SingletonHotel.getInstance(getContext());
 
         adapter = new ListaHotelAdapter(getActivity(), gestor.getListaHoteis());
 
@@ -62,6 +58,30 @@ public class ListaHoteisFragment extends Fragment {
                 startActivity(detalhe);
             }
         });
+
+        SingletonHotel.getInstance(getContext()).setHotelListener(this);
+        SingletonHotel.getInstance(getContext()).getAllHotelAPI(getContext());
+
+
         return view;
+    }
+
+
+    @Override
+    public void onRefreshListaHotel(ArrayList<Hotel> listahoteis) {
+        if(listahoteis != null){
+            lvHoteis.setAdapter(new ListaHotelAdapter(getContext(), listahoteis));
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        lvHoteis.setAdapter(new ListaHotelAdapter(getContext(),
+        SingletonHotel.getInstance(getContext()).getListaHoteis()));
+    }
+
+    @Override
+    public void onRefreshDetalhes() {
+
     }
 }

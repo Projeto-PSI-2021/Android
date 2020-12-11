@@ -22,15 +22,16 @@
             android:layout_marginTop="52dp"
             android:cropToPadding="true"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/hotel" />
+            app:srcCompat="@drawable/hotel"
+            android:contentDescription="@string/todo" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tvTituloLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_marginTop="12dp"
-            android:text="TOPHotels"
+            android:text="@string/tvTituloLogin"
             android:textSize="24sp" />
 
 
@@ -39,7 +40,7 @@
     <LinearLayout
 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_margin="20dp"
         android:layout_weight="1"
         android:gravity="center"
@@ -48,11 +49,11 @@
         tools:layout_editor_absoluteX="135dp">
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/tvUsernameLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="Email"
+            android:text="@string/tvUsername"
             android:textSize="18sp" />
 
         <EditText
@@ -62,14 +63,15 @@
             android:ems="10"
             android:hint="@string/etNomeUtilizador"
             android:inputType="textPersonName"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:autofillHints="" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/tvPasswordLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="Password"
+            android:text="@string/tvPassword"
             android:textSize="18sp" />
 
         <EditText
@@ -79,7 +81,8 @@
             android:ems="10"
             android:hint="@string/Password"
             android:inputType="textPassword"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:autofillHints="" />
 
         <Button
             android:id="@+id/btEntrar"
@@ -88,15 +91,6 @@
             android:layout_marginTop="15dp"
             android:onClick="onClickLogin"
             android:text="@string/btEntrar"
-            app:backgroundTint="@android:color/holo_red_light" />
-
-        <Button
-            android:id="@+id/btTeste"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:onClick="mostrarActivityPaginaInicial"
-            android:text="Página Principal"
             app:backgroundTint="@android:color/holo_red_light" />
 
 
@@ -108,22 +102,24 @@
             android:gravity="center">
 
             <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvEsqueceuSenhaLogin"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:onClick="mostrarEsqueceuSenha"
-                android:text="@string/tvEsqueceuSenha" />
+                android:text="@string/tvEsqueceuSenha"
+                android:focusable="true" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/tvRegistoLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:onClick="mostrarActivityRegistarConta"
                 android:text="@string/tvRegisto"
-                android:textColor="@android:color/holo_red_light" />
+                android:textColor="@android:color/holo_red_light"
+                android:focusable="true" />
         </LinearLayout>
 
     </LinearLayout>

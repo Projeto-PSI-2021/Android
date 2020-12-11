@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.tophotels.modelos.Hotel;
 import com.example.tophotels.R;
 
@@ -25,7 +27,6 @@ public class ListaHotelAdapter extends BaseAdapter {
         this.contexto = contexto;
         this.listaHoteis = lista;
     }
-
 
     @Override
     public int getCount() {
@@ -73,13 +74,17 @@ public class ListaHotelAdapter extends BaseAdapter {
             tvLocalidade = view.findViewById(R.id.tvLocalidade);
             tvPreco = view.findViewById(R.id.tvPreco);
             inCapa = view.findViewById(R.id.tvImagem);
-
         }
 
         public void update(Hotel hotel){
             this.tvNomeHotel.setText(hotel.getNome());
             this.tvLocalidade.setText(hotel.getLocalidade());
             //this.inCapa.setImageResource(hotel.getCapa());
+            Glide.with(contexto)
+                .load(hotel.getImg())
+                    .placeholder(R.drawable.hotel)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(inCapa);
         }
     }
 }

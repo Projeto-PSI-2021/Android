@@ -1,43 +1,118 @@
 package com.example.tophotels.modelos;
 
 
-import android.app.Application;
-import android.util.Log;
+import android.content.Context;
+
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.example.tophotels.AppController;
-import com.example.tophotels.vistas.ListaHoteisFragment;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.tophotels.listeners.HotelListener;
+import com.example.tophotels.listeners.LoginListener;
+import com.example.tophotels.utils.HotelJsonParser;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-
+import java.util.HashMap;
+import java.util.Map;
 
 public class SingletonHotel {
     private ArrayList<Hotel> listaHoteis;
     private static SingletonHotel instance = null; //Instancia de objeto "static"
 
-    public static synchronized SingletonHotel getInstance(){
-        if(instance==null){
+    //Volley
+    private static RequestQueue volleyQueue = null;
+
+    //Endereços api
+    private static final String mUrlAPILogin = "http://tophotelsfrontend.ddns.net/api/user/login";
+    private static final String mUrlAPIHotel = "http://tophotelsfrontend.ddns.net/api/hotel";
+
+    //Listeners
+    private HotelListener hotelListener;
+    private LoginListener loginListener;
+
+
+    public static synchronized SingletonHotel getInstance(Context contexto) {
+        if (instance == null) {
             instance = new SingletonHotel();
+            volleyQueue = Volley.newRequestQueue(contexto);
         }
         return instance;
     }
 
-    private SingletonHotel(){
+    private SingletonHotel() {
         this.listaHoteis = new ArrayList<>();
-        carregarHoteis();
         //gerarFakeData();
     }
 
-    public Hotel getHotel(long id){
-        for(Hotel hotel: this.listaHoteis){
-            if(hotel.getId() == id){
+    // ** API ** //
+
+    public void loginAPI(final Context contexto, final String username, final String password) {
+        StringRequest request = new StringRequest(Request.Method.POST,
+                mUrlAPILogin,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        loginListener.onValidateLogin(HotelJsonParser.parserJsonLogin(response), username);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(contexto, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> parametros = new HashMap<String, String>();
+                parametros.put("username", username);
+                parametros.put("password", password);
+                return parametros;
+            }
+        };
+        volleyQueue.add(request);
+    }
+
+    public void getAllHotelAPI(final Context contexto) {
+        if (!HotelJsonParser.isConnectionInternet(contexto)) {
+            Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
+
+            if (hotelListener != null) {
+                hotelListener.onRefreshListaHotel(getListaHoteis());
+            }
+        } else {
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, mUrlAPIHotel, null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            listaHoteis = HotelJsonParser.parserJsonHoteis(response);
+
+                            if (hotelListener != null) {
+                                hotelListener.onRefreshListaHotel(listaHoteis);
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(contexto, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+            volleyQueue.add(request);
+        }
+    }
+
+    // ** END-API ** //
+
+    public Hotel getHotel(long id) {
+        for (Hotel hotel : this.listaHoteis) {
+            if (hotel.getId() == id) {
                 return hotel;
             }
 
@@ -49,37 +124,16 @@ public class SingletonHotel {
     //    adicionarHotel(1, "Hotel Mexil ", null, null, 0, null, 0, 0, "Torres Vedras", null, 0);
     //}
 
-    private void adicionarHotel(int id, String nome, String proprietario, String descricao, int contacto, String website, int cp4, int cp3, String localidade, String morada, int estado) {
-        this.listaHoteis.add(new Hotel(id, nome, proprietario, descricao, contacto, website, cp4, cp3, localidade, morada, estado));
-    }
-
-    private void carregarHoteis() {
-        String url = "http://tophotelsfrontend.ddns.net/api/hotel";
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                JSONObject hotel_resposta = response.getJSONObject(i);
-                                Log.e("RESPOSTA", hotel_resposta.getString("nome"));
-                                adicionarHotel(hotel_resposta.getInt("id"), hotel_resposta.getString("nome"), hotel_resposta.getString("proprietario"), hotel_resposta.getString("descricao"), hotel_resposta.getInt("contacto"), hotel_resposta.getString("website"), hotel_resposta.getInt("cp4"), hotel_resposta.getInt("cp3"), hotel_resposta.getString("localidade"), hotel_resposta.getString("morada"), hotel_resposta.getInt("estado"));
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                    }
-                }
-        );
-        AppController.gethInstance().addToQueue(jsonArrayRequest);
-    }
 
     public ArrayList<Hotel> getListaHoteis() {
         return listaHoteis;
+    }
+
+    public void setHotelListener(HotelListener hotelListener) {
+        this.hotelListener = hotelListener;
+    }
+
+    public void setLoginListener(LoginListener loginListener) {
+        this.loginListener = loginListener;
     }
 }
