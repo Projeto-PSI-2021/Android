@@ -90,6 +90,22 @@ public class HotelJsonParser {
         return token;
     }
 
+    public static Boolean parserJsonRegister(String resposta) {
+        Boolean flag = null;
+
+        try {
+            JSONObject registo = new JSONObject(resposta);
+            if (registo.getBoolean("success")) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
     public static boolean isConnectionInternet(Context contexto) {
         ConnectivityManager cm = (ConnectivityManager) contexto.getSystemService(Context.CONNECTIVITY_SERVICE);
 

@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/etNomeUtilizador"
+            android:hint="@string/etNomeUtilizadorLogin"
             android:inputType="textPersonName"
             android:textSize="14sp"
             android:autofillHints="" />
@@ -79,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/Password"
+            android:hint="@string/etPasswordLogin"
             android:inputType="textPassword"
             android:textSize="14sp"
             android:autofillHints="" />

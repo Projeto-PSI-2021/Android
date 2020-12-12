@@ -15,6 +15,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.tophotels.listeners.HotelListener;
 import com.example.tophotels.listeners.LoginListener;
+import com.example.tophotels.listeners.RegisterListener;
 import com.example.tophotels.utils.HotelJsonParser;
 
 import org.json.JSONArray;
@@ -32,11 +33,13 @@ public class SingletonHotel {
 
     //Endereços api
     private static final String mUrlAPILogin = "http://tophotelsfrontend.ddns.net/api/user/login";
+    private static final String mUrlAPIRegisto = "http://tophotelsfrontend.ddns.net/api/user/registar";
     private static final String mUrlAPIHotel = "http://tophotelsfrontend.ddns.net/api/hotel";
 
     //Listeners
     private HotelListener hotelListener;
     private LoginListener loginListener;
+    private RegisterListener registerListener;
 
 
     public static synchronized SingletonHotel getInstance(Context contexto) {
@@ -70,9 +73,37 @@ public class SingletonHotel {
         }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> parametros = new HashMap<String, String>();
+                Map<String, String> parametros = new HashMap<String, String>();
                 parametros.put("username", username);
                 parametros.put("password", password);
+                return parametros;
+            }
+        };
+        volleyQueue.add(request);
+    }
+
+    public void registoAPI(final Context contexto, final String username, final String email, final String password) {
+        StringRequest request = new StringRequest(Request.Method.POST,
+                mUrlAPIRegisto,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        registerListener.onValidateRegister(HotelJsonParser.parserJsonRegister(response));
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(contexto, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new HashMap<String, String>();
+
+                parametros.put("username", username);
+                parametros.put("password", password);
+                parametros.put("email", email);
+
                 return parametros;
             }
         };
@@ -135,5 +166,9 @@ public class SingletonHotel {
 
     public void setLoginListener(LoginListener loginListener) {
         this.loginListener = loginListener;
+    }
+
+    public void setRegisterListener(RegisterListener registerListener) {
+        this.registerListener = registerListener;
     }
 }

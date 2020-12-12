@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -10,13 +11,14 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="15dp">
+        android:padding="15dp"
+        tools:ignore="ExtraText">
 
         <TextView
             android:id="@+id/textView11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=" Nome de utilizador"
+            android:text="@string/tvUsernameRegisto"
             android:textSize="18sp" />
 
         <EditText
@@ -24,41 +26,64 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/etNomeUtilizador"
+            android:hint="@string/etNomeUtilizadorRegisto"
             android:inputType="textPersonName"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:autofillHints="" />
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/tvEmailRegisto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="Email"
+            android:text="@string/tvEmailRegisto"
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/etEmailRegistar"
+            android:id="@+id/etEmailRegisto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:hint="@string/etEmailRegisto"
+            android:autofillHints=""
+            tools:ignore="LabelFor"/>
 
         <TextView
-            android:id="@+id/textView16"
+            android:id="@+id/tvPasswordRegisto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="Password"
+            android:text="@string/tvPasswordRegisto"
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/etPasswordRegistar"
+            android:id="@+id/etPasswordRegisto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/Password"
+            android:hint="@string/etPasswordRegisto"
             android:inputType="textPassword"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:autofillHints="" />
+
+        <TextView
+            android:id="@+id/tvConfirmaPasswordRegisto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/tvConfirmaPasswordRegisto"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/etConfirmaPasswordRegisto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/etConfirmaPasswordRegisto"
+            android:inputType="textPassword"
+            android:textSize="14sp"
+            android:autofillHints="" />
 
     </LinearLayout>
 
@@ -75,7 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="200dp"
             android:onClick="onClickRegistar"
-            android:text="Registar"
+            android:text="@string/btRegistar"
             app:backgroundTint="@android:color/holo_red_light" />
     </LinearLayout>
 </LinearLayout>
