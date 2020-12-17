@@ -15,8 +15,6 @@ import com.example.tophotels.R;
 
 import java.util.ArrayList;
 
-
-
 public class ListaHotelAdapter extends BaseAdapter {
 
     private Context contexto;
@@ -67,13 +65,13 @@ public class ListaHotelAdapter extends BaseAdapter {
 
     private class ViewHolderLivro{
         private TextView tvNomeHotel, tvLocalidade, tvPreco;
-        private ImageView inCapa;
+        private ImageView img;
 
         public ViewHolderLivro(View view){
             tvNomeHotel = view.findViewById(R.id.tvNomeHotel);
             tvLocalidade = view.findViewById(R.id.tvLocalidade);
             tvPreco = view.findViewById(R.id.tvPreco);
-            inCapa = view.findViewById(R.id.tvImagem);
+            img = view.findViewById(R.id.tvImagem);
         }
 
         public void update(Hotel hotel){
@@ -84,7 +82,7 @@ public class ListaHotelAdapter extends BaseAdapter {
                 .load(hotel.getImg())
                     .placeholder(R.drawable.hotel)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(inCapa);
+                    .into(img);
         }
     }
 }

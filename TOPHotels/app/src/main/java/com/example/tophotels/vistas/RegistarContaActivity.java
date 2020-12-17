@@ -9,12 +9,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tophotels.R;
-import com.android.volley.RequestQueue;
-import com.example.tophotels.listeners.RegisterListener;
+import com.example.tophotels.listeners.UserListener;
 import com.example.tophotels.modelos.SingletonHotel;
-import com.example.tophotels.utils.HotelJsonParser;
+import com.example.tophotels.modelos.User;
+import com.example.tophotels.utils.JsonParser;
 
-public class RegistarContaActivity extends AppCompatActivity implements RegisterListener {
+public class RegistarContaActivity extends AppCompatActivity implements UserListener {
     private EditText etUsername, etPassword, etPasswordConfirmar, etEmail;
 
     @Override
@@ -22,16 +22,18 @@ public class RegistarContaActivity extends AppCompatActivity implements Register
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registar_conta_activity);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         etUsername = findViewById(R.id.etUsernameRegistar);
         etEmail = findViewById(R.id.etEmailRegisto);
         etPassword = findViewById(R.id.etPasswordRegisto);
         etPasswordConfirmar = findViewById(R.id.etConfirmaPasswordRegisto);
 
-        SingletonHotel.getInstance(getApplicationContext()).setRegisterListener(this);
+        SingletonHotel.getInstance(getApplicationContext()).setUserListener(this);
     }
 
     public void onClickRegistar(View view) {
-        if (!HotelJsonParser.isConnectionInternet(getApplicationContext())){
+        if (!JsonParser.isConnectionInternet(getApplicationContext())){
             Toast.makeText(getApplicationContext(), "Não está ligado à internet.", Toast.LENGTH_SHORT).show();
         } else {
             if (!etUsername.getText().toString().matches("")){
@@ -39,7 +41,7 @@ public class RegistarContaActivity extends AppCompatActivity implements Register
                     if (!etPassword.getText().toString().matches("")){
                         if (!etPasswordConfirmar.getText().toString().matches("")){
                             if (etPassword.getText().toString().contentEquals(etPasswordConfirmar.getText())){
-                                SingletonHotel.getInstance(getApplicationContext()).registoAPI(getApplicationContext(), etUsername.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString());
+                                SingletonHotel.getInstance(getApplicationContext()).postRegistoAPI(getApplicationContext(), etUsername.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString());
                             } else {
                                 Toast.makeText(getApplicationContext(), "Palavras passe não são iguais, tente outra vez.", Toast.LENGTH_SHORT).show();
                             }
@@ -60,6 +62,11 @@ public class RegistarContaActivity extends AppCompatActivity implements Register
 
     private boolean isEmailValido(String mail) {
         return Patterns.EMAIL_ADDRESS.matcher(mail).matches();
+    }
+
+    @Override
+    public void onValidateLogin(User user) {
+
     }
 
     @Override

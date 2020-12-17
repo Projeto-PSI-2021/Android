@@ -1,6 +1,5 @@
 package com.example.tophotels.modelos;
 
-
 import android.content.Context;
 
 import android.widget.Toast;
@@ -14,9 +13,9 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.tophotels.listeners.HotelListener;
-import com.example.tophotels.listeners.LoginListener;
-import com.example.tophotels.listeners.RegisterListener;
-import com.example.tophotels.utils.HotelJsonParser;
+import com.example.tophotels.listeners.UserInfoListener;
+import com.example.tophotels.listeners.UserListener;
+import com.example.tophotels.utils.JsonParser;
 
 import org.json.JSONArray;
 
@@ -32,14 +31,17 @@ public class SingletonHotel {
     private static RequestQueue volleyQueue = null;
 
     //Endereços api
-    private static final String mUrlAPILogin = "http://tophotelsfrontend.ddns.net/api/user/login";
-    private static final String mUrlAPIRegisto = "http://tophotelsfrontend.ddns.net/api/user/registar";
-    private static final String mUrlAPIHotel = "http://tophotelsfrontend.ddns.net/api/hotel";
+    //private static final String mUrlAPIUser = "http://tophotelsbackend.ddns.net/api/user";
+    //private static final String mUrlAPIUserInfo = "http://tophotelsbackend.ddns.net/api/user-info";
+    private static final String mUrlAPIUserInfo = "http://d62aa66b8dd3.eu.ngrok.io/api/user-info";
+    private static final String mUrlAPIUser = "http://d62aa66b8dd3.eu.ngrok.io/api/user";
+    //private static final String mUrlAPIHotel = "http://tophotelsbackend.ddns.net/api/hotel";
+    private static final String mUrlAPIHotel = "http://d62aa66b8dd3.eu.ngrok.io/api/hotel";
 
     //Listeners
     private HotelListener hotelListener;
-    private LoginListener loginListener;
-    private RegisterListener registerListener;
+    private UserListener userListener;
+    private UserInfoListener userInfoListener;
 
 
     public static synchronized SingletonHotel getInstance(Context contexto) {
@@ -57,61 +59,133 @@ public class SingletonHotel {
 
     // ** API ** //
 
-    public void loginAPI(final Context contexto, final String username, final String password) {
-        StringRequest request = new StringRequest(Request.Method.POST,
-                mUrlAPILogin,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        loginListener.onValidateLogin(HotelJsonParser.parserJsonLogin(response), username);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(contexto, error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("username", username);
-                parametros.put("password", password);
-                return parametros;
-            }
-        };
-        volleyQueue.add(request);
+    public void postLoginAPI(final Context contexto, final String username, final String password) {
+        if (!JsonParser.isConnectionInternet(contexto)) {
+            Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
+        } else {
+            StringRequest request = new StringRequest(Request.Method.POST,
+                    mUrlAPIUser + "/login",
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            userListener.onValidateLogin(JsonParser.jsonParserLogin(response));
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(contexto, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<String, String>();
+                    parametros.put("username", username);
+                    parametros.put("password", password);
+                    return parametros;
+                }
+            };
+            volleyQueue.add(request);
+        }
     }
 
-    public void registoAPI(final Context contexto, final String username, final String email, final String password) {
-        StringRequest request = new StringRequest(Request.Method.POST,
-                mUrlAPIRegisto,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        registerListener.onValidateRegister(HotelJsonParser.parserJsonRegister(response));
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(contexto, error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parametros = new HashMap<String, String>();
+    public void postRegistoAPI(final Context contexto, final String username, final String email, final String password) {
+        if (!JsonParser.isConnectionInternet(contexto)) {
+            Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
+        } else {
+            StringRequest request = new StringRequest(Request.Method.POST,
+                    mUrlAPIUser + "/registar",
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            userListener.onValidateRegister(JsonParser.jsonParserRegister(response));
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(contexto, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<String, String>();
 
-                parametros.put("username", username);
-                parametros.put("password", password);
-                parametros.put("email", email);
+                    parametros.put("username", username);
+                    parametros.put("password", password);
+                    parametros.put("email", email);
 
-                return parametros;
-            }
-        };
-        volleyQueue.add(request);
+                    return parametros;
+                }
+            };
+            volleyQueue.add(request);
+        }
+    }
+
+    public void getUserInfoAPI(final Context contexto, final String access_token) {
+        if (!JsonParser.isConnectionInternet(contexto)) {
+            Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
+        } else {
+            StringRequest request = new StringRequest(Request.Method.POST,
+                    mUrlAPIUser + "/info?access-token=" + access_token,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            userInfoListener.onRefreshDetalhes(JsonParser.jsonParserUserInfo(response));
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(contexto, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<String, String>();
+
+                    parametros.put("access_token", access_token);
+
+                    return parametros;
+                }
+            };
+            volleyQueue.add(request);
+        }
+    }
+
+    public void patchUserInfoAPI(final Context contexto, UserInfo userInfo, final String access_token) {
+        if (!JsonParser.isConnectionInternet(contexto)) {
+            Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
+        } else {
+            StringRequest request = new StringRequest(Request.Method.PATCH,
+                    mUrlAPIUserInfo + "/" + userInfo.getId(),
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            userInfoListener.onUpdateDetalhes(JsonParser.jsonParserUserInfoPatch(response));
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(contexto, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<String, String>();
+
+                    parametros.put("nome", userInfo.getNome());
+                    parametros.put("apelido", userInfo.getApelido());
+                    parametros.put("contactoTel", "" + userInfo.getContactoTel());
+                    parametros.put("morada", userInfo.getMorada());
+                    parametros.put("nif", "" + userInfo.getNif());
+
+                    return parametros;
+                }
+            };
+            volleyQueue.add(request);
+        }
     }
 
     public void getAllHotelAPI(final Context contexto) {
-        if (!HotelJsonParser.isConnectionInternet(contexto)) {
+        if (!JsonParser.isConnectionInternet(contexto)) {
             Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
 
             if (hotelListener != null) {
@@ -122,7 +196,7 @@ public class SingletonHotel {
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            listaHoteis = HotelJsonParser.parserJsonHoteis(response);
+                            listaHoteis = JsonParser.jsonParserListaHoteis(response);
 
                             if (hotelListener != null) {
                                 hotelListener.onRefreshListaHotel(listaHoteis);
@@ -151,11 +225,6 @@ public class SingletonHotel {
         return null;
     }
 
-    //private void gerarFakeData() {
-    //    adicionarHotel(1, "Hotel Mexil ", null, null, 0, null, 0, 0, "Torres Vedras", null, 0);
-    //}
-
-
     public ArrayList<Hotel> getListaHoteis() {
         return listaHoteis;
     }
@@ -164,11 +233,11 @@ public class SingletonHotel {
         this.hotelListener = hotelListener;
     }
 
-    public void setLoginListener(LoginListener loginListener) {
-        this.loginListener = loginListener;
+    public void setUserListener(UserListener userListener) {
+        this.userListener = userListener;
     }
 
-    public void setRegisterListener(RegisterListener registerListener) {
-        this.registerListener = registerListener;
+    public void setUserInfoListener(UserInfoListener userInfoListener) {
+        this.userInfoListener = userInfoListener;
     }
 }

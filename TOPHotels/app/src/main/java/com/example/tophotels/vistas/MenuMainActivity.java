@@ -26,10 +26,15 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     public static final int fragmentoAtual = FRAGMENTO_PESQUISAHOTEL;
     Fragment fragment = null;
 
-    public static final String USERNAME = "USERNAME";
+    // aceder a sharedpreference
     public static final String PREF_USER = "PREF_USER";
+    // id user
+    public static final String USER_ID = "USER_ID";
+    // username
+    public static final String USERNAME = "USERNAME";
+    // access-token
     public static final String TOKEN = "TOKEN";
-
+    // tabela username string
     private String user;
 
     private NavigationView nav_view;
@@ -38,7 +43,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tela_pos_login);
+        setContentView(R.layout.activity_menu_main);
         setTitle("Pesquise o hotel");
 
         Toolbar tb = findViewById(R.id.toolbar);
@@ -82,14 +87,14 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                 break;*/
 
             case R.id.nav_conta:
-                fragment = new DefinicoesContaFragment();
-                setTitle("Definições de conta");
+                Intent intentMenu = new Intent(MenuMainActivity.this, DetalhesContaActivity.class);
+                startActivity(intentMenu);
                 break;
 
             case R.id.nav_logout:
-                SharedPreferences SM = getSharedPreferences("userrecord", 0);
+                SharedPreferences SM = getSharedPreferences(MenuMainActivity.PREF_USER, Context.MODE_PRIVATE);
                 SharedPreferences.Editor edit = SM.edit();
-                edit.putBoolean("userlogin", false);
+                edit.clear();
                 edit.apply();
 
                 Intent intent = new Intent(MenuMainActivity.this, LoginActivity.class);

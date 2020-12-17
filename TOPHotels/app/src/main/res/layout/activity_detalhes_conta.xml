@@ -1,124 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".vistas.DefinicoesContaFragment">
+    android:orientation="vertical"
+    android:padding="15dp"
+    tools:context=".vistas.DetalhesContaActivity">
 
-    <LinearLayout
+
+
+
+            <TextView
+                android:id="@+id/tvNomeDetalhe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tvNomeDetalhe"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/etNomeDetalhe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:autofillHints=""
+                tools:ignore="LabelFor" />
+
+            <TextView
+                android:id="@+id/tvApelidoDetalhe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/tvApelidoDetalhe"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/etApelidoDetalhe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:autofillHints=""
+                tools:ignore="LabelFor" />
+
+            <TextView
+                android:id="@+id/tvTelefoneDetalhe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/tvTelefoneDetalhe"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/etTelefoneDetalhe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:autofillHints=""
+                tools:ignore="LabelFor" />
+
+            <TextView
+                android:id="@+id/tvCartaoCreditoDetalhe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/tvCartaoCreditoDetalhe"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/etCartaoCreditoDetalhe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:autofillHints=""
+                tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/tvDataNascimentoDetalhe"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="15dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Nome"
-                android:textSize="18sp" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/tvDataNascimentoDetalhe"
+        android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/etNome"
+                android:id="@+id/etDataNascimentoDetalhe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="date"
+                android:autofillHints=""
+                tools:ignore="LabelFor" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/tvNifDetalhe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Apelido"
+                android:text="@string/tvNifDetalhe"
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/etApelido"
+                android:id="@+id/etNifDetalhe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="number"
+                android:autofillHints=""
+                tools:ignore="LabelFor" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/tvMoradaDetalhe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Telefone"
+                android:text="@string/tvMoradaDetalhe"
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/etTelefone"
+                android:id="@+id/etMoradaDetalhe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="number" />
-
-            <TextView
-                android:id="@+id/textView22"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Cartão de crédito"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/etCartaoCredito"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="number" />
-
-            <TextView
-                android:id="@+id/textView23"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Data de nascimento"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/editTextDate2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="date" />
-
-            <TextView
-                android:id="@+id/textView24"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="NIF"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/etNif"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="number" />
-
-            <TextView
-                android:id="@+id/textView25"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Morada"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/etMorada"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:autofillHints=""
+                tools:ignore="LabelFor" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -131,9 +140,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/holo_red_light"
-                    android:text="Guardar" />
+                    android:text="@string/btGuardar"
+                    android:onClick="onClickGuardarDetalhesConta"/>
             </LinearLayout>
-        </LinearLayout>
 
-    </LinearLayout>
-</FrameLayout>
+</LinearLayout>

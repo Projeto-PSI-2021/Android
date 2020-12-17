@@ -1,6 +1,5 @@
 package com.example.tophotels.modelos;
 
-
 public class Hotel {
     private int id;
     private String nome;

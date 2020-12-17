@@ -1,8 +1,6 @@
 package com.example.tophotels.vistas;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,26 +10,28 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.tophotels.listeners.LoginListener;
+import com.example.tophotels.listeners.UserListener;
 import com.example.tophotels.modelos.SingletonHotel;
 import com.example.tophotels.R;
-import com.example.tophotels.utils.HotelJsonParser;
+import com.example.tophotels.modelos.User;
+import com.example.tophotels.utils.JsonParser;
 
-public class LoginActivity extends AppCompatActivity implements LoginListener {
+public class LoginActivity extends AppCompatActivity implements UserListener {
     private EditText etUsername, etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.login_activity);
 
-        etUsername = findViewById(R.id.etUsername);
-        etPassword = findViewById(R.id.etPassword);
+        etUsername = findViewById(R.id.etUsernameLogin);
+        etPassword = findViewById(R.id.etPasswordLogin);
 
         this.etUsername.setText("joaoneves");
         this.etPassword.setText("12345678");
 
-        SingletonHotel.getInstance(getApplicationContext()).setLoginListener(this);
+        SingletonHotel.getInstance(getApplicationContext()).setUserListener(this);
     }
 
     public void mostrarEsqueceuSenha(View view) {
@@ -44,12 +44,12 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     }
 
     public void onClickLogin(View view) {
-        if (!HotelJsonParser.isConnectionInternet(getApplicationContext())) {
+        if (!JsonParser.isConnectionInternet(getApplicationContext())) {
             Toast.makeText(getApplicationContext(), "Não tem ligação à internet.", Toast.LENGTH_SHORT).show();
         } else {
             if (!etUsername.getText().toString().matches("")) {
                 if (!etPassword.getText().toString().matches("")) {
-                    SingletonHotel.getInstance(getApplicationContext()).loginAPI(getApplicationContext(), etUsername.getText().toString(), etPassword.getText().toString());
+                    SingletonHotel.getInstance(getApplicationContext()).postLoginAPI(getApplicationContext(), etUsername.getText().toString(), etPassword.getText().toString());
                 } else {
                     Toast.makeText(this, "Preencher password", Toast.LENGTH_SHORT).show();
                 }
@@ -60,9 +60,9 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     }
 
     @Override
-    public void onValidateLogin(String token, String username) {
-        if (token != null) {
-            saveSharePreferencesUserInfo(token, username);
+    public void onValidateLogin(User user) {
+        if (user != null) {
+            saveSharePreferencesUserInfo(user);
             Intent intentMenu = new Intent(getApplicationContext(), MenuMainActivity.class);
             startActivity(intentMenu);
             finish();
@@ -72,11 +72,18 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         }
     }
 
-    private void saveSharePreferencesUserInfo(String token, String username) {
+    @Override
+    public void onValidateRegister(Boolean flag) {
+
+    }
+
+    private void saveSharePreferencesUserInfo(User user) {
         SharedPreferences sharedPreferencesInfoUser = getSharedPreferences(MenuMainActivity.PREF_USER, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferencesInfoUser.edit();
-        editor.putString(MenuMainActivity.USERNAME, username);
-        editor.putString(MenuMainActivity.TOKEN, token);
+        editor.clear();
+        editor.putInt(MenuMainActivity.USER_ID, user.getId());
+        editor.putString(MenuMainActivity.USERNAME, user.getUsername());
+        editor.putString(MenuMainActivity.TOKEN, user.getAccess_token());
         editor.apply();
     }
 }

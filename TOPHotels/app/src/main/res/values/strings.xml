@@ -34,4 +34,12 @@
     <string name="tvPasswordRegisto">Palavra passe</string>
     <string name="btRegistar">Registar</string>
     <string name="tvConfirmaPasswordRegisto">Confirmar palavra passe</string>
+    <string name="btGuardar">Guardar</string>
+    <string name="tvNomeDetalhe">Primeiro Nome</string>
+    <string name="tvApelidoDetalhe">Apelido</string>
+    <string name="tvDataNascimentoDetalhe">Data de nascimento</string>
+    <string name="tvNifDetalhe">NIF</string>
+    <string name="tvMoradaDetalhe">Morada</string>
+    <string name="tvCartaoCreditoDetalhe">Cartão de crédito</string>
+    <string name="tvTelefoneDetalhe">Telefone</string>
 </resources>
