@@ -9,7 +9,7 @@ import android.view.MenuInflater;
 import com.example.tophotels.R;
 
 
-public class HotelSelecionadoActivity extends AppCompatActivity{
+public class QuartoSelecionadoActivity extends AppCompatActivity{
 
 
     @Override
@@ -17,7 +17,7 @@ public class HotelSelecionadoActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hotel_selecionado);
 
-        setTitle("Hotel Selecionado");
+        setTitle("Quarto Selecionado");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

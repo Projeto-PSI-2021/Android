@@ -27,13 +27,14 @@
                 android:contentDescription="TODO" />
 
             <EditText
-                android:id="@+id/etPesquisaHotel"
+                android:id="@+id/etLocalidadePesquisa"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName"
                 android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/localidade"
+                android:inputType="textPersonName"
                 tools:ignore="LabelFor" />
 
         </LinearLayout>
@@ -49,11 +50,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Check-in:"
+                android:text="Data Inicial:"
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/etCheckIn"
+                android:id="@+id/etDataInicial"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -75,11 +76,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Check-out: "
+                android:text="Data Final: "
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/etCheckOut"
+                android:id="@+id/etDataFinal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

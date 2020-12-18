@@ -16,10 +16,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
-            android:name=".vistas.DetalhesContaActivity"
-            android:parentActivityName=".vistas.MenuMainActivity"/>
+            android:name=".vistas.PesquisarActivity"
+            android:parentActivityName=".vistas.MenuMainActivity" />
         <activity
-            android:name=".vistas.HotelSelecionadoActivity"
+            android:name=".vistas.DetalhesContaActivity"
+            android:parentActivityName=".vistas.MenuMainActivity" />
+        <activity
+            android:name=".vistas.QuartoSelecionadoActivity"
             android:parentActivityName=".vistas.MenuMainActivity" />
         <activity
             android:name=".vistas.MenuMainActivity"
@@ -35,8 +38,8 @@
         </activity>
         <activity
             android:name=".vistas.RegistarContaActivity"
-            android:parentActivityName=".vistas.LoginActivity"
-            android:label="@string/CabecalhoRegistarConta" />
+            android:label="@string/CabecalhoRegistarConta"
+            android:parentActivityName=".vistas.LoginActivity" />
     </application>
 
 </manifest>

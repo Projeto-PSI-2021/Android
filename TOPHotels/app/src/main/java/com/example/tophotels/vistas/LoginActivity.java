@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tophotels.listeners.UserListener;
-import com.example.tophotels.modelos.SingletonHotel;
+import com.example.tophotels.modelos.Singleton;
 import com.example.tophotels.R;
 import com.example.tophotels.modelos.User;
 import com.example.tophotels.utils.JsonParser;
@@ -31,7 +31,11 @@ public class LoginActivity extends AppCompatActivity implements UserListener {
         this.etUsername.setText("joaoneves");
         this.etPassword.setText("12345678");
 
-        SingletonHotel.getInstance(getApplicationContext()).setUserListener(this);
+        Singleton.getInstance(getApplicationContext()).setUserListener(this);
+
+
+        //verificar se a sharedpreference já possui login
+        //se possuir chamar o método do login e enviar os dados inseridos na sharedpreference.
     }
 
     public void mostrarEsqueceuSenha(View view) {
@@ -49,7 +53,7 @@ public class LoginActivity extends AppCompatActivity implements UserListener {
         } else {
             if (!etUsername.getText().toString().matches("")) {
                 if (!etPassword.getText().toString().matches("")) {
-                    SingletonHotel.getInstance(getApplicationContext()).postLoginAPI(getApplicationContext(), etUsername.getText().toString(), etPassword.getText().toString());
+                    Singleton.getInstance(getApplicationContext()).postLoginAPI(getApplicationContext(), etUsername.getText().toString(), etPassword.getText().toString());
                 } else {
                     Toast.makeText(this, "Preencher password", Toast.LENGTH_SHORT).show();
                 }

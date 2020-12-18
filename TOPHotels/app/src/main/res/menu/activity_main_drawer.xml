@@ -7,7 +7,11 @@
         <item
             android:id="@+id/nav_reservas"
             android:icon="@drawable/ic_baseline_home_24"
-            android:title="@string/Reservas"/>
+            android:title="@string/Reservas" />
+        <item
+            android:id="@+id/nav_pesquisar"
+            android:icon="@drawable/ic_baseline_search_24"
+            android:title="@string/Pesquisar" />
         <item
             android:id="@+id/nav_conta"
             android:icon="@drawable/ic_baseline_settings_24"

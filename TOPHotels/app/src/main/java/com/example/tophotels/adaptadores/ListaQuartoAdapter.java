@@ -10,35 +10,35 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.tophotels.modelos.Hotel;
 import com.example.tophotels.R;
+import com.example.tophotels.modelos.Quarto;
 
 import java.util.ArrayList;
 
-public class ListaHotelAdapter extends BaseAdapter {
+public class ListaQuartoAdapter extends BaseAdapter {
 
     private Context contexto;
     private LayoutInflater inflater;
-    private ArrayList<Hotel> listaHoteis;
+    private ArrayList<Quarto> listaQuartos;
 
-    public ListaHotelAdapter(Context contexto, ArrayList<Hotel> lista){
+    public ListaQuartoAdapter(Context contexto, ArrayList<Quarto> lista){
         this.contexto = contexto;
-        this.listaHoteis = lista;
+        this.listaQuartos = lista;
     }
 
     @Override
     public int getCount() {
-        return this.listaHoteis.size();
+        return this.listaQuartos.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return this.listaHoteis.get(position);
+        return this.listaQuartos.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return this.listaHoteis.get(position).getId();
+        return this.listaQuartos.get(position).getId();
     }
 
     @Override
@@ -58,28 +58,27 @@ public class ListaHotelAdapter extends BaseAdapter {
             convertView.setTag(vHolder);
         }
 
-        vHolder.update(this.listaHoteis.get(position));
+        vHolder.update(this.listaQuartos.get(position));
 
         return convertView;
     }
 
     private class ViewHolderLivro{
-        private TextView tvNomeHotel, tvLocalidade, tvPreco;
+        private TextView tvDescricaoQuarto, tvPrecoNoite;
         private ImageView img;
 
         public ViewHolderLivro(View view){
-            tvNomeHotel = view.findViewById(R.id.tvNomeHotel);
-            tvLocalidade = view.findViewById(R.id.tvLocalidade);
-            tvPreco = view.findViewById(R.id.tvPreco);
+            tvDescricaoQuarto = view.findViewById(R.id.tvDescricaoQuarto);
+            tvPrecoNoite = view.findViewById(R.id.tvPrecoNoite);
             img = view.findViewById(R.id.tvImagem);
         }
 
-        public void update(Hotel hotel){
-            this.tvNomeHotel.setText(hotel.getNome());
-            this.tvLocalidade.setText(hotel.getLocalidade());
+        public void update(Quarto quarto){
+            this.tvDescricaoQuarto.setText(quarto.getDescricao());
+            this.tvPrecoNoite.setText(""+quarto.getPrecoNoite());
             //this.inCapa.setImageResource(hotel.getCapa());
             Glide.with(contexto)
-                .load(hotel.getImg())
+                .load(quarto.getImg())
                     .placeholder(R.drawable.hotel)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(img);

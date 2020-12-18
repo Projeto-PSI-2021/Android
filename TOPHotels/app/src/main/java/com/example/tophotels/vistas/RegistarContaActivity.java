@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.example.tophotels.R;
 import com.example.tophotels.listeners.UserListener;
-import com.example.tophotels.modelos.SingletonHotel;
+import com.example.tophotels.modelos.Singleton;
 import com.example.tophotels.modelos.User;
 import com.example.tophotels.utils.JsonParser;
 
@@ -29,7 +29,7 @@ public class RegistarContaActivity extends AppCompatActivity implements UserList
         etPassword = findViewById(R.id.etPasswordRegisto);
         etPasswordConfirmar = findViewById(R.id.etConfirmaPasswordRegisto);
 
-        SingletonHotel.getInstance(getApplicationContext()).setUserListener(this);
+        Singleton.getInstance(getApplicationContext()).setUserListener(this);
     }
 
     public void onClickRegistar(View view) {
@@ -41,7 +41,7 @@ public class RegistarContaActivity extends AppCompatActivity implements UserList
                     if (!etPassword.getText().toString().matches("")){
                         if (!etPasswordConfirmar.getText().toString().matches("")){
                             if (etPassword.getText().toString().contentEquals(etPasswordConfirmar.getText())){
-                                SingletonHotel.getInstance(getApplicationContext()).postRegistoAPI(getApplicationContext(), etUsername.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString());
+                                Singleton.getInstance(getApplicationContext()).postRegistoAPI(getApplicationContext(), etUsername.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString());
                             } else {
                                 Toast.makeText(getApplicationContext(), "Palavras passe não são iguais, tente outra vez.", Toast.LENGTH_SHORT).show();
                             }

@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.example.tophotels.R;
 import com.example.tophotels.listeners.UserInfoListener;
-import com.example.tophotels.modelos.SingletonHotel;
+import com.example.tophotels.modelos.Singleton;
 import com.example.tophotels.modelos.UserInfo;
 import com.example.tophotels.utils.JsonParser;
 
@@ -48,8 +48,8 @@ public class DetalhesContaActivity extends AppCompatActivity implements UserInfo
         etNif = findViewById(R.id.etNifDetalhe);
         etMorada = findViewById(R.id.etMoradaDetalhe);
 
-        SingletonHotel.getInstance(getApplicationContext()).setUserInfoListener(this);
-        SingletonHotel.getInstance(getApplicationContext()).getUserInfoAPI(getApplicationContext(), token);
+        Singleton.getInstance(getApplicationContext()).setUserInfoListener(this);
+        Singleton.getInstance(getApplicationContext()).getUserInfoAPI(getApplicationContext(), token);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -67,7 +67,7 @@ public class DetalhesContaActivity extends AppCompatActivity implements UserInfo
             String img = null;
 
             userInfo = new UserInfo(id, nome, apelido, contactoTel, morada, nif, img, userId);
-            SingletonHotel.getInstance(getApplicationContext()).patchUserInfoAPI(getApplicationContext(), userInfo, token);
+            Singleton.getInstance(getApplicationContext()).patchUserInfoAPI(getApplicationContext(), userInfo, token);
         }
     }
 

@@ -80,15 +80,20 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Intent intent = null;
         switch (item.getItemId()) {
             /*case R.id.nav_reservas:
                 frag = new ListaHoteisFragment();
                 setTitle(item.getTitle());
                 break;*/
+            case R.id.nav_pesquisar:
+                Fragment fragment = new PesquisarHotelFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment, fragment).commit();
+                break;
 
             case R.id.nav_conta:
-                Intent intentMenu = new Intent(MenuMainActivity.this, DetalhesContaActivity.class);
-                startActivity(intentMenu);
+                intent = new Intent(MenuMainActivity.this, DetalhesContaActivity.class);
+                startActivity(intent);
                 break;
 
             case R.id.nav_logout:
@@ -97,7 +102,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                 edit.clear();
                 edit.apply();
 
-                Intent intent = new Intent(MenuMainActivity.this, LoginActivity.class);
+                intent = new Intent(MenuMainActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
                 break;

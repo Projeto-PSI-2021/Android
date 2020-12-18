@@ -42,4 +42,6 @@
     <string name="tvMoradaDetalhe">Morada</string>
     <string name="tvCartaoCreditoDetalhe">Cartão de crédito</string>
     <string name="tvTelefoneDetalhe">Telefone</string>
+    <string name="Pesquisar">Pesquisar</string>
+    <string name="localidade">Localidade</string>
 </resources>
