@@ -44,4 +44,5 @@
     <string name="tvTelefoneDetalhe">Telefone</string>
     <string name="Pesquisar">Pesquisar</string>
     <string name="localidade">Localidade</string>
+    <string name="btForgot">Pedir password</string>
 </resources>

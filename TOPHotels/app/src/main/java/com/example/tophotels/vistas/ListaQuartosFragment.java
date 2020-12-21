@@ -22,7 +22,7 @@ import com.example.tophotels.adaptadores.ListaQuartoAdapter;
 
 import java.util.ArrayList;
 
-public class ListaQuartosFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, QuartoListener {
+public class ListaQuartosFragment extends Fragment implements QuartoListener {
     private ListaQuartoAdapter adapter;
     private ListView lvQuartos;
 
@@ -40,7 +40,7 @@ public class ListaQuartosFragment extends Fragment implements SwipeRefreshLayout
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_lista_hoteis, container, false);
+        View view = inflater.inflate(R.layout.fragment_lista_quartos, container, false);
         lvQuartos = view.findViewById(R.id.lvQuartos);
 
         String localidade = getArguments().getString("localidade", "");
@@ -51,15 +51,11 @@ public class ListaQuartosFragment extends Fragment implements SwipeRefreshLayout
         // tabela user.access_token string
         String token = sharedPreferencesUser.getString(MenuMainActivity.TOKEN, null);
 
-        //Singleton.getInstance(getContext()).setHotelListener(this);
-        //Singleton.getInstance(getContext()).getAllHotelAPI(getContext());
         Singleton.getInstance(getContext()).setQuartoListener(this);
         Singleton.getInstance(getContext()).postPesquisaHotel(getContext(), localidade, data_inicial, data_final, token);
 
         adapter = new ListaQuartoAdapter(getActivity(), Singleton.getInstance(getContext()).getListaQuartos());
-
         lvQuartos.setAdapter(adapter);
-
         //Vai escutar até clicar na imagem
         lvQuartos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -67,6 +63,7 @@ public class ListaQuartosFragment extends Fragment implements SwipeRefreshLayout
                 Intent detalhe = new Intent(getActivity().getApplicationContext(), QuartoSelecionadoActivity.class);
                 //detalhe.putExtra(DetalhesLivros.INDICE, position);
                 //detalhe.putExtra(HotelSelecionadoActivity.ID, id);
+                detalhe.putExtra(QuartoSelecionadoActivity.ID, id);
                 startActivity(detalhe);
             }
         });
@@ -85,37 +82,9 @@ public class ListaQuartosFragment extends Fragment implements SwipeRefreshLayout
     }
 
     @Override
-    public void onRefresh() {
-        lvQuartos.setAdapter(new ListaQuartoAdapter(getContext(),
-                Singleton.getInstance(getContext()).getListaQuartos()));
-    }
-
-    @Override
     public void onRefreshListaQuarto(ArrayList<Quarto> listaQuartos) {
         if (listaQuartos != null) {
             lvQuartos.setAdapter(new ListaQuartoAdapter(getContext(), listaQuartos));
         }
     }
-
-
-
-
-    /* HotelListener
-    @Override
-    public void onRefreshListaHotel(ArrayList<Hotel> listahoteis) {
-        if(listahoteis != null){
-            lvHoteis.setAdapter(new ListaHotelAdapter(getContext(), listahoteis));
-        }
-    }
-
-    @Override
-    public void onRefresh() {
-        lvHoteis.setAdapter(new ListaHotelAdapter(getContext(),
-        Singleton.getInstance(getContext()).getListaHoteis()));
-    }
-
-    @Override
-    public void onRefreshDetalhes() {
-
-    }*/
 }

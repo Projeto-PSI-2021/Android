@@ -48,7 +48,7 @@ public class ListaQuartoAdapter extends BaseAdapter {
         }
 
         if(convertView == null){
-            convertView = inflater.inflate(R.layout.item_lista_hoteis, null);
+            convertView = inflater.inflate(R.layout.item_lista_quartos, null);
 
         }
         ViewHolderLivro vHolder = (ViewHolderLivro) convertView.getTag();
@@ -70,7 +70,7 @@ public class ListaQuartoAdapter extends BaseAdapter {
         public ViewHolderLivro(View view){
             tvDescricaoQuarto = view.findViewById(R.id.tvDescricaoQuarto);
             tvPrecoNoite = view.findViewById(R.id.tvPrecoNoite);
-            img = view.findViewById(R.id.tvImagem);
+            img = view.findViewById(R.id.imgListaQuartos);
         }
 
         public void update(Quarto quarto){

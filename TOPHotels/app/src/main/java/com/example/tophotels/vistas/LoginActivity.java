@@ -38,8 +38,9 @@ public class LoginActivity extends AppCompatActivity implements UserListener {
         //se possuir chamar o método do login e enviar os dados inseridos na sharedpreference.
     }
 
-    public void mostrarEsqueceuSenha(View view) {
-        Toast.makeText(getApplicationContext(), "Esqueceu senha clicado", Toast.LENGTH_LONG).show();
+    public void mostrarActivityEsqueceuSenha(View view) {
+        Intent i = new Intent(LoginActivity.this, EsqueceuPasswordActivity.class);
+        startActivity(i);
     }
 
     public void mostrarActivityRegistarConta(View view) {
@@ -78,6 +79,11 @@ public class LoginActivity extends AppCompatActivity implements UserListener {
 
     @Override
     public void onValidateRegister(Boolean flag) {
+
+    }
+
+    @Override
+    public void onForgotPassword(Boolean flag) {
 
     }
 

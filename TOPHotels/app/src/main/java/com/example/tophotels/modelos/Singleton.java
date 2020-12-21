@@ -34,13 +34,13 @@ public class Singleton {
 
     //Endereços api
     //private static final String mUrlAPIUser = "http://tophotelsbackend.ddns.net/api/user";
-    private static final String mUrlAPIUser = "http://e36e3832b970.eu.ngrok.io/api/user";
+    private static final String mUrlAPIUser = "http://ab9cd58a31d6.eu.ngrok.io/api/user";
     //private static final String mUrlAPIUserInfo = "http://tophotelsbackend.ddns.net/api/user-info";
-    private static final String mUrlAPIUserInfo = "http://e36e3832b970.eu.ngrok.io/api/user-info";
+    private static final String mUrlAPIUserInfo = "http://ab9cd58a31d6.eu.ngrok.io/api/user-info";
     //private static final String mUrlAPIHotel = "http://tophotelsbackend.ddns.net/api/hotel";
-    private static final String mUrlAPIHotel = "http://e36e3832b970.eu.ngrok.io/api/hotel";
+    private static final String mUrlAPIHotel = "http://ab9cd58a31d6.eu.ngrok.io/api/hotel";
     //private static final String mUrlAPIQuarto = "http://tophotelsbackend.ddns.net/api/quarto";
-    private static final String mUrlAPIQuarto = "http://e36e3832b970.eu.ngrok.io/api/quarto";
+    private static final String mUrlAPIQuarto = "http://ab9cd58a31d6.eu.ngrok.io/api/quarto";
 
     //Listeners
     private HotelListener hotelListener;
@@ -117,6 +117,36 @@ public class Singleton {
 
                     parametros.put("username", username);
                     parametros.put("password", password);
+                    parametros.put("email", email);
+
+                    return parametros;
+                }
+            };
+            volleyQueue.add(request);
+        }
+    }
+
+    public void postEsqueceuPassword(final Context contexto, final String email) {
+        if (!JsonParser.isConnectionInternet(contexto)) {
+            Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
+        } else {
+            StringRequest request = new StringRequest(Request.Method.POST,
+                    mUrlAPIUser + "/reset-password",
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            userListener.onForgotPassword(JsonParser.jsonParserForgot(response));
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(contexto, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<String, String>();
+
                     parametros.put("email", email);
 
                     return parametros;

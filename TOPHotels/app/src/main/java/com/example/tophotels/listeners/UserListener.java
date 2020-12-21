@@ -6,4 +6,5 @@ public interface UserListener {
 
     void onValidateLogin(User user);
     void onValidateRegister(Boolean flag);
+    void onForgotPassword(Boolean flag);
 }

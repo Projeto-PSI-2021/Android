@@ -62,7 +62,7 @@ public class JsonParser {
                 int id = quartoJson.getInt("id");
                 String descricao = quartoJson.getString("descricao");
                 double precoNoite = quartoJson.getDouble("precoNoite");
-                String img = quartoJson.getString("img");
+                String img = "http://dec431788822.eu.ngrok.io/assets/quartos/" + quartoJson.getString("img");
 
                 Quarto quarto = new Quarto(id, descricao, precoNoite, img);
                 listaQuarto.add(quarto);
@@ -196,6 +196,22 @@ public class JsonParser {
         try {
             JSONObject registo = new JSONObject(resposta);
             if (registo.getBoolean("success")) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    public static Boolean jsonParserForgot(String resposta) {
+        Boolean flag = null;
+
+        try {
+            JSONObject forgot = new JSONObject(resposta);
+            if (forgot.getBoolean("success")) {
                 flag = true;
             } else {
                 flag = false;

@@ -16,9 +16,6 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
-            android:name=".vistas.PesquisarActivity"
-            android:parentActivityName=".vistas.MenuMainActivity" />
-        <activity
             android:name=".vistas.DetalhesContaActivity"
             android:parentActivityName=".vistas.MenuMainActivity" />
         <activity
@@ -36,6 +33,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".vistas.EsqueceuPasswordActivity"
+            android:parentActivityName=".vistas.LoginActivity"/>
         <activity
             android:name=".vistas.RegistarContaActivity"
             android:label="@string/CabecalhoRegistarConta"

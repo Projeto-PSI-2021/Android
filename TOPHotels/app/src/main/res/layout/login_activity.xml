@@ -107,8 +107,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:clickable="true"
-                android:onClick="mostrarEsqueceuSenha"
+                android:onClick="mostrarActivityEsqueceuSenha"
                 android:text="@string/tvEsqueceuSenha"
+                android:textColor="@android:color/holo_red_light"
                 android:focusable="true" />
 
             <TextView

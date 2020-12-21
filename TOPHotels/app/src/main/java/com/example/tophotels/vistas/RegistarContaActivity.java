@@ -25,7 +25,7 @@ public class RegistarContaActivity extends AppCompatActivity implements UserList
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etUsername = findViewById(R.id.etUsernameRegistar);
-        etEmail = findViewById(R.id.etEmailRegisto);
+        etEmail = findViewById(R.id.etEmailForgot);
         etPassword = findViewById(R.id.etPasswordRegisto);
         etPasswordConfirmar = findViewById(R.id.etConfirmaPasswordRegisto);
 
@@ -82,6 +82,11 @@ public class RegistarContaActivity extends AppCompatActivity implements UserList
             etPasswordConfirmar.setText("");
             Toast.makeText(getApplicationContext(), "Erro ao registar.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onForgotPassword(Boolean flag) {
+
     }
 }
 
