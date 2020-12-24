@@ -11,9 +11,12 @@ import android.widget.Toast;
 
 import com.example.tophotels.R;
 import com.example.tophotels.listeners.UserInfoListener;
+import com.example.tophotels.modelos.Reserva;
 import com.example.tophotels.modelos.Singleton;
 import com.example.tophotels.modelos.UserInfo;
 import com.example.tophotels.utils.JsonParser;
+
+import java.util.ArrayList;
 
 public class DetalhesContaActivity extends AppCompatActivity implements UserInfoListener {
     EditText etNome, etApelido, etTelefone, etCartaoCredito, etDataNascimento, etNif, etMorada;
@@ -33,6 +36,7 @@ public class DetalhesContaActivity extends AppCompatActivity implements UserInfo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_conta);
+        setTitle("Detalhes da conta");
 
         SharedPreferences sharedPreferencesUser = getSharedPreferences(MenuMainActivity.PREF_USER, Context.MODE_PRIVATE);
         // tabela user.access_token string
@@ -81,6 +85,11 @@ public class DetalhesContaActivity extends AppCompatActivity implements UserInfo
     public void onUpdateDetalhes(UserInfo userInfo) {
         saveSharePreferencesUserInfo(userInfo);
         escreveDados(userInfo);
+    }
+
+    @Override
+    public void onRefreshListaReserva(ArrayList<Reserva> listreservas) {
+
     }
 
     public void escreveDados(UserInfo userInfo) {

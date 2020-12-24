@@ -18,7 +18,7 @@ import com.example.tophotels.modelos.Quarto;
 import com.example.tophotels.modelos.Singleton;
 
 
-public class QuartoSelecionadoActivity extends AppCompatActivity{
+public class HotelDetalhesActivity extends AppCompatActivity{
     public static final String ID = "com.example.tophotels.vistas.id";
 
     private TextView tvDescricao;
@@ -31,11 +31,11 @@ public class QuartoSelecionadoActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quarto_selecionado);
+        setContentView(R.layout.activity_hotel_detalhes);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        tvDescricao = findViewById(R.id.tvComodidades);
+        tvDescricao = findViewById(R.id.tvDescricaoHotel);
         imgQuarto = findViewById(R.id.imgQuartoSelecionado);
 
         SharedPreferences sharedPreferencesUser = getSharedPreferences(MenuMainActivity.PREF_USER, Context.MODE_PRIVATE);

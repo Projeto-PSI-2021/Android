@@ -103,14 +103,14 @@
 
             <TextView
                 android:id="@+id/tvEsqueceuSenhaLogin"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:clickable="true"
+                android:focusable="true"
                 android:onClick="mostrarActivityEsqueceuSenha"
                 android:text="@string/tvEsqueceuSenha"
-                android:textColor="@android:color/holo_red_light"
-                android:focusable="true" />
+                android:textColor="@android:color/holo_red_light" />
 
             <TextView
                 android:id="@+id/tvRegistoLogin"

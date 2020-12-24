@@ -26,8 +26,8 @@
                 app:srcCompat="@drawable/ic_baseline_search_24"
                 android:contentDescription="TODO" />
 
-            <EditText
-                android:id="@+id/etLocalidadePesquisa"
+            <AutoCompleteTextView
+                android:id="@+id/actvRegiaoPesquisa"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -46,15 +46,15 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/tvDataInicialPesquisa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Data Inicial:"
+                android:text="@string/tvDataInicialPesquisa"
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/etDataInicial"
+                android:id="@+id/etDataInicialPesquisa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -72,15 +72,15 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/tvDataFinalPesquisa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Data Final: "
+                android:text="@string/tvDataFinalPesquisa"
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/etDataFinal"
+                android:id="@+id/etDataFinalPesquisa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -98,15 +98,15 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/tvNrPessoasPesquisa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Nº pessoas"
+                android:text="@string/tvNrPessoasPesquisa"
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/etNrPessoas"
+                android:id="@+id/etNrPessoasPesquisa"
                 android:layout_width="83dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

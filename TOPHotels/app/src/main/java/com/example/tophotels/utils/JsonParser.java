@@ -6,6 +6,9 @@ import android.net.NetworkInfo;
 
 import com.example.tophotels.modelos.Hotel;
 import com.example.tophotels.modelos.Quarto;
+import com.example.tophotels.modelos.Regiao;
+import com.example.tophotels.modelos.Reserva;
+import com.example.tophotels.modelos.Singleton;
 import com.example.tophotels.modelos.User;
 import com.example.tophotels.modelos.UserInfo;
 
@@ -17,29 +20,32 @@ import java.util.ArrayList;
 
 public class JsonParser {
 
-    public static ArrayList<Hotel> jsonParserListaHoteis(JSONArray resposta) {
+    public static ArrayList<Hotel> jsonParserListaHoteis(String resposta) {
         ArrayList<Hotel> listaHotel = new ArrayList<>();
 
         try {
-            for (int i = 0; i < resposta.length(); i++) {
+            JSONArray respostaArray = new JSONArray(resposta);
+            for (int i = 0; i < respostaArray.length(); i++) {
                 // receber objeto da resposta (array)
-                JSONObject hotelJson = (JSONObject) resposta.get(i);
-
+                JSONObject array = (JSONObject) respostaArray.get(i);
+                JSONObject hotelJson = array.getJSONObject("hotel");
                 // receber os valores do objeto
                 int id = hotelJson.getInt("id");
                 String nome = hotelJson.getString("nome");
-                String proprietario = hotelJson.getString("proprietario");
                 String descricao = hotelJson.getString("descricao");
                 int contacto = hotelJson.getInt("contacto");
                 String website = hotelJson.getString("website");
                 int cp4 = hotelJson.getInt("cp4");
                 int cp3 = hotelJson.getInt("cp3");
-                String localidade = hotelJson.getString("localidade");
                 String morada = hotelJson.getString("morada");
                 int estado = hotelJson.getInt("estado");
-                //String img = hotelJson.getString("img");
+                String img = Singleton.mUrl + "/assets/hoteis/" + hotelJson.getString("img");
 
-                Hotel hotel = new Hotel(id, nome, proprietario, descricao, contacto, website, cp4, cp3, localidade, morada, estado);
+                JSONObject preco = array.getJSONObject("preco");
+                double preco_min = preco.getDouble("min");
+                double preco_max = preco.getDouble("max");
+
+                Hotel hotel = new Hotel(id, nome, descricao, contacto, website, cp4, cp3, morada, estado, preco_min, preco_max, img);
                 listaHotel.add(hotel);
             }
         } catch (JSONException e) {
@@ -57,12 +63,11 @@ public class JsonParser {
             for (int i = 0; i < respostaArray.length(); i++) {
                 // receber objeto da resposta (array)
                 JSONObject quartoJson = (JSONObject) respostaArray.get(i);
-
                 // receber os valores do objeto
                 int id = quartoJson.getInt("id");
                 String descricao = quartoJson.getString("descricao");
                 double precoNoite = quartoJson.getDouble("precoNoite");
-                String img = "http://dec431788822.eu.ngrok.io/assets/quartos/" + quartoJson.getString("img");
+                String img = Singleton.mUrl + "/assets/quartos/" + quartoJson.getString("img");
 
                 Quarto quarto = new Quarto(id, descricao, precoNoite, img);
                 listaQuarto.add(quarto);
@@ -72,35 +77,6 @@ public class JsonParser {
         }
 
         return listaQuarto;
-    }
-
-    public static Hotel jsonParserHotel(String resposta) {
-        Hotel hotel = null;
-
-        try {
-            // receber objeto da respota (array)
-            JSONObject hotelJson = new JSONObject(resposta);
-
-            // receber os valores do objeto
-            int id = hotelJson.getInt("id");
-            String nome = hotelJson.getString("nome");
-            String proprietario = hotelJson.getString("proprietario");
-            String descricao = hotelJson.getString("descricao");
-            int contacto = hotelJson.getInt("contacto");
-            String website = hotelJson.getString("website");
-            int cp4 = hotelJson.getInt("cp4");
-            int cp3 = hotelJson.getInt("cp3");
-            String localidade = hotelJson.getString("localidade");
-            String morada = hotelJson.getString("morada");
-            int estado = hotelJson.getInt("estado");
-            //String img = hotelJson.getString("img");
-
-            hotel = new Hotel(id, nome, proprietario, descricao, contacto, website, cp4, cp3, localidade, morada, estado);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return hotel;
     }
 
     public static UserInfo jsonParserUserInfo(String resposta) {
@@ -169,6 +145,56 @@ public class JsonParser {
         return userInfo;
     }
 
+    public static ArrayList<Reserva> jsonParserListaReservas(String resposta) {
+        ArrayList<Reserva> listaReserva = new ArrayList<>();
+
+        try {
+            JSONArray respostaArray = new JSONArray(resposta);
+            for (int i = 0; i < respostaArray.length(); i++) {
+                JSONObject array = (JSONObject) respostaArray.get(i);
+                JSONObject reservaJson = array.getJSONObject("reserva");
+                JSONObject hotelJson = array.getJSONObject("hotel");
+
+
+                int id = reservaJson.getInt("id");
+                int nPessoas = reservaJson.getInt("nPessoas");
+                double preco = reservaJson.getDouble("preco");
+                String dataCheckIn = reservaJson.getString("dataCheckin");
+                String dataCheckOut = reservaJson.getString("dataCheckout");
+                String estado = reservaJson.getString("estado");
+                String hotel = hotelJson.getString("descricao");
+
+                Reserva reserva = new Reserva(id, nPessoas, preco, dataCheckIn, dataCheckOut, estado, hotel);
+                listaReserva.add(reserva);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return listaReserva;
+    }
+
+    public static ArrayList<Regiao> jsonParserListaRegioes(String resposta){
+        ArrayList<Regiao> listaRegiao = new ArrayList<>();
+
+        try {
+            JSONArray respostaArray = new JSONArray(resposta);
+            for (int i = 0; i < respostaArray.length(); i++) {
+                JSONObject reservaJson = (JSONObject) respostaArray.get(i);
+
+                int id = reservaJson.getInt("id");
+                String nome = reservaJson.getString("nome");
+
+                Regiao reserva = new Regiao(id, nome);
+                listaRegiao.add(reserva);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return listaRegiao;
+    }
+
     public static User jsonParserLogin(String resposta) {
         User user = null;
 
@@ -181,8 +207,9 @@ public class JsonParser {
                 String username = userJson.getString("username");
                 String email = userJson.getString("email");
                 String access_token = userJson.getString("access_token");
+                String img = Singleton.mUrl + "/assets/usersImage/" + login.getString("img");
 
-                user = new User(id, username, email, access_token);
+                user = new User(id, username, email, access_token, img);
             }
         } catch (JSONException e) {
             e.printStackTrace();

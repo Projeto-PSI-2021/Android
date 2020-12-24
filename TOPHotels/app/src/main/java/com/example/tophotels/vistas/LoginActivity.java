@@ -94,6 +94,7 @@ public class LoginActivity extends AppCompatActivity implements UserListener {
         editor.putInt(MenuMainActivity.USER_ID, user.getId());
         editor.putString(MenuMainActivity.USERNAME, user.getUsername());
         editor.putString(MenuMainActivity.TOKEN, user.getAccess_token());
+        editor.putString(MenuMainActivity.IMG_USER, user.getImg());
         editor.apply();
     }
 }

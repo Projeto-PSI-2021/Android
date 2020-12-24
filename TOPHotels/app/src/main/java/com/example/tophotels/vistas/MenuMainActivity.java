@@ -14,8 +14,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.tophotels.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -28,6 +31,8 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
 
     // aceder a sharedpreference
     public static final String PREF_USER = "PREF_USER";
+    // img user
+    public static final String IMG_USER = "IMG_USER";
     // id user
     public static final String USER_ID = "USER_ID";
     // username
@@ -36,6 +41,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     public static final String TOKEN = "TOKEN";
     // tabela username string
     private String user;
+    private String img;
 
     private NavigationView nav_view;
     private DrawerLayout drawerLayout;
@@ -72,23 +78,33 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     private void carregarCabecalho() {
         SharedPreferences sharedPreferencesUser = getSharedPreferences(PREF_USER, Context.MODE_PRIVATE);
         user = sharedPreferencesUser.getString(USERNAME, getString(R.string.semEmail));
+        img = sharedPreferencesUser.getString(IMG_USER, "");
 
         View cabecalho = nav_view.getHeaderView(0);
         TextView tvUser = cabecalho.findViewById(R.id.tvNavUser);
+        ImageView imgUser = cabecalho.findViewById(R.id.imgUser);
         tvUser.setText(user);
+        Glide.with(getApplicationContext())
+                .load(img)
+                .placeholder(R.mipmap.ic_launcher)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(imgUser);
+
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent intent = null;
         switch (item.getItemId()) {
-            /*case R.id.nav_reservas:
-                frag = new ListaHoteisFragment();
-                setTitle(item.getTitle());
-                break;*/
-            case R.id.nav_pesquisar:
-                Fragment fragment = new PesquisarHotelFragment();
+            case R.id.nav_reservas:
+                fragment = new ListaReservasFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment, fragment).commit();
+                setTitle("Histórico de reservas");
+                break;
+            case R.id.nav_pesquisar:
+                fragment = new PesquisarHotelFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment, fragment).commit();
+                setTitle("Pesquise o hotel");
                 break;
 
             case R.id.nav_conta:

@@ -3,30 +3,30 @@ package com.example.tophotels.modelos;
 public class Hotel {
     private int id;
     private String nome;
-    private String proprietario;
     private String descricao;
     private int contacto;
     private String website;
     private int cp4;
     private int cp3;
-    private String localidade;
     private String morada;
     private int estado;
-    private int img;
+    private double preco_min;
+    private double preco_max;
+    private String img;
 
-    public Hotel(int id, String nome, String proprietario, String descricao, int contacto, String website, int cp4, int cp3, String localidade, String morada, int estado) {
+    public Hotel(int id, String nome, String descricao, int contacto, String website, int cp4, int cp3, String morada, int estado, double preco_min, double preco_max, String img) {
         this.id = id;
         this.nome = nome;
-        this.proprietario = proprietario;
         this.descricao = descricao;
         this.contacto = contacto;
         this.website = website;
         this.cp4 = cp4;
         this.cp3 = cp3;
-        this.localidade = localidade;
         this.morada = morada;
         this.estado = estado;
-        //this.img = img;
+        this.preco_min = preco_min;
+        this.preco_max = preco_max;
+        this.img = img;
     }
 
     public int getId() {
@@ -43,14 +43,6 @@ public class Hotel {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getProprietario() {
-        return proprietario;
-    }
-
-    public void setProprietario(String proprietario) {
-        this.proprietario = proprietario;
     }
 
     public String getDescricao() {
@@ -93,14 +85,6 @@ public class Hotel {
         this.cp3 = cp3;
     }
 
-    public String getLocalidade() {
-        return localidade;
-    }
-
-    public void setLocalidade(String localidade) {
-        this.localidade = localidade;
-    }
-
     public String getMorada() {
         return morada;
     }
@@ -117,11 +101,27 @@ public class Hotel {
         this.estado = estado;
     }
 
-    public int getImg() {
+    public double getPreco_min() {
+        return preco_min;
+    }
+
+    public void setPreco_min(double preco_min) {
+        this.preco_min = preco_min;
+    }
+
+    public double getPreco_max() {
+        return preco_max;
+    }
+
+    public void setPreco_max(double preco_max) {
+        this.preco_max = preco_max;
+    }
+
+    public String getImg() {
         return img;
     }
 
-    public void setImg(int img) {
+    public void setImg(String img) {
         this.img = img;
     }
 }

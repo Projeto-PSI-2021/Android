@@ -21,6 +21,7 @@ public class EsqueceuPasswordActivity extends AppCompatActivity implements UserL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_esqueceu_password);
+        setTitle("Esqueceu a password");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

@@ -45,4 +45,17 @@
     <string name="Pesquisar">Pesquisar</string>
     <string name="localidade">Localidade</string>
     <string name="btForgot">Pedir password</string>
+    <string name="tvNomeHotelPesquisa">Hotel: </string>
+    <string name="tvDescricaoHotelPesquisa">Descrição: </string>
+    <string name="tvPrecoHotelPesquisa">Preços: </string>
+    <string name="tvNumPessoasListaReservas">Nº Pessoas: </string>
+    <string name="tvPrecoListaReservas">Preço: </string>
+    <string name="tvCheckOutListaReservas">Data de Check Out: </string>
+    <string name="tvCheckInListaReservas">Data de Check In: </string>
+    <string name="tvEstadoListaReservas">Estado: </string>
+    <string name="tvHotelDescricaoListaReservas">Hotel: </string>
+    <string name="tvDataInicialPesquisa">Data Inicial:</string>
+    <string name="tvDataFinalPesquisa">Data Final:</string>
+    <string name="tvNrPessoasPesquisa">Nº pessoas:</string>
+    <string name="tvRegiaoPesquisa">Região:</string>
 </resources>

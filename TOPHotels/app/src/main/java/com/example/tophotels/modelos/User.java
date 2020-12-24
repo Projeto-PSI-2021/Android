@@ -5,12 +5,14 @@ public class User {
     private String username;
     private String email;
     private String access_token;
+    private String img;
 
-    public User(int id, String username, String email, String access_token) {
+    public User(int id, String username, String email, String access_token, String img) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.access_token = access_token;
+        this.img = img;
     }
 
     public int getId() {
@@ -43,5 +45,13 @@ public class User {
 
     public void setAccess_token(String access_token) {
         this.access_token = access_token;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

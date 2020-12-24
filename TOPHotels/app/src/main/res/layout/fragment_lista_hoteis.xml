@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".vistas.ListaQuartosFragment">
+    tools:context=".vistas.ListaHoteisFragment">
 
     <ListView
-        android:id="@+id/lvQuartos"
+        android:id="@+id/lvHoteis"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

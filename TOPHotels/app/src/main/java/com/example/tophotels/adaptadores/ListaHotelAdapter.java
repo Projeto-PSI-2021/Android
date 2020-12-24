@@ -11,34 +11,34 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.tophotels.R;
-import com.example.tophotels.modelos.Quarto;
+import com.example.tophotels.modelos.Hotel;
 
 import java.util.ArrayList;
 
-public class ListaQuartoAdapter extends BaseAdapter {
+public class ListaHotelAdapter extends BaseAdapter {
 
     private Context contexto;
     private LayoutInflater inflater;
-    private ArrayList<Quarto> listaQuartos;
+    private ArrayList<Hotel> listaHoteis;
 
-    public ListaQuartoAdapter(Context contexto, ArrayList<Quarto> lista){
+    public ListaHotelAdapter(Context contexto, ArrayList<Hotel> lista){
         this.contexto = contexto;
-        this.listaQuartos = lista;
+        this.listaHoteis = lista;
     }
 
     @Override
     public int getCount() {
-        return this.listaQuartos.size();
+        return this.listaHoteis.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return this.listaQuartos.get(position);
+        return this.listaHoteis.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return this.listaQuartos.get(position).getId();
+        return this.listaHoteis.get(position).getId();
     }
 
     @Override
@@ -48,37 +48,38 @@ public class ListaQuartoAdapter extends BaseAdapter {
         }
 
         if(convertView == null){
-            convertView = inflater.inflate(R.layout.item_lista_quartos, null);
+            convertView = inflater.inflate(R.layout.item_lista_hoteis, null);
 
         }
-        ViewHolderLivro vHolder = (ViewHolderLivro) convertView.getTag();
+        ViewHolderHotel vHolder = (ViewHolderHotel) convertView.getTag();
 
         if(vHolder == null){
-            vHolder = new ViewHolderLivro(convertView);
+            vHolder = new ViewHolderHotel(convertView);
             convertView.setTag(vHolder);
         }
 
-        vHolder.update(this.listaQuartos.get(position));
+        vHolder.update(this.listaHoteis.get(position));
 
         return convertView;
     }
 
-    private class ViewHolderLivro{
-        private TextView tvDescricaoQuarto, tvPrecoNoite;
+    private class ViewHolderHotel{
+        private TextView tvNome, tvDescricao, tvPreco;
         private ImageView img;
 
-        public ViewHolderLivro(View view){
-            tvDescricaoQuarto = view.findViewById(R.id.tvDescricaoQuarto);
-            tvPrecoNoite = view.findViewById(R.id.tvPrecoNoite);
+        public ViewHolderHotel(View view){
+            tvNome = view.findViewById(R.id.tvNomeHotelPesquisa);
+            tvDescricao = view.findViewById(R.id.tvDescricaoHotelPesquisa);
+            tvPreco = view.findViewById(R.id.tvPrecoHotelPesquisa);
             img = view.findViewById(R.id.imgListaQuartos);
         }
 
-        public void update(Quarto quarto){
-            this.tvDescricaoQuarto.setText(quarto.getDescricao());
-            this.tvPrecoNoite.setText(""+quarto.getPrecoNoite());
-            //this.inCapa.setImageResource(hotel.getCapa());
+        public void update(Hotel hotel){
+            this.tvNome.setText(hotel.getNome());
+            this.tvDescricao.setText(hotel.getDescricao());
+            this.tvPreco.setText("Preços: "+hotel.getPreco_min()+ "€ - "+hotel.getPreco_max()+"€");
             Glide.with(contexto)
-                .load(quarto.getImg())
+                .load(hotel.getImg())
                     .placeholder(R.drawable.hotel)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(img);
