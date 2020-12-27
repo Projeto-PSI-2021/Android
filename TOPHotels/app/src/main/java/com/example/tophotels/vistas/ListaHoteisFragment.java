@@ -69,11 +69,8 @@ public class ListaHoteisFragment extends Fragment implements HotelListener {
         lvHoteis.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent detalhe = new Intent(getActivity().getApplicationContext(), HotelDetalhesActivity.class);
-                //detalhe.putExtra(DetalhesLivros.INDICE, position);
-                //detalhe.putExtra(HotelSelecionadoActivity.ID, id);
-                detalhe.putExtra(HotelDetalhesActivity.ID, id);
-                startActivity(detalhe);
+                ListaQuartosFragment listaQuartosFragment = ListaQuartosFragment.newInstance((int)id, data_inicial, data_final);
+                getFragmentManager().beginTransaction().replace(R.id.contentFragment, listaQuartosFragment).commit();
             }
         });
 

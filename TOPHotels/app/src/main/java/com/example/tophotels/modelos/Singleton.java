@@ -34,7 +34,7 @@ public class Singleton {
 
     //Endereços api
     // Endereço base
-    public static final String mUrl = "http://tophotelsfrontend.ddns.net";
+    public static final String mUrl = "http://b931d8868030.eu.ngrok.io";
     private static final String mUrlAPIUser = mUrl + "/api/user";
     private static final String mUrlAPIUserInfo = mUrl + "/api/user-info";
     private static final String mUrlAPIHotel = mUrl + "/api/hotel";
@@ -301,6 +301,47 @@ public class Singleton {
                     Map<String, String> parametros = new HashMap<String, String>();
 
                     parametros.put("localidade", localidade);
+                    parametros.put("data_inicial", data_inicial);
+                    parametros.put("data_final", data_final);
+
+                    return parametros;
+                }
+            };
+
+            volleyQueue.add(request);
+        }
+    }
+
+    public void postPesquisaQuartos(final Context contexto, final int hotelId, final String data_inicial, final String data_final, final String access_token) {
+        if (!JsonParser.isConnectionInternet(contexto)){
+            Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
+            if (quartoListener != null) {
+                // receber com a base de dados local
+                //hotelListener.onRefreshListaHotel(getListaHoteis);
+            }
+        } else {
+            StringRequest request = new StringRequest(Request.Method.POST,
+                    mUrlAPIQuarto + "/receber-quartos?access-token="+access_token,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            listaQuartos = JsonParser.jsonParserListaQuartos(response);
+
+                            if (quartoListener != null) {
+                                quartoListener.onRefreshListaQuarto(listaQuartos);
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(contexto, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<String, String>();
+
+                    parametros.put("hotel_id", "" + hotelId);
                     parametros.put("data_inicial", data_inicial);
                     parametros.put("data_final", data_final);
 
