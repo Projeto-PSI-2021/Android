@@ -58,4 +58,7 @@
     <string name="tvDataFinalPesquisa">Data Final:</string>
     <string name="tvNrPessoasPesquisa">Nº pessoas:</string>
     <string name="tvRegiaoPesquisa">Região:</string>
+    <string name="tvNomeQuarto">Quarto:</string>
+    <string name="tvPrecoNoite">Preço:</string>
+    <string name="tvEstadoQuarto">Estado:</string>
 </resources>

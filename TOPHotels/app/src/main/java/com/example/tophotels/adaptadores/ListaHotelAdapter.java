@@ -68,10 +68,10 @@ public class ListaHotelAdapter extends BaseAdapter {
         private ImageView img;
 
         public ViewHolderHotel(View view){
-            tvNome = view.findViewById(R.id.tvNomeHotelPesquisa);
-            tvDescricao = view.findViewById(R.id.tvDescricaoHotelPesquisa);
-            tvPreco = view.findViewById(R.id.tvPrecoHotelPesquisa);
-            img = view.findViewById(R.id.imgListaQuartos);
+            tvNome = view.findViewById(R.id.tvNomeQuarto);
+            tvDescricao = view.findViewById(R.id.tvPrecoNoite);
+            tvPreco = view.findViewById(R.id.tvEstadoQuarto);
+            img = view.findViewById(R.id.imgListaHoteis);
         }
 
         public void update(Hotel hotel){

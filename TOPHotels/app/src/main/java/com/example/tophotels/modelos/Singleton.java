@@ -34,7 +34,7 @@ public class Singleton {
 
     //Endereços api
     // Endereço base
-    public static final String mUrl = "http://a51427f5ccd5.eu.ngrok.io";
+    public static final String mUrl = "http://tophotelsfrontend.ddns.net";
     private static final String mUrlAPIUser = mUrl + "/api/user";
     private static final String mUrlAPIUserInfo = mUrl + "/api/user-info";
     private static final String mUrlAPIHotel = mUrl + "/api/hotel";
