@@ -46,8 +46,12 @@ public class ListaReservasFragment extends Fragment implements UserInfoListener 
         // tabela user.access_token string
         String token = sharedPreferencesUser.getString(MenuMainActivity.TOKEN, null);
 
+        SharedPreferences sharedPreferencesUserInfo = this.getActivity().getSharedPreferences(DetalhesContaActivity.PREF_USERINFO, Context.MODE_PRIVATE);
+        // tabela user.access_token string
+        int userInfo_id = sharedPreferencesUser.getInt(DetalhesContaActivity.USERINFO_ID, 0);
+
         Singleton.getInstance(getContext()).setUserInfoListener(this);
-        Singleton.getInstance(getContext()).getListaReservasAPI(getContext(), token);
+        Singleton.getInstance(getContext()).getListaReservasAPI(getContext(), token, userInfo_id);
 
         adapter = new ListaReservaAdapter(getActivity(), Singleton.getInstance(getContext()).getListaReservas());
         lvReservas.setAdapter(adapter);

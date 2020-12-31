@@ -163,8 +163,9 @@ public class JsonParser {
                 String dataCheckOut = reservaJson.getString("dataCheckout");
                 String estado = reservaJson.getString("estado");
                 String hotel = hotelJson.getString("descricao");
+                int userInfoId = reservaJson.getInt("userInfoId");
 
-                Reserva reserva = new Reserva(id, nPessoas, preco, dataCheckIn, dataCheckOut, estado, hotel);
+                Reserva reserva = new Reserva(id, nPessoas, preco, dataCheckIn, dataCheckOut, estado, hotel, userInfoId);
                 listaReserva.add(reserva);
             }
         } catch (JSONException e) {

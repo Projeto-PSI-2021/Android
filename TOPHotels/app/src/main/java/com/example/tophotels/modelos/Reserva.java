@@ -8,8 +8,9 @@ public class Reserva {
     private String dataCheckOut;
     private String estado;
     private String hotel;
+    private int userInfoId;
 
-    public Reserva(int id, int nPessoas, double preco, String dataCheckIn, String dataCheckOut, String estado, String hotel) {
+    public Reserva(int id, int nPessoas, double preco, String dataCheckIn, String dataCheckOut, String estado, String hotel, int userInfoId) {
         this.id = id;
         this.nPessoas = nPessoas;
         this.preco = preco;
@@ -17,6 +18,7 @@ public class Reserva {
         this.dataCheckOut = dataCheckOut;
         this.estado = estado;
         this.hotel = hotel;
+        this.userInfoId = userInfoId;
     }
 
     public int getId() {
@@ -73,5 +75,13 @@ public class Reserva {
 
     public void setHotel(String hotel) {
         this.hotel = hotel;
+    }
+
+    public int getUserInfoId() {
+        return userInfoId;
+    }
+
+    public void setUserInfoId(int userInfoId) {
+        this.userInfoId = userInfoId;
     }
 }

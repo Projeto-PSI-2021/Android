@@ -27,14 +27,17 @@ public class Singleton {
     private ArrayList<Quarto> listaQuartos;
     private ArrayList<Reserva> listaReservas;
     private ArrayList<Regiao> listaRegioes;
+    private User user;
+
+    private TophotelsBDHelper tophotelsBDHelper = null;
+
     private static Singleton instance = null; //Instancia de objeto "static"
 
     //Volley
     private static RequestQueue volleyQueue = null;
 
     //Endereços api
-    // Endereço base
-    public static final String mUrl = "http://b931d8868030.eu.ngrok.io";
+    public static final String mUrl = "http://29ef326807e5.eu.ngrok.io"; //Endereço base
     private static final String mUrlAPIUser = mUrl + "/api/user";
     private static final String mUrlAPIUserInfo = mUrl + "/api/user-info";
     private static final String mUrlAPIHotel = mUrl + "/api/hotel";
@@ -51,32 +54,40 @@ public class Singleton {
 
     public static synchronized Singleton getInstance(Context contexto) {
         if (instance == null) {
-            instance = new Singleton();
+            instance = new Singleton(contexto);
             volleyQueue = Volley.newRequestQueue(contexto);
         }
         return instance;
     }
 
-    private Singleton() {
+    private Singleton(Context contexto) {
         this.listaHoteis = new ArrayList<>();
         this.listaQuartos = new ArrayList<>();
         this.listaReservas = new ArrayList<>();
         this.listaRegioes = new ArrayList<>();
-        //gerarFakeData();
+        this.tophotelsBDHelper = new TophotelsBDHelper(contexto);
     }
 
     // ** API ** //
 
     public void postLoginAPI(final Context contexto, final String username, final String password) {
         if (!JsonParser.isConnectionInternet(contexto)) {
-            Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(contexto, "A iniciar offline.", Toast.LENGTH_SHORT).show();
+            if (userListener != null) {
+                userListener.onValidateLogin(getUserDB(username));
+            }
         } else {
             StringRequest request = new StringRequest(Request.Method.POST,
                     mUrlAPIUser + "/login",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            userListener.onValidateLogin(JsonParser.jsonParserLogin(response));
+                            user = JsonParser.jsonParserLogin(response);
+                            adicionarUserBD(user);
+
+                            if (userListener != null) {
+                                userListener.onValidateLogin(user);
+                            }
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -213,20 +224,21 @@ public class Singleton {
         }
     }
 
-    public void getListaReservasAPI(final Context contexto, final String access_token) {
-        if (!JsonParser.isConnectionInternet(contexto)){
+    public void getListaReservasAPI(final Context contexto, final String access_token, final int userInfo_id) {
+        if (!JsonParser.isConnectionInternet(contexto)) {
             Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
             if (userInfoListener != null) {
                 // receber com a base de dados local
-                //quartoListener.onRefreshListaHotel(getListaQuartos);
+                userInfoListener.onRefreshListaReserva(getListaReservasDB(userInfo_id));
             }
         } else {
             StringRequest request = new StringRequest(Request.Method.GET,
-                    mUrlAPIUser + "/lista-reservas?access-token="+access_token,
+                    mUrlAPIUser + "/lista-reservas?access-token=" + access_token,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             listaReservas = JsonParser.jsonParserListaReservas(response);
+                            adicionarReservasBD(listaReservas);
 
                             if (userInfoListener != null) {
                                 userInfoListener.onRefreshListaReserva(listaReservas);
@@ -243,19 +255,20 @@ public class Singleton {
     }
 
     public void getListaRegioesAPI(final Context contexto, final String access_token) {
-        if (!JsonParser.isConnectionInternet(contexto)){
+        if (!JsonParser.isConnectionInternet(contexto)) {
             Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
             if (regiaoListener != null) {
                 // receber com a base de dados local
-                //regiaoListener.onRefreshListaRegiao(getListaRegioes);
+                regiaoListener.onRefreshListaRegiao(getListaRegioesBD());
             }
         } else {
             StringRequest request = new StringRequest(Request.Method.GET,
-                    mUrlAPIRegiao + "?sort=nome&access-token="+access_token,
+                    mUrlAPIRegiao + "?sort=nome&access-token=" + access_token,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             listaRegioes = JsonParser.jsonParserListaRegioes(response);
+                            adicionarRegioesBD(listaRegioes);
 
                             if (regiaoListener != null) {
                                 regiaoListener.onRefreshListaRegiao(listaRegioes);
@@ -272,15 +285,15 @@ public class Singleton {
     }
 
     public void postPesquisaHotel(final Context contexto, final String localidade, final String data_inicial, final String data_final, final String access_token) {
-        if (!JsonParser.isConnectionInternet(contexto)){
+        if (!JsonParser.isConnectionInternet(contexto)) {
             Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
             if (hotelListener != null) {
                 // receber com a base de dados local
                 //hotelListener.onRefreshListaHotel(getListaHoteis);
             }
-         } else {
+        } else {
             StringRequest request = new StringRequest(Request.Method.POST,
-                    mUrlAPIHotel + "/pesquisar-hotel?access-token="+access_token,
+                    mUrlAPIHotel + "/pesquisar-hotel?access-token=" + access_token,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -295,7 +308,7 @@ public class Singleton {
                 public void onErrorResponse(VolleyError error) {
                     Toast.makeText(contexto, error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-            }){
+            }) {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> parametros = new HashMap<String, String>();
@@ -313,7 +326,7 @@ public class Singleton {
     }
 
     public void postPesquisaQuartos(final Context contexto, final int hotelId, final String data_inicial, final String data_final, final String access_token) {
-        if (!JsonParser.isConnectionInternet(contexto)){
+        if (!JsonParser.isConnectionInternet(contexto)) {
             Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
             if (quartoListener != null) {
                 // receber com a base de dados local
@@ -321,7 +334,7 @@ public class Singleton {
             }
         } else {
             StringRequest request = new StringRequest(Request.Method.POST,
-                    mUrlAPIQuarto + "/receber-quartos?access-token="+access_token,
+                    mUrlAPIQuarto + "/receber-quartos?access-token=" + access_token,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -336,7 +349,7 @@ public class Singleton {
                 public void onErrorResponse(VolleyError error) {
                     Toast.makeText(contexto, error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-            }){
+            }) {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> parametros = new HashMap<String, String>();
@@ -382,13 +395,32 @@ public class Singleton {
         return null;
     }
 
-    public Regiao getRegiao(long id) {
+    public Regiao getRegiaoDB(long id) {
         for (Regiao regiao : this.listaRegioes) {
             if (regiao.getId() == id) {
                 return regiao;
             }
         }
         return null;
+    }
+
+    public void adicionarRegioesBD(ArrayList<Regiao> listaRegioes) {
+        tophotelsBDHelper.removerAllRegioesBD();
+        for (Regiao regiao : listaRegioes) {
+            tophotelsBDHelper.adicionaRegiao(regiao);
+        }
+    }
+
+    public void adicionarUserBD(User user) {
+        tophotelsBDHelper.removerAllUsersBD();
+        tophotelsBDHelper.adicionaUser(user);
+    }
+
+    public void adicionarReservasBD(ArrayList<Reserva> listaReservas) {
+        tophotelsBDHelper.removerAllReservasBD();
+        for (Reserva reserva : listaReservas) {
+            tophotelsBDHelper.adicionaReserva(reserva);
+        }
     }
 
     public ArrayList<Hotel> getListaHoteis() {
@@ -403,9 +435,22 @@ public class Singleton {
         return listaReservas;
     }
 
-    public ArrayList<Regiao> getListaRegioes() {
+    public ArrayList<Regiao> getListaRegioesBD() {
+        listaRegioes = tophotelsBDHelper.getAllRegioesBD();
         return listaRegioes;
     }
+
+    public User getUserDB(String username) {
+        user = tophotelsBDHelper.getUserDB(username);
+        return user;
+    }
+
+    public ArrayList<Reserva> getListaReservasDB(int userInfo_id) {
+        listaReservas = tophotelsBDHelper.getReservasBD(userInfo_id);
+        return listaReservas;
+    }
+
+    // ** SET-LISTENERS ** //
 
     public void setHotelListener(HotelListener hotelListener) {
         this.hotelListener = hotelListener;
@@ -426,4 +471,6 @@ public class Singleton {
     public void setRegiaoListener(RegiaoListener regiaoListener) {
         this.regiaoListener = regiaoListener;
     }
+
+    // ** END SET-LISTENERS ** //
 }
