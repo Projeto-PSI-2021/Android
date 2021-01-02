@@ -37,7 +37,7 @@ public class Singleton {
     private static RequestQueue volleyQueue = null;
 
     //Endereços api
-    public static final String mUrl = "http://e62808064cbb.eu.ngrok.io"; //Endereço base
+    public static final String mUrl = "http://80ab8e9d609f.eu.ngrok.io"; //Endereço base
     private static final String mUrlAPIUser = mUrl + "/api/user";
     private static final String mUrlAPIUserInfo = mUrl + "/api/user-info";
     private static final String mUrlAPIHotel = mUrl + "/api/hotel";
@@ -399,7 +399,6 @@ public class Singleton {
     }
 
     public void adicionarUserBD(User user) {
-        tophotelsBDHelper.removerAllUsersBD();
         tophotelsBDHelper.adicionaUser(user);
     }
 
