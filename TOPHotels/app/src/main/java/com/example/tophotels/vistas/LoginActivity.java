@@ -49,18 +49,19 @@ public class LoginActivity extends AppCompatActivity implements UserListener {
     }
 
     public void onClickLogin(View view) {
-        if (!JsonParser.isConnectionInternet(getApplicationContext())) {
-            Toast.makeText(getApplicationContext(), "Não tem ligação à internet.", Toast.LENGTH_SHORT).show();
-        } else {
-            if (!etUsername.getText().toString().matches("")) {
-                if (!etPassword.getText().toString().matches("")) {
+        if (!etUsername.getText().toString().matches("")) {
+            if (!etPassword.getText().toString().matches("")) {
+                if (!JsonParser.isConnectionInternet(getApplicationContext())) {
+                    Toast.makeText(getApplicationContext(), "Não tem ligação à internet.", Toast.LENGTH_SHORT).show();
                     Singleton.getInstance(getApplicationContext()).postLoginAPI(getApplicationContext(), etUsername.getText().toString(), etPassword.getText().toString());
                 } else {
-                    Toast.makeText(this, "Preencher password", Toast.LENGTH_SHORT).show();
+                    Singleton.getInstance(getApplicationContext()).postLoginAPI(getApplicationContext(), etUsername.getText().toString(), etPassword.getText().toString());
                 }
             } else {
-                Toast.makeText(this, "Preencher username", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Preencher password", Toast.LENGTH_SHORT).show();
             }
+        } else {
+            Toast.makeText(this, "Preencher username", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -37,7 +37,7 @@ public class Singleton {
     private static RequestQueue volleyQueue = null;
 
     //Endereços api
-    public static final String mUrl = "http://29ef326807e5.eu.ngrok.io"; //Endereço base
+    public static final String mUrl = "http://e62808064cbb.eu.ngrok.io"; //Endereço base
     private static final String mUrlAPIUser = mUrl + "/api/user";
     private static final String mUrlAPIUserInfo = mUrl + "/api/user-info";
     private static final String mUrlAPIHotel = mUrl + "/api/hotel";
@@ -72,7 +72,6 @@ public class Singleton {
 
     public void postLoginAPI(final Context contexto, final String username, final String password) {
         if (!JsonParser.isConnectionInternet(contexto)) {
-            Toast.makeText(contexto, "A iniciar offline.", Toast.LENGTH_SHORT).show();
             if (userListener != null) {
                 userListener.onValidateLogin(getUserDB(username));
             }
@@ -109,7 +108,7 @@ public class Singleton {
 
     public void postRegistoAPI(final Context contexto, final String username, final String email, final String password) {
         if (!JsonParser.isConnectionInternet(contexto)) {
-            Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(contexto, "Não tem ligação à internet.", Toast.LENGTH_SHORT).show();
         } else {
             StringRequest request = new StringRequest(Request.Method.POST,
                     mUrlAPIUser + "/registar",
@@ -141,7 +140,7 @@ public class Singleton {
 
     public void postEsqueceuPassword(final Context contexto, final String email) {
         if (!JsonParser.isConnectionInternet(contexto)) {
-            Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(contexto, "Não tem ligação à internet.", Toast.LENGTH_SHORT).show();
         } else {
             StringRequest request = new StringRequest(Request.Method.POST,
                     mUrlAPIUser + "/reset-password",
@@ -171,7 +170,7 @@ public class Singleton {
 
     public void getUserInfoAPI(final Context contexto, final String access_token) {
         if (!JsonParser.isConnectionInternet(contexto)) {
-            Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(contexto, "Não tem ligação à internet.", Toast.LENGTH_SHORT).show();
         } else {
             StringRequest request = new StringRequest(Request.Method.GET,
                     mUrlAPIUser + "/info?access-token=" + access_token,
@@ -192,7 +191,7 @@ public class Singleton {
 
     public void patchUserInfoAPI(final Context contexto, UserInfo userInfo, final String access_token) {
         if (!JsonParser.isConnectionInternet(contexto)) {
-            Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(contexto, "Não tem ligação à internet.", Toast.LENGTH_SHORT).show();
         } else {
             StringRequest request = new StringRequest(Request.Method.PATCH,
                     mUrlAPIUserInfo + "/" + userInfo.getId(),
@@ -226,7 +225,7 @@ public class Singleton {
 
     public void getListaReservasAPI(final Context contexto, final String access_token, final int userInfo_id) {
         if (!JsonParser.isConnectionInternet(contexto)) {
-            Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(contexto, "Não tem ligação à internet.", Toast.LENGTH_SHORT).show();
             if (userInfoListener != null) {
                 // receber com a base de dados local
                 userInfoListener.onRefreshListaReserva(getListaReservasDB(userInfo_id));
@@ -256,11 +255,7 @@ public class Singleton {
 
     public void getListaRegioesAPI(final Context contexto, final String access_token) {
         if (!JsonParser.isConnectionInternet(contexto)) {
-            Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
-            if (regiaoListener != null) {
-                // receber com a base de dados local
-                regiaoListener.onRefreshListaRegiao(getListaRegioesBD());
-            }
+            Toast.makeText(contexto, "Não tem ligação à internet.", Toast.LENGTH_SHORT).show();
         } else {
             StringRequest request = new StringRequest(Request.Method.GET,
                     mUrlAPIRegiao + "?sort=nome&access-token=" + access_token,
@@ -268,7 +263,6 @@ public class Singleton {
                         @Override
                         public void onResponse(String response) {
                             listaRegioes = JsonParser.jsonParserListaRegioes(response);
-                            adicionarRegioesBD(listaRegioes);
 
                             if (regiaoListener != null) {
                                 regiaoListener.onRefreshListaRegiao(listaRegioes);
@@ -286,7 +280,7 @@ public class Singleton {
 
     public void postPesquisaHotel(final Context contexto, final String localidade, final String data_inicial, final String data_final, final String access_token) {
         if (!JsonParser.isConnectionInternet(contexto)) {
-            Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(contexto, "Não tem ligação à internet.", Toast.LENGTH_SHORT).show();
             if (hotelListener != null) {
                 // receber com a base de dados local
                 //hotelListener.onRefreshListaHotel(getListaHoteis);
@@ -327,7 +321,7 @@ public class Singleton {
 
     public void postPesquisaQuartos(final Context contexto, final int hotelId, final String data_inicial, final String data_final, final String access_token) {
         if (!JsonParser.isConnectionInternet(contexto)) {
-            Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(contexto, "Não tem ligação à internet.", Toast.LENGTH_SHORT).show();
             if (quartoListener != null) {
                 // receber com a base de dados local
                 //hotelListener.onRefreshListaHotel(getListaHoteis);
@@ -404,13 +398,6 @@ public class Singleton {
         return null;
     }
 
-    public void adicionarRegioesBD(ArrayList<Regiao> listaRegioes) {
-        tophotelsBDHelper.removerAllRegioesBD();
-        for (Regiao regiao : listaRegioes) {
-            tophotelsBDHelper.adicionaRegiao(regiao);
-        }
-    }
-
     public void adicionarUserBD(User user) {
         tophotelsBDHelper.removerAllUsersBD();
         tophotelsBDHelper.adicionaUser(user);
@@ -433,11 +420,6 @@ public class Singleton {
 
     public ArrayList<Reserva> getListaReservas() {
         return listaReservas;
-    }
-
-    public ArrayList<Regiao> getListaRegioesBD() {
-        listaRegioes = tophotelsBDHelper.getAllRegioesBD();
-        return listaRegioes;
     }
 
     public User getUserDB(String username) {

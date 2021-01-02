@@ -15,10 +15,6 @@ public class TophotelsBDHelper extends SQLiteOpenHelper {
     private static final String NOME_BD = "tophotelsDB";
     private static final int VERSAO_BD = 1;
 
-    private static final String TABELA_REGIAO = "Regiao";
-    private static final String ID_REGIAO = "id";
-    private static final String NOME_REGIAO = "nome";
-
     private static final String TABELA_USER = "User";
     private static final String ID_USER = "id";
     private static final String USERNAME = "username";
@@ -46,10 +42,6 @@ public class TophotelsBDHelper extends SQLiteOpenHelper {
     @SuppressLint("SQLiteString")
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sqlTabela_Regiao = "CREATE TABLE " + TABELA_REGIAO + "(" +
-                ID_REGIAO + " INTEGER PRIMARY KEY, " +
-                NOME_REGIAO + " TEXT NOT NULL" + ")";
-
         String sqlTabela_User = "CREATE TABLE " + TABELA_USER + "(" +
                 ID_USER + " INTEGER PRIMARY KEY, " +
                 USERNAME + " TEXT NOT NULL, " +
@@ -66,54 +58,15 @@ public class TophotelsBDHelper extends SQLiteOpenHelper {
                 HOTEL + " STRING NOT NULL, " +
                 USER_ID + " STRING NOT NULL" + ")";
 
-        db.execSQL(sqlTabela_Regiao);
         db.execSQL(sqlTabela_User);
         db.execSQL(sqlTabela_Reservas);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABELA_REGIAO);
+        db.execSQL("DROP TABLE IF EXISTS " + TABELA_RESERVA);
+        db.execSQL("DROP TABLE IF EXISTS " + TABELA_USER);
     }
-
-    // ** REGIAO ** //
-
-    public Regiao adicionaRegiao(Regiao regiao) {
-        ContentValues valores = new ContentValues();
-        valores.put(ID_REGIAO, regiao.getId());
-        valores.put(NOME_REGIAO, regiao.getNome());
-
-        long id = this.basedados.insert(TABELA_REGIAO, null, valores);
-
-        if (id > -1) {
-            regiao.setId((int) id);
-            return regiao;
-        }
-        return null;
-    }
-
-    public void removerAllRegioesBD() {
-        this.basedados.delete(TABELA_REGIAO, null, null);
-    }
-
-    public ArrayList<Regiao> getAllRegioesBD() {
-        ArrayList<Regiao> lista = new ArrayList<>();
-
-        Cursor cursor = this.basedados.query(TABELA_REGIAO, new String[]{ID_REGIAO, NOME_REGIAO},
-                null, null, null, null, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                Regiao regiao = new Regiao(0,
-                        cursor.getString(1)
-                );
-                lista.add(regiao);
-            } while (cursor.moveToNext());
-        }
-        return lista;
-    }
-
-    // ** END REGIAO ** //
 
     // ** USER ** //
 
@@ -159,10 +112,10 @@ public class TophotelsBDHelper extends SQLiteOpenHelper {
 
     public User getUserDB(String username) {
         Cursor cursor = this.basedados.query(TABELA_USER, new String[]{ID_USER, USERNAME, EMAIL, ACCESS_TOKEN},
-                "WHERE username = " + username, null, null, null, null);
+                "username = '" + username + "'", null, null, null, null);
 
         if (cursor.moveToFirst()) {
-            return new User(0,
+            return new User(cursor.getInt(0),
                     cursor.getString(1),
                     cursor.getString(2),
                     cursor.getString(3),
@@ -204,11 +157,11 @@ public class TophotelsBDHelper extends SQLiteOpenHelper {
         ArrayList<Reserva> lista = new ArrayList<>();
 
         Cursor cursor = this.basedados.query(TABELA_RESERVA, new String[]{ID_RESERVA, N_PESSOAS, PRECO, DATA_CHECKIN, DATA_CHECKOUT, ESTADO, HOTEL, USER_ID},
-                "WHERE userInfoId = " + userInfoId, null, null, null, null);
+                "user_id = " + userInfoId, null, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
-                Reserva reserva = new Reserva(0,
+                Reserva reserva = new Reserva(cursor.getInt(0),
                         cursor.getInt(1),
                         cursor.getDouble(2),
                         cursor.getString(3),

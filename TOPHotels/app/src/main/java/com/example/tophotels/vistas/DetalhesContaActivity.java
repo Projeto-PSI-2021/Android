@@ -29,8 +29,6 @@ public class DetalhesContaActivity extends AppCompatActivity implements UserInfo
     private String token;
     // tabela user.id int
     private int userId;
-    // tabela userInfo.id int
-    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +45,6 @@ public class DetalhesContaActivity extends AppCompatActivity implements UserInfo
         etNome = findViewById(R.id.etNomeDetalhe);
         etApelido = findViewById(R.id.etApelidoDetalhe);
         etTelefone = findViewById(R.id.etTelefoneDetalhe);
-        etCartaoCredito = findViewById(R.id.etCartaoCreditoDetalhe);
-        etDataNascimento = findViewById(R.id.etDataNascimentoDetalhe);
         etNif = findViewById(R.id.etNifDetalhe);
         etMorada = findViewById(R.id.etMoradaDetalhe);
 
@@ -70,7 +66,7 @@ public class DetalhesContaActivity extends AppCompatActivity implements UserInfo
             int nif = Integer.parseInt(etNif.getText().toString());
             String img = null;
 
-            userInfo = new UserInfo(id, nome, apelido, contactoTel, morada, nif, img, userId);
+            userInfo = new UserInfo(userId, nome, apelido, contactoTel, morada, nif, img, userId);
             Singleton.getInstance(getApplicationContext()).patchUserInfoAPI(getApplicationContext(), userInfo, token);
         }
     }
@@ -94,8 +90,6 @@ public class DetalhesContaActivity extends AppCompatActivity implements UserInfo
 
     public void escreveDados(UserInfo userInfo) {
         SharedPreferences sharedPreferencesUserInfo = getSharedPreferences(DetalhesContaActivity.PREF_USERINFO, Context.MODE_PRIVATE);
-        // tabela userInfo.id int
-        id = sharedPreferencesUserInfo.getInt(DetalhesContaActivity.USERINFO_ID, 0);
 
         etNome.setText(userInfo.getNome());
         etApelido.setText(userInfo.getApelido());
