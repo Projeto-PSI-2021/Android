@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.example.tophotels.modelos.ComodidadesQuarto;
 import com.example.tophotels.modelos.Hotel;
 import com.example.tophotels.modelos.Quarto;
 import com.example.tophotels.modelos.Regiao;
@@ -53,6 +54,29 @@ public class JsonParser {
         }
 
         return listaHotel;
+    }
+
+    public static ArrayList<ComodidadesQuarto> jsonParserListaComodidadesQuarto(String resposta) {
+        ArrayList<ComodidadesQuarto> listaComodidadesQuartos = new ArrayList<>();
+
+        try {
+            JSONArray respostaArray = new JSONArray(resposta);
+            for (int i = 0; i < respostaArray.length(); i++) {
+                // receber objeto da resposta (array)
+                JSONObject array = (JSONObject) respostaArray.get(i);
+                JSONObject comodidadesQuartoJson = array.getJSONObject("hotel");
+                // receber os valores do objeto
+                int id = comodidadesQuartoJson.getInt("id");
+                String descricao = comodidadesQuartoJson.getString("descricao");
+
+                ComodidadesQuarto comQuarto = new ComodidadesQuarto(id, descricao);
+                listaComodidadesQuartos.add(comQuarto);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return listaComodidadesQuartos;
     }
 
     public static ArrayList<Quarto> jsonParserListaQuartos(String resposta) {
