@@ -29,6 +29,18 @@ public class Hotel {
         this.img = img;
     }
 
+    public Hotel(int id, String nome, String descricao, int contacto, String website, int cp4, int cp3, String morada, String img) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.contacto = contacto;
+        this.website = website;
+        this.cp4 = cp4;
+        this.cp3 = cp3;
+        this.morada = morada;
+        this.img = img;
+    }
+
     public int getId() {
         return id;
     }

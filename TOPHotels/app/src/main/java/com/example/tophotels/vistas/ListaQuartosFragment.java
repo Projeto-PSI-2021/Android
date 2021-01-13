@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.example.tophotels.R;
 import com.example.tophotels.adaptadores.ListaQuartosAdapter;
 import com.example.tophotels.listeners.QuartoListener;
+import com.example.tophotels.modelos.ComodidadesQuarto;
 import com.example.tophotels.modelos.Quarto;
 import com.example.tophotels.modelos.Singleton;
 
@@ -75,5 +76,13 @@ public class ListaQuartosFragment extends Fragment implements QuartoListener {
         if (listaQuartos != null) {
             lvQuartos.setAdapter(new ListaQuartosAdapter(getContext(), listaQuartos));
         }
+    }
+
+    @Override
+    public void onLoadDetalhesQuarto(Quarto quarto) {
+    }
+
+    @Override
+    public void onLoadComodidadesQuarto(ArrayList<ComodidadesQuarto> listaComodidadesQuarto) {
     }
 }

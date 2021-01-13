@@ -29,6 +29,7 @@ public class Singleton {
     private ArrayList<Reserva> listaReservas;
     private ArrayList<Regiao> listaRegioes;
     private ArrayList<ComodidadesQuarto> listaComodidadesQuarto;
+    private ArrayList<ComodidadesHotel> listaComodidadesHotel;
     private User user;
 
     private TophotelsBDHelper tophotelsBDHelper = null;
@@ -40,9 +41,7 @@ public class Singleton {
 
     //Endereços api
     // Endereço base
-    //http://tophotelsfrontend.ddns.net
-    //http://b931d8868030.eu.ngrok.io
-    public static final String mUrl = "http://tophotelsfrontend.ddns.net";
+    public static final String mUrl = "http://a082c95b4f7e.eu.ngrok.io";
     private static final String mUrlAPIUser = mUrl + "/api/user";
     private static final String mUrlAPIUserInfo = mUrl + "/api/user-info";
     private static final String mUrlAPIHotel = mUrl + "/api/hotel";
@@ -74,6 +73,7 @@ public class Singleton {
         this.listaReservas = new ArrayList<>();
         this.listaRegioes = new ArrayList<>();
         this.listaComodidadesQuarto = new ArrayList<>();
+        this.listaComodidadesHotel = new ArrayList<>();
         this.tophotelsBDHelper = new TophotelsBDHelper(contexto);
     }
 
@@ -337,7 +337,7 @@ public class Singleton {
             }
         } else {
             StringRequest request = new StringRequest(Request.Method.POST,
-                    mUrlAPIQuarto + "/receber-quartos?access-token=" + access_token,
+                    mUrlAPIQuarto + "/receber?access-token=" + access_token,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -369,7 +369,7 @@ public class Singleton {
         }
     }
 
-    public void getComodidadesQuartoAPI(final Context contexto, final Quarto quartoId, final String access_token) {
+    public void getDetalhesQuartoAPI(final Context contexto, final int quartoId, final String access_token) {
         if (!JsonParser.isConnectionInternet(contexto)){
             Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
             if (userInfoListener != null) {
@@ -382,10 +382,16 @@ public class Singleton {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            listaComodidadesQuarto = JsonParser.jsonParserListaComodidadesQuarto(response);
+                            listaComodidadesQuarto = JsonParser.jsonParserDetalhesQuarto_comodidadesQuarto(response);
+                            listaComodidadesHotel = JsonParser.jsonParserDetalhesQuarto_comodidadesHotel(response);
 
-                            if (comodidadesQuartoListener != null) {
-                                comodidadesQuartoListener.onRefreshListaComodidadesQuarto(listaComodidadesQuarto);
+                            if (quartoListener != null) {
+                                quartoListener.onLoadComodidadesQuarto(listaComodidadesQuarto);
+                                quartoListener.onLoadDetalhesQuarto(JsonParser.jsonParserDetalhesQuarto(response));
+                            }
+                            if (hotelListener != null) {
+                                hotelListener.onLoadComodidadesHotel(listaComodidadesHotel);
+                                hotelListener.onLoadDetalhes(JsonParser.jsonParserDetalhesQuarto_hotel(response));
                             }
                         }
                     }, new Response.ErrorListener() {
@@ -453,6 +459,10 @@ public class Singleton {
 
     public ArrayList<ComodidadesQuarto> getListaComodidadesQuarto() {
         return listaComodidadesQuarto;
+    }
+
+    public ArrayList<ComodidadesHotel> getListaComodidadesHotel() {
+        return listaComodidadesHotel;
     }
 
     public ArrayList<Quarto> getListaQuartos() {

@@ -8,33 +8,32 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.tophotels.R;
-import com.example.tophotels.modelos.ComodidadesQuarto;
-
+import com.example.tophotels.modelos.ComodidadesHotel;
 import java.util.ArrayList;
 
-public class ListaComodidadesQuartoAdapter extends BaseAdapter {
+public class ListaComodidadesHotelAdapter extends BaseAdapter {
     private Context contexto;
     private LayoutInflater inflater;
-    private ArrayList<ComodidadesQuarto> listaComodidadesQuarto;
+    private ArrayList<ComodidadesHotel> listaComodidadesHotel;
 
-    public ListaComodidadesQuartoAdapter(Context contexto, ArrayList<ComodidadesQuarto> lista){
+    public ListaComodidadesHotelAdapter(Context contexto, ArrayList<ComodidadesHotel> lista){
         this.contexto = contexto;
-        this.listaComodidadesQuarto = lista;
+        this.listaComodidadesHotel = lista;
     }
 
     @Override
     public int getCount() {
-        return this.listaComodidadesQuarto.size();
+        return this.listaComodidadesHotel.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return this.listaComodidadesQuarto.get(position);
+        return this.listaComodidadesHotel.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return this.listaComodidadesQuarto.get(position).getId();
+        return this.listaComodidadesHotel.get(position).getId();
     }
 
     @Override
@@ -44,32 +43,31 @@ public class ListaComodidadesQuartoAdapter extends BaseAdapter {
         }
 
         if(convertView == null){
-            convertView = inflater.inflate(R.layout.item_lista_comodidades_quarto, null);
+            convertView = inflater.inflate(R.layout.item_lista_comodidades_hotel, null);
 
         }
-        ViewHolderComodidadesQuarto vHolder = (ViewHolderComodidadesQuarto) convertView.getTag();
+        ViewHolderComodidadesHotel vHolder = (ViewHolderComodidadesHotel) convertView.getTag();
 
         if(vHolder == null){
-            vHolder = new ViewHolderComodidadesQuarto(convertView);
+            vHolder = new ViewHolderComodidadesHotel(convertView);
             convertView.setTag(vHolder);
         }
 
-        vHolder.update(this.listaComodidadesQuarto.get(position));
+        vHolder.update(this.listaComodidadesHotel.get(position));
 
         return convertView;
     }
 
-    private class ViewHolderComodidadesQuarto{
+    private class ViewHolderComodidadesHotel{
         private TextView tvDescricao;
 
-        public ViewHolderComodidadesQuarto(View view){
+        public ViewHolderComodidadesHotel(View view){
             tvDescricao = view.findViewById(R.id.tvNomeComodidadeHotel);
         }
 
-        public void update(ComodidadesQuarto comodidadesQuarto){
-            this.tvDescricao.setText(comodidadesQuarto.getDescricao());
+        public void update(ComodidadesHotel comodidadesHotel){
+            this.tvDescricao.setText(comodidadesHotel.getDescricao());
 
         }
     }
-
 }

@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.example.tophotels.R;
 import com.example.tophotels.listeners.HotelListener;
+import com.example.tophotels.modelos.ComodidadesHotel;
 import com.example.tophotels.modelos.Hotel;
 import com.example.tophotels.modelos.Singleton;
 import com.example.tophotels.adaptadores.ListaHotelAdapter;
@@ -85,7 +86,12 @@ public class ListaHoteisFragment extends Fragment implements HotelListener {
     }
 
     @Override
-    public void onRefreshDetalhes() {
+    public void onLoadDetalhes(Hotel hotel) {
+
+    }
+
+    @Override
+    public void onLoadComodidadesHotel(ArrayList<ComodidadesHotel> listaComodidadesHotel) {
 
     }
 }

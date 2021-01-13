@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.example.tophotels.modelos.ComodidadesHotel;
 import com.example.tophotels.modelos.ComodidadesQuarto;
 import com.example.tophotels.modelos.Hotel;
 import com.example.tophotels.modelos.Quarto;
@@ -56,27 +57,111 @@ public class JsonParser {
         return listaHotel;
     }
 
-    public static ArrayList<ComodidadesQuarto> jsonParserListaComodidadesQuarto(String resposta) {
+    public static Hotel jsonParserDetalhesQuarto_hotel(String resposta) {
+        Hotel hotel = null;
+
+        try {
+            JSONObject jsonObject = new JSONObject(resposta);
+
+            // receber objeto da resposta (array)
+            JSONObject hotelJson = jsonObject.getJSONObject("hotel");
+
+            // receber os valores do objeto
+            int id = hotelJson.getInt("id");
+            String nome = hotelJson.getString("nome");
+            String descricao = hotelJson.getString("descricao");
+            int contacto = hotelJson.getInt("contacto");
+            String website = hotelJson.getString("website");
+            int cp4 = hotelJson.getInt("cp4");
+            int cp3 = hotelJson.getInt("cp3");
+            String morada= hotelJson.getString("morada");
+            String img = hotelJson.getString("img");
+
+            hotel = new Hotel(id, nome, descricao, contacto, website, cp4, cp3, morada, img);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return hotel;
+    }
+
+    public static Quarto jsonParserDetalhesQuarto(String resposta) {
+        Quarto quarto = null;
+
+        try {
+            JSONObject jsonObject = new JSONObject(resposta);
+
+            // receber objeto da resposta (array)
+            JSONObject quartoJson = jsonObject.getJSONObject("quarto");
+
+            // receber os valores do objeto
+            int id = quartoJson.getInt("id");
+            String descricao = quartoJson.getString("descricao");
+            double precoNoite = quartoJson.getDouble("precoNoite");
+            String img = quartoJson.getString("img");
+
+            quarto = new Quarto(id, descricao, precoNoite, img);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return quarto;
+    }
+
+    public static ArrayList<ComodidadesQuarto> jsonParserDetalhesQuarto_comodidadesQuarto(String resposta) {
         ArrayList<ComodidadesQuarto> listaComodidadesQuartos = new ArrayList<>();
 
         try {
-            JSONArray respostaArray = new JSONArray(resposta);
-            for (int i = 0; i < respostaArray.length(); i++) {
+            JSONObject jsonObject = new JSONObject(resposta);
+
+            JSONArray jsonArray = jsonObject.getJSONArray("comodidadesQuarto");
+
+            for (int i = 0; i < jsonArray.length(); i++) {
                 // receber objeto da resposta (array)
-                JSONObject array = (JSONObject) respostaArray.get(i);
-                JSONObject comodidadesQuartoJson = array.getJSONObject("hotel");
+                JSONObject array = (JSONObject) jsonArray.get(i);
+                JSONObject comodidadesQuartoJson = array.getJSONObject("descricao");
+
                 // receber os valores do objeto
                 int id = comodidadesQuartoJson.getInt("id");
-                String descricao = comodidadesQuartoJson.getString("descricao");
+                String descricao = comodidadesQuartoJson.getString("nome");
 
-                ComodidadesQuarto comQuarto = new ComodidadesQuarto(id, descricao);
-                listaComodidadesQuartos.add(comQuarto);
+                ComodidadesQuarto comodidadesQuarto = new ComodidadesQuarto(id, descricao);
+                listaComodidadesQuartos.add(comodidadesQuarto);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         return listaComodidadesQuartos;
+    }
+
+    public static ArrayList<ComodidadesHotel> jsonParserDetalhesQuarto_comodidadesHotel(String resposta) {
+        ArrayList<ComodidadesHotel> listaComodidadesHoteis = new ArrayList<>();
+
+        try {
+            JSONObject jsonObject = new JSONObject(resposta);
+
+            JSONArray jsonArray = jsonObject.getJSONArray("comodidadesHotel");
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                // receber objeto da resposta (array)
+                JSONObject array = (JSONObject) jsonArray.get(i);
+                JSONObject comodidadesHotelJson = array.getJSONObject("descricao");
+
+                // receber os valores do objeto
+                int id = comodidadesHotelJson.getInt("id");
+                String descricao = comodidadesHotelJson.getString("nome");
+
+                ComodidadesHotel comodidadesHotel = new ComodidadesHotel(id, descricao);
+                listaComodidadesHoteis.add(comodidadesHotel);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return listaComodidadesHoteis;
     }
 
     public static ArrayList<Quarto> jsonParserListaQuartos(String resposta) {
@@ -118,19 +203,19 @@ public class JsonParser {
                 String morada = "";
                 int nif = 0;
                 String img = userInfoJson.getString("img");
-                if (!userInfoJson.isNull("nome")){
+                if (!userInfoJson.isNull("nome")) {
                     nome = userInfoJson.getString("nome");
                 }
-                if (!userInfoJson.isNull("apelido")){
+                if (!userInfoJson.isNull("apelido")) {
                     apelido = userInfoJson.getString("apelido");
                 }
-                if (!userInfoJson.isNull("contactoTel")){
+                if (!userInfoJson.isNull("contactoTel")) {
                     contactoTel = userInfoJson.getInt("contactoTel");
                 }
-                if (!userInfoJson.isNull("morada")){
+                if (!userInfoJson.isNull("morada")) {
                     morada = userInfoJson.getString("morada");
                 }
-                if (!userInfoJson.isNull("nif")){
+                if (!userInfoJson.isNull("nif")) {
                     nif = userInfoJson.getInt("nif");
                 }
 
@@ -199,7 +284,7 @@ public class JsonParser {
         return listaReserva;
     }
 
-    public static ArrayList<Regiao> jsonParserListaRegioes(String resposta){
+    public static ArrayList<Regiao> jsonParserListaRegioes(String resposta) {
         ArrayList<Regiao> listaRegiao = new ArrayList<>();
 
         try {

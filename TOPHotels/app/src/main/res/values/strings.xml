@@ -61,4 +61,6 @@
     <string name="tvNomeQuarto">Quarto:</string>
     <string name="tvPrecoNoite">Preço:</string>
     <string name="tvEstadoQuarto">Estado:</string>
+    <string name="tvComodidadesHotel">Comodidades do hotel</string>
+    <string name="tvComodidadesQuarto">Comodidades do quarto</string>
 </resources>
