@@ -296,7 +296,7 @@ public class Singleton {
             }
         } else {
             StringRequest request = new StringRequest(Request.Method.POST,
-                    mUrlAPIHotel + "/pesquisar-hotel?access-token=" + access_token,
+                    mUrlAPIHotel + "/pesquisar?access-token=" + access_token,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
