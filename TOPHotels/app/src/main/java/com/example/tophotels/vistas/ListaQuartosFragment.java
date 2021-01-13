@@ -13,9 +13,7 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 import com.example.tophotels.R;
-import com.example.tophotels.adaptadores.ListaHotelAdapter;
 import com.example.tophotels.adaptadores.ListaQuartosAdapter;
-import com.example.tophotels.adaptadores.ListaReservaAdapter;
 import com.example.tophotels.listeners.QuartoListener;
 import com.example.tophotels.modelos.Quarto;
 import com.example.tophotels.modelos.Singleton;
@@ -57,6 +55,17 @@ public class ListaQuartosFragment extends Fragment implements QuartoListener {
 
         adapter = new ListaQuartosAdapter(getActivity(), Singleton.getInstance(getContext()).getListaQuartos());
         lvQuartos.setAdapter(adapter);
+
+
+        lvQuartos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getContext(), QuartoDetalhesActivity.class);
+                intent.putExtra(QuartoDetalhesActivity.ID, id);
+                startActivity(intent);
+            }
+        });
+
 
         return view;
     }

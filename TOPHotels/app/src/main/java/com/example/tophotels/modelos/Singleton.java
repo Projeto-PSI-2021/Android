@@ -37,12 +37,17 @@ public class Singleton {
     private static RequestQueue volleyQueue = null;
 
     //Endereços api
-    public static final String mUrl = "http://80ab8e9d609f.eu.ngrok.io"; //Endereço base
+    // Endereço base
+    //http://tophotelsfrontend.ddns.net
+    //http://b931d8868030.eu.ngrok.io
+    public static final String mUrl = "http://tophotelsfrontend.ddns.net";
     private static final String mUrlAPIUser = mUrl + "/api/user";
     private static final String mUrlAPIUserInfo = mUrl + "/api/user-info";
     private static final String mUrlAPIHotel = mUrl + "/api/hotel";
     private static final String mUrlAPIRegiao = mUrl + "/api/regiao-hotel";
     private static final String mUrlAPIQuarto = mUrl + "/api/quarto";
+
+
 
     //Listeners
     private HotelListener hotelListener;
@@ -356,6 +361,32 @@ public class Singleton {
                 }
             };
 
+            volleyQueue.add(request);
+        }
+    }
+
+    public void getQuartoAPI(final Context contexto, final int quartoId, final String access_token) {
+        if (!JsonParser.isConnectionInternet(contexto)){
+            Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
+            if (userInfoListener != null) {
+                // receber com a base de dados local
+                //quartoListener.onRefreshListaHotel(getListaQuartos);
+            }
+        } else {
+            StringRequest request = new StringRequest(Request.Method.GET,
+                    mUrlAPIQuarto + "/" + quartoId + "/detalhes?access-token="+access_token,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            listaReservas = JsonParser.jsonParserListaComodidadesQuarto(response);
+
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(contexto, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
             volleyQueue.add(request);
         }
     }

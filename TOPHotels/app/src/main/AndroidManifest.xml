@@ -19,7 +19,7 @@
             android:name=".vistas.DetalhesContaActivity"
             android:parentActivityName=".vistas.MenuMainActivity" />
         <activity
-            android:name=".vistas.HotelDetalhesActivity"
+            android:name=".vistas.QuartoDetalhesActivity"
             android:parentActivityName=".vistas.MenuMainActivity" />
         <activity
             android:name=".vistas.MenuMainActivity"
