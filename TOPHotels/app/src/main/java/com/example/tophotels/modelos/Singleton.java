@@ -11,6 +11,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.tophotels.listeners.ComodidadesQuartoListener;
 import com.example.tophotels.listeners.HotelListener;
 import com.example.tophotels.listeners.QuartoListener;
 import com.example.tophotels.listeners.RegiaoListener;
@@ -27,6 +28,7 @@ public class Singleton {
     private ArrayList<Quarto> listaQuartos;
     private ArrayList<Reserva> listaReservas;
     private ArrayList<Regiao> listaRegioes;
+    private ArrayList<ComodidadesQuarto> listaComodidadesQuarto;
     private User user;
 
     private TophotelsBDHelper tophotelsBDHelper = null;
@@ -55,6 +57,7 @@ public class Singleton {
     private UserListener userListener;
     private UserInfoListener userInfoListener;
     private RegiaoListener regiaoListener;
+    private ComodidadesQuartoListener comodidadesQuartoListener;
 
 
     public static synchronized Singleton getInstance(Context contexto) {
@@ -70,6 +73,7 @@ public class Singleton {
         this.listaQuartos = new ArrayList<>();
         this.listaReservas = new ArrayList<>();
         this.listaRegioes = new ArrayList<>();
+        this.listaComodidadesQuarto = new ArrayList<>();
         this.tophotelsBDHelper = new TophotelsBDHelper(contexto);
     }
 
@@ -365,7 +369,7 @@ public class Singleton {
         }
     }
 
-    public void getQuartoAPI(final Context contexto, final int quartoId, final String access_token) {
+    public void getComodidadesQuartoAPI(final Context contexto, final Quarto quartoId, final String access_token) {
         if (!JsonParser.isConnectionInternet(contexto)){
             Toast.makeText(contexto, "Não tem Internet.", Toast.LENGTH_SHORT).show();
             if (userInfoListener != null) {
@@ -378,8 +382,11 @@ public class Singleton {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            listaReservas = JsonParser.jsonParserListaComodidadesQuarto(response);
+                            listaComodidadesQuarto = JsonParser.jsonParserListaComodidadesQuarto(response);
 
+                            if (comodidadesQuartoListener != null) {
+                                comodidadesQuartoListener.onRefreshListaComodidadesQuarto(listaComodidadesQuarto);
+                            }
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -444,6 +451,10 @@ public class Singleton {
         return listaHoteis;
     }
 
+    public ArrayList<ComodidadesQuarto> getListaComodidadesQuarto() {
+        return listaComodidadesQuarto;
+    }
+
     public ArrayList<Quarto> getListaQuartos() {
         return listaQuartos;
     }
@@ -483,6 +494,12 @@ public class Singleton {
     public void setRegiaoListener(RegiaoListener regiaoListener) {
         this.regiaoListener = regiaoListener;
     }
+
+    public void setListaComodidadesQuarto(ComodidadesQuartoListener comodidadesQuartoListener){
+        this.comodidadesQuartoListener = comodidadesQuartoListener;
+    }
+
+
 
     // ** END SET-LISTENERS ** //
 }

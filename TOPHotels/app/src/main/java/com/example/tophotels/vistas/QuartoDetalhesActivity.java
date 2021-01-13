@@ -9,11 +9,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.tophotels.R;
+import com.example.tophotels.adaptadores.ListaComodidadesQuartoAdapter;
+import com.example.tophotels.adaptadores.ListaHotelAdapter;
+import com.example.tophotels.adaptadores.ListaReservaAdapter;
+import com.example.tophotels.listeners.ComodidadesQuartoListener;
 import com.example.tophotels.modelos.ComodidadesQuarto;
 import com.example.tophotels.modelos.Quarto;
 import com.example.tophotels.modelos.Singleton;
@@ -26,6 +31,8 @@ public class QuartoDetalhesActivity extends AppCompatActivity{
     private ImageView imgQuarto;
     private Quarto quarto;
     private ComodidadesQuarto comodidadesQuarto;
+    private ListaComodidadesQuartoAdapter adapter;
+    private ListView lvComodidadesQuarto;
 
     // tabela user.access_token string
     private String token;
@@ -42,6 +49,7 @@ public class QuartoDetalhesActivity extends AppCompatActivity{
         SharedPreferences sharedPreferencesUser = getSharedPreferences(MenuMainActivity.PREF_USER, Context.MODE_PRIVATE);
         token = sharedPreferencesUser.getString(MenuMainActivity.TOKEN, null);
 
+
         int id = (int) getIntent().getLongExtra(ID, -1);
 
         if (id == -1){
@@ -53,6 +61,12 @@ public class QuartoDetalhesActivity extends AppCompatActivity{
         if (quarto != null) {
             setTitle(quarto.getDescricao());
             //preencheDetalhes(quarto, comodidadesQuarto);
+
+            Singleton.getInstance(getApplicationContext()).setListaComodidadesQuarto(this);
+            Singleton.getInstance(getApplicationContext()).getComodidadesQuartoAPI(getApplicationContext(), quarto, token);
+
+            adapter = new ListaComodidadesQuartoAdapter(getApplicationContext(), Singleton.getInstance(getApplicationContext()).getListaComodidadesQuarto());
+            lvComodidadesQuarto.setAdapter(adapter);
         }
 
     }
