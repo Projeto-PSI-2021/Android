@@ -63,4 +63,11 @@
     <string name="tvEstadoQuarto">Estado:</string>
     <string name="tvComodidadesHotel">Comodidades do hotel</string>
     <string name="tvComodidadesQuarto">Comodidades do quarto</string>
+    <string name="tvDescricaoHotelDetalhes">Descrição:</string>
+    <string name="tvContactoHotelDetalhes">Contacto:</string>
+    <string name="tvMoradaHotelDetalhes">Morada:</string>
+    <string name="tvRegiaoHotelDetalhes">Região:</string>
+    <string name="tvWebsiteHotelDetalhes">Website:</string>
+    <string name="tvNomeHotelDetalhes">Nome:</string>
+    <string name="tvCodigoPostalHotelDetalhes">Código Postal:</string>
 </resources>
