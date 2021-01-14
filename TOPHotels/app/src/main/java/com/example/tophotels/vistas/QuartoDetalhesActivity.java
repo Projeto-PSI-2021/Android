@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoListener, HotelListener {
     public static final String ID = "com.example.tophotels.vistas.id";
 
-    private TextView tvNome, tvDescricao, tvContacto, tvMorada, tvWebsite, tvCodigoPostal;
+    private TextView tvNome, tvDescricao, tvContacto, tvMorada, tvWebsite, tvCodigoPostal, tvDescricaoQuarto, tvPrecoQuarto;
     private ImageView imgQuarto, imgHotel;
     private Quarto quarto;
     private ComodidadesQuarto comodidadesQuarto;
@@ -51,6 +51,7 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //Detalhes Hotel
         tvNome = findViewById(R.id.tvNome);
         tvDescricao = findViewById(R.id.tvDescricao);
         tvContacto = findViewById(R.id.tvContacto);
@@ -58,7 +59,12 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
         tvWebsite = findViewById(R.id.tvWebsite);
         tvCodigoPostal = findViewById(R.id.tvCodigoPostal);
         imgHotel = findViewById(R.id.imgHotel);
+
+        //Detalhes Quarto
         imgQuarto = findViewById(R.id.imgQuarto);
+        tvDescricaoQuarto = findViewById(R.id.tvDescricaoQuarto);
+        tvPrecoQuarto = findViewById(R.id.tvPrecoQuarto);
+
 
         lvComodidadesQuarto = findViewById(R.id.lvComodidadesQuarto);
         lvComodidadesHotel = findViewById(R.id.lvComodidadesHotel);
@@ -68,7 +74,7 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
 
         int id = (int) getIntent().getLongExtra(ID, -1);
 
-        if (id == -1){
+        if (id == -1) {
             quarto = null;
         } else {
             quarto = Singleton.getInstance(getApplicationContext()).getQuarto(id);
@@ -98,7 +104,6 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
     }
 
 
-
     @Override
     public void onLoadDetalhesQuarto(Quarto quarto) {
         if (quarto != null) {
@@ -107,6 +112,9 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
                     .placeholder(R.mipmap.ic_launcher)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imgQuarto);
+            tvDescricaoQuarto.setText(quarto.getDescricao());
+            tvPrecoQuarto.setText(quarto.getPrecoNoite() + "€");
+
         }
     }
 
@@ -124,7 +132,6 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
     }
 
 
-
     @Override
     public void onLoadDetalhes(Hotel hotel) {
         if (hotel != null) {
@@ -139,8 +146,6 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
                     .into(imgHotel);
             tvCodigoPostal.setText(hotel.getCp4() + "-" + hotel.getCp3());
             tvWebsite.setText(hotel.getWebsite());
-
-
         }
     }
 

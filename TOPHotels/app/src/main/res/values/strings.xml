@@ -70,4 +70,6 @@
     <string name="tvWebsiteHotelDetalhes">Website:</string>
     <string name="tvNomeHotelDetalhes">Nome:</string>
     <string name="tvCodigoPostalHotelDetalhes">Código Postal:</string>
+    <string name="tvDescricaoQuartoDetalhes">Descrição:</string>
+    <string name="tvPrecoQuartoDetalhes">Preço:</string>
 </resources>
