@@ -75,7 +75,7 @@ public class JsonParser {
             int cp4 = hotelJson.getInt("cp4");
             int cp3 = hotelJson.getInt("cp3");
             String morada= hotelJson.getString("morada");
-            String img = hotelJson.getString("img");
+            String img = Singleton.mUrl + "/assets/hoteis/" + hotelJson.getString("img");
 
             hotel = new Hotel(id, nome, descricao, contacto, website, cp4, cp3, morada, img);
 
@@ -99,7 +99,7 @@ public class JsonParser {
             int id = quartoJson.getInt("id");
             String descricao = quartoJson.getString("descricao");
             double precoNoite = quartoJson.getDouble("precoNoite");
-            String img = quartoJson.getString("img");
+            String img = Singleton.mUrl + "/assets/quartos/" + quartoJson.getString("img");
 
             quarto = new Quarto(id, descricao, precoNoite, img);
 
