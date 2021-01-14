@@ -58,6 +58,7 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
         tvWebsite = findViewById(R.id.tvWebsite);
         tvCodigoPostal = findViewById(R.id.tvCodigoPostal);
         imgHotel = findViewById(R.id.imgHotel);
+        imgQuarto = findViewById(R.id.imgQuarto);
 
         lvComodidadesQuarto = findViewById(R.id.lvComodidadesQuarto);
         lvComodidadesHotel = findViewById(R.id.lvComodidadesHotel);
@@ -101,7 +102,11 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
     @Override
     public void onLoadDetalhesQuarto(Quarto quarto) {
         if (quarto != null) {
-
+            Glide.with(getApplicationContext())
+                    .load(quarto.getImg())
+                    .placeholder(R.mipmap.ic_launcher)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imgQuarto);
         }
     }
 
