@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.ImageView;
@@ -18,9 +17,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.tophotels.R;
 import com.example.tophotels.adaptadores.ListaComodidadesHotelAdapter;
 import com.example.tophotels.adaptadores.ListaComodidadesQuartoAdapter;
-import com.example.tophotels.adaptadores.ListaHotelAdapter;
-import com.example.tophotels.adaptadores.ListaQuartosAdapter;
-import com.example.tophotels.adaptadores.ListaReservaAdapter;
 import com.example.tophotels.listeners.ComodidadesQuartoListener;
 import com.example.tophotels.listeners.HotelListener;
 import com.example.tophotels.listeners.QuartoListener;
@@ -29,6 +25,7 @@ import com.example.tophotels.modelos.ComodidadesQuarto;
 import com.example.tophotels.modelos.Hotel;
 import com.example.tophotels.modelos.Quarto;
 import com.example.tophotels.modelos.Singleton;
+import com.example.tophotels.modelos.UserInfo;
 
 import java.util.ArrayList;
 
@@ -36,8 +33,8 @@ import java.util.ArrayList;
 public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoListener, HotelListener {
     public static final String ID = "com.example.tophotels.vistas.id";
 
-    private TextView tvDescricao;
-    private ImageView imgQuarto;
+    private TextView tvNome, tvDescricao, tvContacto, tvMorada, tvWebsite, tvCodigoPostal;
+    private ImageView imgQuarto, imgHotel;
     private Quarto quarto;
     private ComodidadesQuarto comodidadesQuarto;
     private ListaComodidadesQuartoAdapter adapter;
@@ -53,6 +50,14 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
         setContentView(R.layout.activity_quarto_detalhes);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        tvNome = findViewById(R.id.tvNome);
+        tvDescricao = findViewById(R.id.tvDescricao);
+        tvContacto = findViewById(R.id.tvContacto);
+        tvMorada = findViewById(R.id.tvMorada);
+        tvWebsite = findViewById(R.id.tvWebsite);
+        tvCodigoPostal = findViewById(R.id.tvCodigoPostal);
+        imgHotel = findViewById(R.id.imgHotel);
 
         lvComodidadesQuarto = findViewById(R.id.lvComodidadesQuarto);
         lvComodidadesHotel = findViewById(R.id.lvComodidadesHotel);
@@ -91,6 +96,8 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
 
     }
 
+
+
     @Override
     public void onLoadDetalhesQuarto(Quarto quarto) {
         if (quarto != null) {
@@ -108,11 +115,26 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
     @Override
     public void onRefreshListaHotel(ArrayList<Hotel> listahoteis) {
 
+
     }
+
+
 
     @Override
     public void onLoadDetalhes(Hotel hotel) {
         if (hotel != null) {
+            tvNome.setText(hotel.getNome());
+            tvDescricao.setText(hotel.getDescricao());
+            tvContacto.setText("" + hotel.getContacto());
+            tvMorada.setText(hotel.getMorada());
+            Glide.with(getApplicationContext())
+                    .load(hotel.getImg())
+                    .placeholder(R.mipmap.ic_launcher)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imgHotel);
+            tvCodigoPostal.setText(hotel.getCp4() + "-" + hotel.getCp3());
+            tvWebsite.setText(hotel.getWebsite());
+
 
         }
     }
