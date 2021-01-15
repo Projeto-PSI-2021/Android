@@ -8,7 +8,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -119,10 +122,30 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
         }
     }
 
+    private void setAlturaListViewComodidadesQuarto(ListView listView) {
+        ListAdapter listAdapter = lvComodidadesQuarto.getAdapter();
+        if (listAdapter == null) {
+            return;
+        }
+        int totalHeight = 0;
+
+        for (int i = 0,len = listAdapter.getCount(); i < len; i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        // listView.getDividerHeight() gets the height occupied by the separator between children
+        // params.height finally gets the height of the entire ListView full display
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() *  (listAdapter .getCount() - 1));
+        listView.setLayoutParams(params);
+    }
+
     @Override
     public void onLoadComodidadesQuarto(ArrayList<ComodidadesQuarto> listaComodidadesQuarto) {
         if (listaComodidadesQuarto != null) {
             lvComodidadesQuarto.setAdapter(new ListaComodidadesQuartoAdapter(getApplicationContext(), listaComodidadesQuarto));
+            setAlturaListViewComodidadesQuarto(lvComodidadesQuarto);
         }
     }
 
@@ -150,10 +173,30 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
         }
     }
 
+    private void setAlturaListViewComodidadesHotel(ListView listView) {
+        ListAdapter listAdapter = lvComodidadesHotel.getAdapter();
+        if (listAdapter == null) {
+            return;
+        }
+        int totalHeight = 0;
+
+        for (int i = 0,len = listAdapter.getCount(); i < len; i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        // listView.getDividerHeight() gets the height occupied by the separator between children
+        // params.height finally gets the height of the entire ListView full display
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() *  (listAdapter .getCount() - 1));
+        listView.setLayoutParams(params);
+    }
+
     @Override
     public void onLoadComodidadesHotel(ArrayList<ComodidadesHotel> listaComodidadesHotel) {
         if (listaComodidadesHotel != null) {
             lvComodidadesHotel.setAdapter(new ListaComodidadesHotelAdapter(getApplicationContext(), listaComodidadesHotel));
+            setAlturaListViewComodidadesHotel(lvComodidadesHotel);
         }
     }
 }
