@@ -4,7 +4,16 @@ public class Quarto {
     private int id;
     private String descricao;
     private double precoNoite;
+    private String categoria;
     private String img;
+
+    public Quarto(int id, String descricao, double precoNoite, String categoria, String img) {
+        this.id = id;
+        this.descricao = descricao;
+        this.precoNoite = precoNoite;
+        this.categoria = categoria;
+        this.img = img;
+    }
 
     public Quarto(int id, String descricao, double precoNoite, String img) {
         this.id = id;
@@ -35,6 +44,14 @@ public class Quarto {
 
     public void setPrecoNoite(double precoNoite) {
         this.precoNoite = precoNoite;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public String getImg() {

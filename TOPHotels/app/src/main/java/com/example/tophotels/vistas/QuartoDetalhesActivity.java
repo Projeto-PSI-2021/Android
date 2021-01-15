@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoListener, HotelListener {
     public static final String ID = "com.example.tophotels.vistas.id";
 
-    private TextView tvNome, tvDescricao, tvContacto, tvMorada, tvWebsite, tvCodigoPostal, tvDescricaoQuarto, tvPrecoQuarto;
+    private TextView tvNome, tvDescricao, tvContacto, tvMorada, tvWebsite, tvCodigoPostal, tvDescricaoQuarto, tvPrecoQuarto, tvCategoriaQuarto;
     private ImageView imgQuarto, imgHotel;
     private Quarto quarto;
     private ComodidadesQuarto comodidadesQuarto;
@@ -64,6 +64,7 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
         imgQuarto = findViewById(R.id.imgQuarto);
         tvDescricaoQuarto = findViewById(R.id.tvDescricaoQuarto);
         tvPrecoQuarto = findViewById(R.id.tvPrecoQuarto);
+        tvCategoriaQuarto = findViewById(R.id.tvCategoriaQuarto);
 
 
         lvComodidadesQuarto = findViewById(R.id.lvComodidadesQuarto);
@@ -114,7 +115,7 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
                     .into(imgQuarto);
             tvDescricaoQuarto.setText(quarto.getDescricao());
             tvPrecoQuarto.setText(quarto.getPrecoNoite() + "€");
-
+            tvCategoriaQuarto.setText(quarto.getCategoria());
         }
     }
 

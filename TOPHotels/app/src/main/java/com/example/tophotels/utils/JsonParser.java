@@ -94,14 +94,17 @@ public class JsonParser {
 
             // receber objeto da resposta (array)
             JSONObject quartoJson = jsonObject.getJSONObject("quarto");
+            JSONObject categoriaJson = jsonObject.getJSONObject("categoria");
 
             // receber os valores do objeto
             int id = quartoJson.getInt("id");
             String descricao = quartoJson.getString("descricao");
             double precoNoite = quartoJson.getDouble("precoNoite");
+            String categoria = categoriaJson.getString("descricao");
             String img = Singleton.mUrl + "/assets/quartos/" + quartoJson.getString("img");
 
-            quarto = new Quarto(id, descricao, precoNoite, img);
+
+            quarto = new Quarto(id, descricao, precoNoite, categoria, img);
 
         } catch (JSONException e) {
             e.printStackTrace();
