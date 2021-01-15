@@ -116,9 +116,9 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
                     .placeholder(R.mipmap.ic_launcher)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imgQuarto);
-            tvDescricaoQuarto.setText(quarto.getDescricao());
-            tvPrecoQuarto.setText(quarto.getPrecoNoite() + "€");
-            tvCategoriaQuarto.setText(quarto.getCategoria());
+            tvDescricaoQuarto.setText("Descrição: " + quarto.getDescricao());
+            tvPrecoQuarto.setText("Preço por noite: " + quarto.getPrecoNoite() + "€");
+            tvCategoriaQuarto.setText("Categoria: " + quarto.getCategoria());
         }
     }
 
@@ -159,17 +159,17 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
     @Override
     public void onLoadDetalhes(Hotel hotel) {
         if (hotel != null) {
-            tvNome.setText(hotel.getNome());
-            tvDescricao.setText(hotel.getDescricao());
-            tvContacto.setText("" + hotel.getContacto());
-            tvMorada.setText(hotel.getMorada());
+            tvNome.setText("Nome: " + hotel.getNome());
+            tvDescricao.setText("Descrição: " + hotel.getDescricao());
+            tvContacto.setText("Contacto: " + hotel.getContacto());
+            tvMorada.setText("Morada: " +hotel.getMorada());
             Glide.with(getApplicationContext())
                     .load(hotel.getImg())
                     .placeholder(R.mipmap.ic_launcher)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imgHotel);
-            tvCodigoPostal.setText(hotel.getCp4() + "-" + hotel.getCp3());
-            tvWebsite.setText(hotel.getWebsite());
+            tvCodigoPostal.setText("Código-postal: " +hotel.getCp4() + "-" + hotel.getCp3());
+            tvWebsite.setText("Website: " + hotel.getWebsite());
         }
     }
 

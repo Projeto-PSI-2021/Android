@@ -32,159 +32,79 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="20dp">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvNomeHotelDetalhes"
-                    android:layout_width="95dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="90dp"
-                    android:layout_marginLeft="90dp"
-                    android:text="@string/tvNomeHotelDetalhes" />
-
-                <LinearLayout
+                    android:id="@+id/tvNome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tvNome"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="20dp">
-
-                <TextView
-                    android:id="@+id/tvDescricaoHotelDetalhes"
-                    android:layout_width="95dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="90dp"
-                    android:layout_marginLeft="90dp"
-                    android:text="@string/tvDescricaoHotelDetalhes" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tvDescricao"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
+                    android:gravity="center" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="20dp">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvContactoHotelDetalhes"
-                    android:layout_width="95dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="90dp"
-                    android:layout_marginLeft="90dp"
-                    android:text="@string/tvContactoHotelDetalhes" />
-
-                <LinearLayout
+                    android:id="@+id/tvDescricao"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:gravity="center" />
 
-                    <TextView
-                        android:id="@+id/tvContacto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="20dp">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvMoradaHotelDetalhes"
-                    android:layout_width="95dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="90dp"
-                    android:layout_marginLeft="90dp"
-                    android:text="@string/tvMoradaHotelDetalhes" />
-
-                <LinearLayout
+                    android:id="@+id/tvContacto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:gravity="center" />
 
-                    <TextView
-                        android:id="@+id/tvMorada"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="20dp">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvCodigoPostalHotelDetalhes"
-                    android:layout_width="95dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="90dp"
-                    android:layout_marginLeft="90dp"
-                    android:text="@string/tvCodigoPostalHotelDetalhes" />
-
-                <LinearLayout
+                    android:id="@+id/tvMorada"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:gravity="center" />
 
-                    <TextView
-                        android:id="@+id/tvCodigoPostal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="20dp">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvWebsiteHotelDetalhes"
-                    android:layout_width="95dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="90dp"
-                    android:layout_marginLeft="90dp"
-                    android:text="@string/tvWebsiteHotelDetalhes" />
-
-                <LinearLayout
+                    android:id="@+id/tvCodigoPostal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:gravity="center" />
 
-                    <TextView
-                        android:id="@+id/tvWebsite"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvWebsite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -199,9 +119,10 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="15dp"
+                    android:gravity="center"
                     android:text="@string/tvComodidadesHotel"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -233,79 +154,43 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingLeft="20dp">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvDescricaoQuartoDetalhes"
-                    android:layout_width="95dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="90dp"
-                    android:layout_marginLeft="90dp"
-                    android:text="@string/tvDescricaoQuartoDetalhes" />
-
-                <LinearLayout
+                    android:id="@+id/tvDescricaoQuarto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:gravity="center" />
 
-                    <TextView
-                        android:id="@+id/tvDescricaoQuarto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingLeft="20dp">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvCategoriaQuartoDetalhes"
-                    android:layout_width="95dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="90dp"
-                    android:layout_marginLeft="90dp"
-                    android:text="@string/tvCategoriaQuartoDetalhes" />
-
-                <LinearLayout
+                    android:id="@+id/tvCategoriaQuarto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:gravity="center" />
 
-                    <TextView
-                        android:id="@+id/tvCategoriaQuarto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingLeft="20dp">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvPrecoQuartoDetalhes"
-                    android:layout_width="95dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="90dp"
-                    android:layout_marginLeft="90dp"
-                    android:text="@string/tvPrecoQuartoDetalhes" />
-
-                <LinearLayout
+                    android:id="@+id/tvPrecoQuarto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:gravity="center" />
 
-                    <TextView
-                        android:id="@+id/tvPrecoQuarto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -320,6 +205,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="15dp"
+                    android:gravity="center"
                     android:text="@string/tvComodidadesQuarto"
                     android:textSize="18sp"
                     android:textStyle="bold" />

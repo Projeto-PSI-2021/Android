@@ -63,7 +63,7 @@ public class ListaComodidadesQuartoAdapter extends BaseAdapter {
         private TextView tvDescricao;
 
         public ViewHolderComodidadesQuarto(View view){
-            tvDescricao = view.findViewById(R.id.tvNomeComodidadeHotel);
+            tvDescricao = view.findViewById(R.id.tvNomeComodidadeQuarto);
         }
 
         public void update(ComodidadesQuarto comodidadesQuarto){
