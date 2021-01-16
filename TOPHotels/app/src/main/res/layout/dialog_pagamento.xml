@@ -10,4 +10,5 @@
         android:ems="10"
         android:hint="Número cartão "
         android:inputType="textPersonName" />
+
 </RelativeLayout>

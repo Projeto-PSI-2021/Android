@@ -7,15 +7,24 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.tophotels.R;
+import com.example.tophotels.modelos.Singleton;
+import com.example.tophotels.utils.JsonParser;
 
 public class DialogCartao extends AppCompatDialogFragment {
     private EditText etNrCartao;
+    public String nrPessoas, preco, dataCheckin, dataCheckout;
+    public int quartoId, userId;
+
+    private String nrCartaoValido = "4242424242424242";
+    private String nrCartaoNoMoney = "4343434343434343";
+    private String nrCartaoExpirado = "4545454545454545";
 
     @NonNull
     @Override
@@ -23,6 +32,7 @@ public class DialogCartao extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_pagamento, null);
+
 
         builder.setView(view)
                 .setTitle("Detalhes do cartão")
@@ -35,11 +45,25 @@ public class DialogCartao extends AppCompatDialogFragment {
                 .setPositiveButton("Efetuar pagamento", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        if (!JsonParser.isConnectionInternet(getActivity().getApplicationContext())){
+                            Toast.makeText(getActivity().getApplicationContext(), "Não está ligado à internet.", Toast.LENGTH_SHORT).show();
+                        }else{
+                            if(etNrCartao.getText().toString().equals(nrCartaoValido)){
+                                Singleton.getInstance(getActivity().getApplicationContext()).postCriarReservaAPI(getActivity().getApplicationContext(), nrPessoas, preco, dataCheckin, dataCheckout, quartoId, userId);
+                            }else if(etNrCartao.getText().toString().equals(nrCartaoNoMoney)){
+                                Toast.makeText(getActivity().getApplicationContext(), "O cartão não possui dinheiro.", Toast.LENGTH_SHORT).show();
+                            }else if(etNrCartao.getText().toString().equals(nrCartaoExpirado)){
+                                Toast.makeText(getActivity().getApplicationContext(), "O cartão inserido expirou.", Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(getActivity().getApplicationContext(), "Erro ao processar pedido", Toast.LENGTH_SHORT).show();
+                            }
+                        }
                     }
                 });
 
         etNrCartao = view.findViewById(R.id.etNumeroCartao);
+
+
 
         return builder.create();
     }

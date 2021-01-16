@@ -3,13 +3,11 @@ package com.example.tophotels.vistas;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -19,15 +17,14 @@ import com.example.tophotels.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class PagamentoActivity extends AppCompatActivity {
     public static final String ID = "com.example.tophotels.vistas.id";
-    private TextView etPreco;
-    private TextView data_checkin, data_checkout;
+    private TextView etPreco, data_checkin, data_checkout;
     private Button btPagamento;
-    private String data_inicial;
-    private String data_final;
+    private String data_inicial, data_final;
+    private Spinner spPessoas;
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +39,9 @@ public class PagamentoActivity extends AppCompatActivity {
         data_checkin = findViewById(R.id.etDataCheckinPagamento);
         data_checkout = findViewById(R.id.etDataCheckoutPagamento);
         btPagamento = findViewById(R.id.bt_Pagamento);
+
+        SharedPreferences sharedPreferencesInfoUser = getSharedPreferences(MenuMainActivity.PREF_USER, Context.MODE_PRIVATE);
+        userId = sharedPreferencesInfoUser.getInt(MenuMainActivity.USER_ID, 0);
 
         SharedPreferences sharedPreferencesPesquisarHotel = getSharedPreferences(PesquisarHotelFragment.PESQUISA_HOTEL, Context.MODE_PRIVATE);
         data_inicial = sharedPreferencesPesquisarHotel.getString(PesquisarHotelFragment.DATA_INICIAL, null);
@@ -76,8 +76,9 @@ public class PagamentoActivity extends AppCompatActivity {
 
         Intent i = this.getIntent();
         Double preco = i.getDoubleExtra("precoNoite", 0);
+        int id = i.getIntExtra("idQuarto", 0);
 
-        Spinner spinner = findViewById(R.id.spinner);
+        spPessoas = findViewById(R.id.spPessoas);
         ArrayList<String> array = new ArrayList<>();
         array.add("1");
         array.add("2");
@@ -89,9 +90,9 @@ public class PagamentoActivity extends AppCompatActivity {
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, array);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(arrayAdapter);
+        spPessoas.setAdapter(arrayAdapter);
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spPessoas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 int nrPessoas = Integer.parseInt(parent.getItemAtPosition(position).toString());
@@ -120,13 +121,27 @@ public class PagamentoActivity extends AppCompatActivity {
         btPagamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDialog();
+                //openDialog();
+                DialogCartao dialog = new DialogCartao();
+                dialog.preco = etPreco.getText().toString();
+                dialog.nrPessoas = spPessoas.getSelectedItem().toString();
+                dialog.dataCheckin = data_checkin.getText().toString();
+                dialog.dataCheckout = data_checkout.getText().toString();
+                dialog.quartoId = id;
+                dialog.userId = userId;
+                dialog.show(getSupportFragmentManager(), "Dialog cartão");
             }
         });
     }
 
-    public void openDialog(){
+    /*public void openDialog(){
         DialogCartao dialog = new DialogCartao();
+        dialog.preco = etPreco.getText().toString();
+        dialog.nrPessoas = spPessoas.getSelectedItem().toString();
+        dialog.dataCheckin = data_checkin.getText().toString();
+        dialog.dataCheckout = data_checkout.getText().toString();
+                dialog.quartoId = id
         dialog.show(getSupportFragmentManager(), "Dialog cartão");
-    }
+
+    }*/
 }

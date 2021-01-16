@@ -121,6 +121,7 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
                     public void onClick(DialogInterface dialog, int which) {
                         Intent i = new Intent(QuartoDetalhesActivity.this, PagamentoActivity.class);
                         i.putExtra("precoNoite", quarto.getPrecoNoite());
+                        i.putExtra("idQuarto", quarto.getId());
                         startActivity(i);
                     }
                 })

@@ -57,8 +57,8 @@ public class PesquisarHotelFragment extends Fragment implements RegiaoListener {
         // tabela user.access_token string
         String token = sharedPreferencesUser.getString(MenuMainActivity.TOKEN, null);
 
-        etDataInicial.setText("2020-12-02");
-        etDataFinal.setText("2020-12-05");
+        etDataInicial.setText("2021-01-02");
+        etDataFinal.setText("2021-01-05");
 
         Button btPesquisar = view.findViewById(R.id.btPesquisar);
         btPesquisar.setOnClickListener(new View.OnClickListener() {

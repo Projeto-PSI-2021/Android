@@ -346,6 +346,22 @@ public class JsonParser {
         return flag;
     }
 
+    public static Boolean jsonParserRegisterReserva(String resposta) {
+        Boolean flag = null;
+
+        try {
+            JSONObject registo = new JSONObject(resposta);
+            if (registo.getBoolean("success")) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
     public static Boolean jsonParserForgot(String resposta) {
         Boolean flag = null;
 

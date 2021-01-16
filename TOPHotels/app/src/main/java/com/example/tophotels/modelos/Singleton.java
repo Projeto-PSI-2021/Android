@@ -15,6 +15,7 @@ import com.example.tophotels.listeners.ComodidadesQuartoListener;
 import com.example.tophotels.listeners.HotelListener;
 import com.example.tophotels.listeners.QuartoListener;
 import com.example.tophotels.listeners.RegiaoListener;
+import com.example.tophotels.listeners.ReservaListener;
 import com.example.tophotels.listeners.UserInfoListener;
 import com.example.tophotels.listeners.UserListener;
 import com.example.tophotels.utils.JsonParser;
@@ -47,6 +48,8 @@ public class Singleton {
     private static final String mUrlAPIHotel = mUrl + "/api/hotel";
     private static final String mUrlAPIRegiao = mUrl + "/api/regiao-hotel";
     private static final String mUrlAPIQuarto = mUrl + "/api/quarto";
+    private static final String mUrlAPICriarReserva = mUrl + "/api/pedido-reserva";
+
 
 
 
@@ -56,6 +59,7 @@ public class Singleton {
     private UserListener userListener;
     private UserInfoListener userInfoListener;
     private RegiaoListener regiaoListener;
+    private ReservaListener reservaListener;
     private ComodidadesQuartoListener comodidadesQuartoListener;
 
 
@@ -139,6 +143,41 @@ public class Singleton {
                     parametros.put("username", username);
                     parametros.put("password", password);
                     parametros.put("email", email);
+
+                    return parametros;
+                }
+            };
+            volleyQueue.add(request);
+        }
+    }
+
+    public void postCriarReservaAPI(final Context contexto, final String nrPessoas, final String preco, final String dataCheckin, final String dataCheckout, final int quartoId, final int userId) {
+        if (!JsonParser.isConnectionInternet(contexto)) {
+            Toast.makeText(contexto, "Não tem ligação à internet.", Toast.LENGTH_SHORT).show();
+        } else {
+            StringRequest request = new StringRequest(Request.Method.POST,
+                    mUrlAPICriarReserva + "/criar-reserva",
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            reservaListener.onValidateRegisterReserva(JsonParser.jsonParserRegisterReserva(response));
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(contexto, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<String, String>();
+
+                    parametros.put("nPessoas", nrPessoas);
+                    parametros.put("preco", preco);
+                    parametros.put("dataCheckIn", dataCheckin);
+                    parametros.put("dataCheckOut", dataCheckout);
+                    parametros.put("quartoId", ""+quartoId);
+                    parametros.put("userId", ""+userId);
 
                     return parametros;
                 }
