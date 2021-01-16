@@ -1,9 +1,12 @@
 package com.example.tophotels.vistas;
 
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
@@ -29,6 +32,8 @@ import com.example.tophotels.modelos.Hotel;
 import com.example.tophotels.modelos.Quarto;
 import com.example.tophotels.modelos.Singleton;
 import com.example.tophotels.modelos.UserInfo;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -43,6 +48,7 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
     private ListaComodidadesQuartoAdapter adapter;
     private ListView lvComodidadesQuarto;
     private ListView lvComodidadesHotel;
+    private FloatingActionButton fabPagamento;
 
     // tabela user.access_token string
     private String token;
@@ -51,6 +57,8 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quarto_detalhes);
+
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -70,6 +78,7 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
         tvCategoriaQuarto = findViewById(R.id.tvCategoriaQuarto);
 
 
+        fabPagamento = findViewById(R.id.fab);
         lvComodidadesQuarto = findViewById(R.id.lvComodidadesQuarto);
         lvComodidadesHotel = findViewById(R.id.lvComodidadesHotel);
 
@@ -93,7 +102,36 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
             Singleton.getInstance(getApplicationContext()).getDetalhesQuartoAPI(getApplicationContext(), quarto.getId(), token);
         }
 
+
+        fabPagamento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogFab();
+            }
+        });
     }
+
+    private void dialogFab(){
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(this);
+        builder.setTitle("Prosseguir para pagamento")
+                .setMessage("Deseja mesmo avançar com o pagamento?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(QuartoDetalhesActivity.this, PagamentoActivity.class);
+                        startActivity(i);
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -154,7 +192,6 @@ public class QuartoDetalhesActivity extends AppCompatActivity implements QuartoL
 
 
     }
-
 
     @Override
     public void onLoadDetalhes(Hotel hotel) {

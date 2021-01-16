@@ -34,6 +34,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".vistas.PagamentoActivity"
+            android:parentActivityName=".vistas.MenuMainActivity"/>
+
+        <activity
             android:name=".vistas.EsqueceuPasswordActivity"
             android:parentActivityName=".vistas.LoginActivity"/>
         <activity
