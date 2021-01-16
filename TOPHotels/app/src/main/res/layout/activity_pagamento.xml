@@ -104,6 +104,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/holo_red_light"
                 android:text="@string/btPagamento" />
+
         </LinearLayout>
 
     </LinearLayout>
