@@ -79,7 +79,7 @@ public class ListaQuartosAdapter extends BaseAdapter {
 
         public void update(Quarto quarto){
             this.tvNomeQuarto.setText(quarto.getDescricao());
-            this.tvPrecoQuarto.setText("Preço: " + quarto.getPrecoNoite());
+            this.tvPrecoQuarto.setText("Preço: " + quarto.getPrecoNoite() + " €");
             Glide.with(contexto)
                     .load(quarto.getImg())
                     .placeholder(R.drawable.hotel)

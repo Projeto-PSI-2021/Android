@@ -18,11 +18,15 @@ import com.example.tophotels.modelos.Singleton;
 import com.example.tophotels.utils.JsonParser;
 
 public class DialogCartao extends AppCompatDialogFragment {
-    private EditText etNrCartao;
+    private EditText etNrCartao, etMM, etYY, etCVC;
     public String nrPessoas, preco, dataCheckin, dataCheckout;
     public int quartoId, userId;
 
     private String nrCartaoValido = "4242424242424242";
+    private String nrCartaoValidoMM = "10";
+    private String nrCartaoValidoYY = "22";
+    private String nrCartaoValidoCVC = "332";
+
     private String nrCartaoNoMoney = "4343434343434343";
     private String nrCartaoExpirado = "4545454545454545";
 
@@ -33,6 +37,9 @@ public class DialogCartao extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_pagamento, null);
 
+        etMM = view.findViewById(R.id.etMMCartao);
+        etYY = view.findViewById(R.id.etYYCartao);
+        etCVC = view.findViewById(R.id.etCVCCartao);
 
         builder.setView(view)
                 .setTitle("Detalhes do cartão")
@@ -49,7 +56,19 @@ public class DialogCartao extends AppCompatDialogFragment {
                             Toast.makeText(getActivity().getApplicationContext(), "Não está ligado à internet.", Toast.LENGTH_SHORT).show();
                         }else{
                             if(etNrCartao.getText().toString().equals(nrCartaoValido)){
-                                Singleton.getInstance(getActivity().getApplicationContext()).postCriarReservaAPI(getActivity().getApplicationContext(), nrPessoas, preco, dataCheckin, dataCheckout, quartoId, userId);
+                                if(etMM.getText().toString().equals(nrCartaoValidoMM)){
+                                    if(etYY.getText().toString().equals(nrCartaoValidoYY)){
+                                        if(etCVC.getText().toString().equals(nrCartaoValidoCVC)){
+                                            Singleton.getInstance(getActivity().getApplicationContext()).postCriarReservaAPI(getActivity().getApplicationContext(), nrPessoas, preco, dataCheckin, dataCheckout, quartoId, userId);
+                                        }else{
+                                            Toast.makeText(getActivity().getApplicationContext(), "O código CVC inserido está incorreto.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }else{
+                                        Toast.makeText(getActivity().getApplicationContext(), "O ano inserido está incorreto.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }else{
+                                    Toast.makeText(getActivity().getApplicationContext(), "O mês inserido está incorreto.", Toast.LENGTH_SHORT).show();
+                                }
                             }else if(etNrCartao.getText().toString().equals(nrCartaoNoMoney)){
                                 Toast.makeText(getActivity().getApplicationContext(), "O cartão não possui dinheiro.", Toast.LENGTH_SHORT).show();
                             }else if(etNrCartao.getText().toString().equals(nrCartaoExpirado)){

@@ -134,14 +134,4 @@ public class PagamentoActivity extends AppCompatActivity {
         });
     }
 
-    /*public void openDialog(){
-        DialogCartao dialog = new DialogCartao();
-        dialog.preco = etPreco.getText().toString();
-        dialog.nrPessoas = spPessoas.getSelectedItem().toString();
-        dialog.dataCheckin = data_checkin.getText().toString();
-        dialog.dataCheckout = data_checkout.getText().toString();
-                dialog.quartoId = id
-        dialog.show(getSupportFragmentManager(), "Dialog cartão");
-
-    }*/
 }
