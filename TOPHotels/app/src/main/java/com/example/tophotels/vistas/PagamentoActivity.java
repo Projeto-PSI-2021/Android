@@ -1,6 +1,8 @@
 package com.example.tophotels.vistas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,10 +19,12 @@ import java.util.ArrayList;
 
 public class PagamentoActivity extends AppCompatActivity {
 
-    private static final String ID = "com.example.tophotels.vistas.id";
+    public static final String ID = "com.example.tophotels.vistas.id";
     private TextView etPreco;
+    private TextView data_checkin, data_checkout;
 
-
+    private String data_inicial;
+    private String data_final;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +36,18 @@ public class PagamentoActivity extends AppCompatActivity {
 
         etPreco = findViewById(R.id.etPrecoPagamento);
 
-        Intent i = this.getIntent();
-        Double preco = i.getDoubleExtra("precoNoite", 0);
+        data_checkin = findViewById(R.id.etDataCheckinPagamento);
+        data_checkout = findViewById(R.id.etDataCheckoutPagamento);
+
+        SharedPreferences sharedPreferencesUser = getSharedPreferences(MenuMainActivity.PREF_USER, Context.MODE_PRIVATE);
+        token = sharedPreferencesUser.getString(MenuMainActivity.TOKEN, null);
+
+        SharedPreferences sharedPreferencesPesquisarHotel = getSharedPreferences(PesquisarHotelFragment.PESQUISA_HOTEL, Context.MODE_PRIVATE);
+        data_inicial = sharedPreferencesPesquisarHotel.getString(PesquisarHotelFragment.DATA_INICIAL, null);
+        data_final = sharedPreferencesPesquisarHotel.getString(PesquisarHotelFragment.DATA_FINAL, null);
+
+        data_checkin.setText(data_inicial);
+        data_checkout.setText(data_final);
 
         Spinner spinner = findViewById(R.id.spinner);
         ArrayList<String> array = new ArrayList<>();
