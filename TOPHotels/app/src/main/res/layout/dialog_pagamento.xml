@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mask="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <LinearLayout
@@ -13,7 +15,7 @@
         android:layout_marginBottom="20dp"
         android:orientation="vertical">
 
-        <EditText
+        <!--<EditText
             android:id="@+id/etNumeroCartao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,7 +23,23 @@
             android:ems="10"
             android:hint="Número cartão "
             android:inputType="textPersonName"
-            android:maxLength="16" />
+            android:maxLength="16" />-->
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Número de cartão"
+            android:textSize="18sp" />
+
+        <br.com.sapereaude.maskedEditText.MaskedEditText
+            android:id="@+id/etNumeroCartao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:typeface="monospace"
+            mask:allowed_chars="1234567890"
+            mask:mask="####-####-####-####" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,7 +53,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="MM"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:maxLength="2" />
 
             <EditText
@@ -45,7 +63,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="YY"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:maxLength="2" />
 
             <EditText
@@ -57,7 +75,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="CVC"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:maxLength="3" />
 
         </LinearLayout>

@@ -23,13 +23,13 @@ public class DialogCartao extends AppCompatDialogFragment {
     public int quartoId, userId;
 
 
-    private String nrCartaoValido = "4242424242424242";
+    private String nrCartaoValido = "4242-4242-4242-4242";
     private String nrCartaoValidoMM = "10";
     private String nrCartaoValidoYY = "22";
     private String nrCartaoValidoCVC = "332";
 
-    private String nrCartaoNoMoney = "4343434343434343";
-    private String nrCartaoExpirado = "4545454545454545";
+    private String nrCartaoNoMoney = "4343-4343-4343-4343";
+    private String nrCartaoExpirado = "4545-4545-4545-4545";
 
     @NonNull
     @Override

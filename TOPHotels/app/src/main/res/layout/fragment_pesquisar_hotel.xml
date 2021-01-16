@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:mask="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".vistas.PesquisarHotelFragment">
@@ -45,23 +46,23 @@
             android:layout_marginTop="30dp"
             android:orientation="vertical">
 
+
             <TextView
-                android:id="@+id/tvDataInicialPesquisa"
-                android:layout_width="wrap_content"
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/tvDataInicialPesquisa"
+                android:text="Data Inicial:"
                 android:textSize="18sp" />
 
-            <EditText
+            <br.com.sapereaude.maskedEditText.MaskedEditText
                 android:id="@+id/etDataInicialPesquisa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
                 android:inputType="date"
-                android:autofillHints=""
-                tools:ignore="LabelFor" />
+                android:typeface="monospace"
+                app:keep_hint="true"
+                mask:allowed_chars="1234567890"
+                mask:mask="####-##-##" />
 
         </LinearLayout>
 
@@ -79,15 +80,15 @@
                 android:text="@string/tvDataFinalPesquisa"
                 android:textSize="18sp" />
 
-            <EditText
+            <br.com.sapereaude.maskedEditText.MaskedEditText
                 android:id="@+id/etDataFinalPesquisa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
                 android:inputType="date"
-                android:autofillHints=""
-                tools:ignore="LabelFor" />
+                android:typeface="monospace"
+                app:keep_hint="true"
+                mask:allowed_chars="1234567890"
+                mask:mask="####-##-##" />
 
         </LinearLayout>
 
