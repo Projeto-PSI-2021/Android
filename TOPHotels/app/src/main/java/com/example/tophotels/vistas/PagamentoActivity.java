@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -24,7 +25,7 @@ public class PagamentoActivity extends AppCompatActivity {
     public static final String ID = "com.example.tophotels.vistas.id";
     private TextView etPreco;
     private TextView data_checkin, data_checkout;
-
+    private Button btPagamento;
     private String data_inicial;
     private String data_final;
 
@@ -40,6 +41,7 @@ public class PagamentoActivity extends AppCompatActivity {
 
         data_checkin = findViewById(R.id.etDataCheckinPagamento);
         data_checkout = findViewById(R.id.etDataCheckoutPagamento);
+        btPagamento = findViewById(R.id.bt_Pagamento);
 
         SharedPreferences sharedPreferencesPesquisarHotel = getSharedPreferences(PesquisarHotelFragment.PESQUISA_HOTEL, Context.MODE_PRIVATE);
         data_inicial = sharedPreferencesPesquisarHotel.getString(PesquisarHotelFragment.DATA_INICIAL, null);
@@ -115,5 +117,16 @@ public class PagamentoActivity extends AppCompatActivity {
             }
         });
 
+        btPagamento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog();
+            }
+        });
+    }
+
+    public void openDialog(){
+        DialogCartao dialog = new DialogCartao();
+        dialog.show(getSupportFragmentManager(), "Dialog cartão");
     }
 }
