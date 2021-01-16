@@ -67,4 +67,5 @@
     <string name="tvNrPessoasPagamento">Número de pessoas:</string>
     <string name="tvPrecoPagamento">Preço:</string>
     <string name="tvDataCheckoutPagamento">Data check-out:</string>
+    <string name="btPagamento">Prosseguir</string>
 </resources>

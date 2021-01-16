@@ -39,15 +39,15 @@ public class PagamentoActivity extends AppCompatActivity {
         data_checkin = findViewById(R.id.etDataCheckinPagamento);
         data_checkout = findViewById(R.id.etDataCheckoutPagamento);
 
-        SharedPreferences sharedPreferencesUser = getSharedPreferences(MenuMainActivity.PREF_USER, Context.MODE_PRIVATE);
-        token = sharedPreferencesUser.getString(MenuMainActivity.TOKEN, null);
-
         SharedPreferences sharedPreferencesPesquisarHotel = getSharedPreferences(PesquisarHotelFragment.PESQUISA_HOTEL, Context.MODE_PRIVATE);
         data_inicial = sharedPreferencesPesquisarHotel.getString(PesquisarHotelFragment.DATA_INICIAL, null);
         data_final = sharedPreferencesPesquisarHotel.getString(PesquisarHotelFragment.DATA_FINAL, null);
 
         data_checkin.setText(data_inicial);
         data_checkout.setText(data_final);
+
+        Intent i = this.getIntent();
+        Double preco = i.getDoubleExtra("precoNoite", 0);
 
         Spinner spinner = findViewById(R.id.spinner);
         ArrayList<String> array = new ArrayList<>();
