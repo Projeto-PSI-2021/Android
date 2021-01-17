@@ -25,7 +25,7 @@ public class RegistarContaActivity extends AppCompatActivity implements UserList
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etUsername = findViewById(R.id.etUsernameRegistar);
-        etEmail = findViewById(R.id.etEmailForgot);
+        etEmail = findViewById(R.id.etEmailRegisto);
         etPassword = findViewById(R.id.etPasswordRegisto);
         etPasswordConfirmar = findViewById(R.id.etConfirmaPasswordRegisto);
 
