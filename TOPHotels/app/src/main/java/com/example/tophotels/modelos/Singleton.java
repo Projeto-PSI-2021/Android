@@ -42,7 +42,11 @@ public class Singleton {
 
     //Endereços api
     // Endereço base
+<<<<<<< Updated upstream
     public static final String mUrl = "http://4153568d536c.ngrok.io";
+=======
+    public static final String mUrl = "http://5e60b8d6d053.eu.ngrok.io";
+>>>>>>> Stashed changes
     private static final String mUrlAPIUser = mUrl + "/api/user";
     private static final String mUrlAPIUserInfo = mUrl + "/api/user-info";
     private static final String mUrlAPIHotel = mUrl + "/api/hotel";
