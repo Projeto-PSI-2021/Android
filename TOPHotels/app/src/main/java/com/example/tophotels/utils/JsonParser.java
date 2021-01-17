@@ -74,7 +74,7 @@ public class JsonParser {
             String website = hotelJson.getString("website");
             int cp4 = hotelJson.getInt("cp4");
             int cp3 = hotelJson.getInt("cp3");
-            String morada= hotelJson.getString("morada");
+            String morada = hotelJson.getString("morada");
             String img = Singleton.mUrl + "/assets/hoteis/" + hotelJson.getString("img");
 
             hotel = new Hotel(id, nome, descricao, contacto, website, cp4, cp3, morada, img);
@@ -313,21 +313,36 @@ public class JsonParser {
 
         try {
             JSONObject login = new JSONObject(resposta);
-            if (login.getBoolean("success")) {
-                JSONObject userJson = login.getJSONObject("user");
+            JSONObject userJson = login.getJSONObject("user");
 
-                int id = userJson.getInt("id");
-                String username = userJson.getString("username");
-                String email = userJson.getString("email");
-                String access_token = userJson.getString("access_token");
-                String img = Singleton.mUrl + "/assets/usersImage/" + login.getString("img");
+            int id = userJson.getInt("id");
+            String username = userJson.getString("username");
+            String email = userJson.getString("email");
+            String access_token = userJson.getString("access_token");
+            String img = Singleton.mUrl + "/assets/usersImage/" + login.getString("img");
 
-                user = new User(id, username, email, access_token, img);
-            }
+            user = new User(id, username, email, access_token, img);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return user;
+    }
+
+    public static Boolean jsonParserValidaLogin(String resposta) {
+        Boolean flag = null;
+
+        try {
+            JSONObject login = new JSONObject(resposta);
+            if (login.getBoolean("success")) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return flag;
     }
 
     public static Boolean jsonParserRegister(String resposta) {

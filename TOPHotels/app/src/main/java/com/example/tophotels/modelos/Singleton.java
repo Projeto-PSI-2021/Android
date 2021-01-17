@@ -42,7 +42,7 @@ public class Singleton {
 
     //Endereços api
     // Endereço base
-    public static final String mUrl = "http://5e60b8d6d053.eu.ngrok.io";
+    public static final String mUrl = "http://8ce58b20467c.eu.ngrok.io";
     private static final String mUrlAPIUser = mUrl + "/api/user";
     private static final String mUrlAPIUserInfo = mUrl + "/api/user-info";
     private static final String mUrlAPIHotel = mUrl + "/api/hotel";
@@ -84,6 +84,7 @@ public class Singleton {
     // ** API ** //
 
     public void postLoginAPI(final Context contexto, final String username, final String password) {
+
         if (!JsonParser.isConnectionInternet(contexto)) {
             if (userListener != null) {
                 userListener.onValidateLogin(getUserDB(username));
@@ -94,11 +95,20 @@ public class Singleton {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            user = JsonParser.jsonParserLogin(response);
-                            adicionarUserBD(user);
+                            Boolean flag = JsonParser.jsonParserValidaLogin(response);
+                            if (flag) {
+                                user = JsonParser.jsonParserLogin(response);
+                                adicionarUserBD(user);
 
-                            if (userListener != null) {
-                                userListener.onValidateLogin(user);
+                                if (userListener != null) {
+                                    userListener.onValidateLogin(user);
+                                }
+                            } else {
+                                user = JsonParser.jsonParserLogin(response);
+
+                                if (userListener != null) {
+                                    userListener.onValidateLogin(user);
+                                }
                             }
                         }
                     }, new Response.ErrorListener() {
