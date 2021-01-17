@@ -21,7 +21,7 @@ import com.example.tophotels.listeners.UserListener;
 import com.example.tophotels.modelos.Singleton;
 import com.example.tophotels.utils.JsonParser;
 
-public class DialogCartao extends AppCompatDialogFragment implements ReservaListener {
+public class DialogCartao extends AppCompatDialogFragment {
     private EditText etNrCartao, etMM, etYY, etCVC;
     public String dataCheckin, dataCheckout;
     public double preco;
@@ -47,7 +47,7 @@ public class DialogCartao extends AppCompatDialogFragment implements ReservaList
         etYY = view.findViewById(R.id.etYYCartao);
         etCVC = view.findViewById(R.id.etCVCCartao);
 
-        Singleton.getInstance(getActivity().getApplicationContext()).setReservaListener(this);
+
 
         builder.setView(view)
                 .setTitle("Detalhes do cartão")
@@ -104,14 +104,6 @@ public class DialogCartao extends AppCompatDialogFragment implements ReservaList
     }
 
 
-    @Override
-    public void onValidateRegisterReserva(Boolean flag) {
-        if (flag) {
-            Intent intent = new Intent(getActivity().getApplicationContext(), MenuMainActivity.class);
-            startActivity(intent);
 
-        } else {
-            Toast.makeText(getActivity().getApplicationContext(), "Erro ao registar pedido.", Toast.LENGTH_SHORT).show();
-        }
-    }
+
 }

@@ -10,15 +10,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tophotels.R;
+import com.example.tophotels.listeners.ReservaListener;
+import com.example.tophotels.modelos.Singleton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class PagamentoActivity extends AppCompatActivity {
+public class PagamentoActivity extends AppCompatActivity implements ReservaListener {
     public static final String ID = "com.example.tophotels.vistas.id";
     private TextView etPreco, data_checkin, data_checkout;
     private Button btPagamento;
@@ -46,6 +49,9 @@ public class PagamentoActivity extends AppCompatActivity {
         SharedPreferences sharedPreferencesPesquisarHotel = getSharedPreferences(PesquisarHotelFragment.PESQUISA_HOTEL, Context.MODE_PRIVATE);
         data_inicial = sharedPreferencesPesquisarHotel.getString(PesquisarHotelFragment.DATA_INICIAL, null);
         data_final = sharedPreferencesPesquisarHotel.getString(PesquisarHotelFragment.DATA_FINAL, null);
+
+
+        Singleton.getInstance(getApplicationContext()).setReservaListener(this);
 
         data_checkin.setText(data_inicial);
         data_checkout.setText(data_final);
@@ -134,4 +140,14 @@ public class PagamentoActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onValidateRegisterReserva(Boolean flag) {
+        if (flag) {
+            Intent intent = new Intent(getApplicationContext(), MenuMainActivity.class);
+            startActivity(intent);
+            Toast.makeText(getApplicationContext(), "Pedido criado com sucesso.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Erro ao registar pedido.", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
