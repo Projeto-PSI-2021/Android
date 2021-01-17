@@ -3,8 +3,10 @@ package com.example.tophotels.vistas;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,13 +16,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.tophotels.R;
+import com.example.tophotels.listeners.ReservaListener;
+import com.example.tophotels.listeners.UserListener;
 import com.example.tophotels.modelos.Singleton;
 import com.example.tophotels.utils.JsonParser;
 
-public class DialogCartao extends AppCompatDialogFragment {
+public class DialogCartao extends AppCompatDialogFragment implements ReservaListener {
     private EditText etNrCartao, etMM, etYY, etCVC;
-    public String nrPessoas, preco, dataCheckin, dataCheckout;
-    public int quartoId, userId;
+    public String dataCheckin, dataCheckout;
+    public double preco;
+    public int nrPessoas, quartoId, userId;
 
 
     private String nrCartaoValido = "4242-4242-4242-4242";
@@ -41,6 +46,8 @@ public class DialogCartao extends AppCompatDialogFragment {
         etMM = view.findViewById(R.id.etMMCartao);
         etYY = view.findViewById(R.id.etYYCartao);
         etCVC = view.findViewById(R.id.etCVCCartao);
+
+        Singleton.getInstance(getActivity().getApplicationContext()).setReservaListener(this);
 
         builder.setView(view)
                 .setTitle("Detalhes do cartão")
@@ -67,6 +74,7 @@ public class DialogCartao extends AppCompatDialogFragment {
                                             if (etCVC.getText().toString().equals(nrCartaoValidoCVC)) {
                                                 Singleton.getInstance(getActivity().getApplicationContext()).postCriarReservaAPI(getActivity().getApplicationContext(),
                                                         nrPessoas, preco, dataCheckin, dataCheckout, quartoId, userId);
+
                                             } else {
                                                 Toast.makeText(getActivity().getApplicationContext(), "O código CVC inserido está incorreto.", Toast.LENGTH_SHORT).show();
                                             }
@@ -92,7 +100,18 @@ public class DialogCartao extends AppCompatDialogFragment {
 
         etNrCartao = view.findViewById(R.id.etNumeroCartao);
 
-
         return builder.create();
+    }
+
+
+    @Override
+    public void onValidateRegisterReserva(Boolean flag) {
+        if (flag) {
+            Intent intent = new Intent(getActivity().getApplicationContext(), MenuMainActivity.class);
+            startActivity(intent);
+
+        } else {
+            Toast.makeText(getActivity().getApplicationContext(), "Erro ao registar pedido.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

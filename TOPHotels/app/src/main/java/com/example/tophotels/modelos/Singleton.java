@@ -42,13 +42,13 @@ public class Singleton {
 
     //Endereços api
     // Endereço base
-    public static final String mUrl = "http://9015d94eef27.eu.ngrok.io";
+    public static final String mUrl = "http://4153568d536c.ngrok.io";
     private static final String mUrlAPIUser = mUrl + "/api/user";
     private static final String mUrlAPIUserInfo = mUrl + "/api/user-info";
     private static final String mUrlAPIHotel = mUrl + "/api/hotel";
     private static final String mUrlAPIRegiao = mUrl + "/api/regiao-hotel";
     private static final String mUrlAPIQuarto = mUrl + "/api/quarto";
-    private static final String mUrlAPICriarReserva = mUrl + "/api/pedido-reserva";
+    private static final String mUrlAPIPedidoReserva = mUrl + "/api/pedido-reserva";
 
 
 
@@ -151,12 +151,12 @@ public class Singleton {
         }
     }
 
-    public void postCriarReservaAPI(final Context contexto, final String nrPessoas, final String preco, final String dataCheckin, final String dataCheckout, final int quartoId, final int userId) {
+    public void postCriarReservaAPI(final Context contexto, final int nrPessoas, final double preco, final String dataCheckin, final String dataCheckout, final int quartoId, final int userId) {
         if (!JsonParser.isConnectionInternet(contexto)) {
             Toast.makeText(contexto, "Não tem ligação à internet.", Toast.LENGTH_SHORT).show();
         } else {
             StringRequest request = new StringRequest(Request.Method.POST,
-                    mUrlAPICriarReserva + "/criar-reserva",
+                    mUrlAPIPedidoReserva + "/criar-reserva",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -172,8 +172,8 @@ public class Singleton {
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> parametros = new HashMap<String, String>();
 
-                    parametros.put("nPessoas", nrPessoas);
-                    parametros.put("preco", preco);
+                    parametros.put("nPessoas", ""+nrPessoas);
+                    parametros.put("preco", ""+preco);
                     parametros.put("dataCheckIn", dataCheckin);
                     parametros.put("dataCheckOut", dataCheckout);
                     parametros.put("quartoId", ""+quartoId);
@@ -548,7 +548,9 @@ public class Singleton {
         this.comodidadesQuartoListener = comodidadesQuartoListener;
     }
 
-
+    public void setReservaListener(ReservaListener reservaListener) {
+        this.reservaListener = reservaListener;
+    }
 
     // ** END SET-LISTENERS ** //
 }

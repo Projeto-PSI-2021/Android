@@ -84,7 +84,7 @@ public class ListaReservaAdapter extends BaseAdapter {
             } else if (reserva.getEstado().matches("2")) {
                 this.tvEstado.setText("Estado: Pendente");
             } else if (reserva.getEstado().matches("3")) {
-                this.tvEstado.setText("Estado: ativo");
+                this.tvEstado.setText("Estado: Ativo");
             }
             tvHotel.setText("Hotel: " + reserva.getHotel());
         }

@@ -123,8 +123,8 @@ public class PagamentoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //openDialog();
                 DialogCartao dialog = new DialogCartao();
-                dialog.preco = etPreco.getText().toString();
-                dialog.nrPessoas = spPessoas.getSelectedItem().toString();
+                dialog.preco = Double.parseDouble(etPreco.getText().toString());
+                dialog.nrPessoas = Integer.parseInt(spPessoas.getSelectedItem().toString());
                 dialog.dataCheckin = data_checkin.getText().toString();
                 dialog.dataCheckout = data_checkout.getText().toString();
                 dialog.quartoId = id;

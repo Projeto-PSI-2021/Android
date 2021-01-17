@@ -38,6 +38,10 @@
             android:parentActivityName=".vistas.MenuMainActivity"/>
 
         <activity
+            android:name=".vistas.Dialo"
+            android:parentActivityName=".vistas.MenuMainActivity"/>
+
+        <activity
             android:name=".vistas.EsqueceuPasswordActivity"
             android:parentActivityName=".vistas.LoginActivity"/>
         <activity
