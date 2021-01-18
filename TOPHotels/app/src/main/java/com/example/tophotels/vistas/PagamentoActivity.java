@@ -150,4 +150,8 @@ public class PagamentoActivity extends AppCompatActivity implements ReservaListe
             Toast.makeText(getApplicationContext(), "Erro ao registar pedido.", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void onBackPressed(){
+
+    }
 }
