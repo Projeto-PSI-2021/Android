@@ -42,7 +42,7 @@ public class Singleton {
 
     //Endereços api
     // Endereço base
-    public static final String mUrl = "http://450a4232b6c1.eu.ngrok.io";
+    public static final String mUrl = "http://483101d66099.eu.ngrok.io";
     private static final String mUrlAPIUser = mUrl + "/api/user";
     private static final String mUrlAPIUserInfo = mUrl + "/api/user-info";
     private static final String mUrlAPIHotel = mUrl + "/api/hotel";
@@ -252,7 +252,7 @@ public class Singleton {
             Toast.makeText(contexto, "Não tem ligação à internet.", Toast.LENGTH_SHORT).show();
         } else {
             StringRequest request = new StringRequest(Request.Method.PATCH,
-                    mUrlAPIUserInfo + "/" + userInfo.getId(),
+                    mUrlAPIUserInfo + "/" + userInfo.getId() + "?access-token=" + access_token,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
