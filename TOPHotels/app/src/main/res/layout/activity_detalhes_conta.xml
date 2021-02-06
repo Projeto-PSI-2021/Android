@@ -9,105 +9,105 @@
     tools:context=".vistas.DetalhesContaActivity">
 
 
+    <TextView
+        android:id="@+id/tvNomeDetalhe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tvNomeDetalhe"
+        android:textSize="18sp" />
 
+    <EditText
+        android:id="@+id/etNomeDetalhe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:ignore="LabelFor" />
 
-            <TextView
-                android:id="@+id/tvNomeDetalhe"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/tvNomeDetalhe"
-                android:textSize="18sp" />
+    <TextView
+        android:id="@+id/tvApelidoDetalhe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/tvApelidoDetalhe"
+        android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/etNomeDetalhe"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:autofillHints=""
-                tools:ignore="LabelFor" />
+    <EditText
+        android:id="@+id/etApelidoDetalhe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:ignore="LabelFor" />
 
-            <TextView
-                android:id="@+id/tvApelidoDetalhe"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@string/tvApelidoDetalhe"
-                android:textSize="18sp" />
+    <TextView
+        android:id="@+id/tvTelefoneDetalhe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/tvTelefoneDetalhe"
+        android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/etApelidoDetalhe"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:autofillHints=""
-                tools:ignore="LabelFor" />
+    <EditText
+        android:id="@+id/etTelefoneDetalhe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="number"
+        android:maxLength="9"
+        tools:ignore="LabelFor" />
 
-            <TextView
-                android:id="@+id/tvTelefoneDetalhe"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@string/tvTelefoneDetalhe"
-                android:textSize="18sp" />
+    <TextView
+        android:id="@+id/tvNifDetalhe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/tvNifDetalhe"
+        android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/etTelefoneDetalhe"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="number"
-                android:autofillHints=""
-                tools:ignore="LabelFor" />
+    <EditText
+        android:id="@+id/etNifDetalhe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="number"
+        android:maxLength="9"
+        tools:ignore="LabelFor" />
 
-            <TextView
-                android:id="@+id/tvNifDetalhe"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@string/tvNifDetalhe"
-                android:textSize="18sp" />
+    <TextView
+        android:id="@+id/tvMoradaDetalhe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/tvMoradaDetalhe"
+        android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/etNifDetalhe"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="number"
-                android:autofillHints=""
-                tools:ignore="LabelFor" />
+    <EditText
+        android:id="@+id/etMoradaDetalhe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:ignore="LabelFor" />
 
-            <TextView
-                android:id="@+id/tvMoradaDetalhe"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@string/tvMoradaDetalhe"
-                android:textSize="18sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/etMoradaDetalhe"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:autofillHints=""
-                tools:ignore="LabelFor" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="bottom"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btGuardar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/holo_red_light"
-                    android:text="@string/btGuardar"
-                    android:onClick="onClickGuardarDetalhesConta"/>
-            </LinearLayout>
+        <Button
+            android:id="@+id/btGuardar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_red_light"
+            android:onClick="onClickGuardarDetalhesConta"
+            android:text="@string/btGuardar" />
+    </LinearLayout>
 
 </LinearLayout>
